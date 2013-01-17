@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Purchase Order Nº {{ "%06d"|format(order.number) }}</h2>
+<div class="purchaseorder-info">
+  <dl class="dl-horizontal">
+    <dt>Proveedor</dt><dd><a href="{{ url_for('supplier.supplier_view', id=order.supplier.id) }}">{{ order.supplier.name }}</a></dd>
+    <dt>Estado</dt><dd>{{ order.status_str }}</dd>
+    <dt>Emisión</dt><dd>{{ order.creation_date|dateformat('%d/%b/%y') }}</dd>
+    <dt>Método de Pedido</dt><dd>{{ order.method_str }}</dd>
+  </dl>
+</div>
+
+<div class="purchaseorder-items">
+  <table class="table table-condensed">
+    <tbody>
+      {% for item in order.items %}
+      <tr>
+        <td>{{ item.sku }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.received_quantity }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{# vim: ft=html.jinja:sw=2
+#}

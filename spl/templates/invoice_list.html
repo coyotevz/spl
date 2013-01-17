@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Facturas</h2>
+<div class="invoice-list">
+  <table class="table table-condensed">
+    <tbody>
+      {% for invoice in expired.paginate(page, per_page=per_page).items %}
+      <tr>
+        <td>{{ invoice.type_str }}</td>
+        <td><a href="{{ url_for('.invoice_view', id=invoice.id) }}">{{ invoice.number_display }}</a></td>
+        <td><a href="{{ url_for('supplier.supplier_view', id=invoice.supplier.id) }}">{{ invoice.supplier.name }}</a></td>
+        <td>{{ invoice.amount|moneyfmt(curr='$ ') }}</td>
+        <td>{{ invoice.status_str }}</td>
+        <td>{{ invoice.issue_date|dateformat('%d/%b/%Y') }}</td>
+        <td>{{ invoice.expiration_date|dateformat('%d/%b/%Y') }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<div class="total-count">
+  {{ (pagination.page-1)*pagination.per_page }}-{{ (((pagination.page-1)*pagination.per_page)+(pagination.items|length)) }} de {{ pagination.total }} proveedores
+</div>
+
+<div class="pagination">
+  {%- for page in pagination.iter_pages() %}
+  {% if page %}
+  {% if page != pagination.page %}
+  <a href="{{ url_for(request.endpoint, page=page, per_page=pagination.per_page if pagination.per_page != 25 else None) }}">{{ page }}</a>
+  {% else %}
+  <strong>{{ page }}</strong>
+  {% endif %}
+  {% else %}
+  <span class="ellipsis">…</span>
+  {% endif %}
+  {%- endfor %}
+</div>
+
+<pre>
+  {{ request.args }}
+</pre>
+{% endblock %}
+{# vim: ft=html.jinja:sw=2
+#}

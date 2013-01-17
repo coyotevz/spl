@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>{{ invoice.type_str }} Nº {{ invoice.number_display }}</h2>
+<div class="invoice-info">
+  <dl class="dl-horizontal">
+    <dt>Estado</dt><dd>{{ invoice.status_str }}</dd>
+    <dt>Emisión</dt><dd>{{ invoice.issue_date|dateformat }}</dd>
+    <dt>Vencimiento</dt><dd>{{ invoice.expiration_date|dateformat }}</dd>
+    <dt>Proveedor</dt><dd><a href="{{ url_for('supplier.supplier_view', id=invoice.supplier.id) }}">{{ invoice.supplier.name }}</a></dd>
+    <dt>Monto</dt><dd><strong>{{ invoice.amount|moneyfmt(curr='$ ') }}</strong></dd>
+  </dl>
+</div>
+{% endblock %}
+
+{# vim: ft=html.jinja:sw=2
+#}
