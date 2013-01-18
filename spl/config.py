@@ -9,14 +9,11 @@ class Config(object):
     ASSETS_OUTPUT_DIR = 'assets'
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql://nobix:nobix@localhost/spl'
+    MONGODB_DATABASE = 'spldata'
 
 class DevelopmentConfig(Config):
     DEBUG = True
     ASSETS_DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///%s' %\
-        path.join(path.abspath(path.curdir), 'development_data.db')
-    SQLALCHEMY_RECORD_QUERIES = True
 
 class TestingConfig(Config):
     TESTING = True
