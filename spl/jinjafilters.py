@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from decimal import Decimal
+from spl.utils import json, ModelJSONEncoder
 
 def dateformat_filter(date, format="%d %b, %Y"):
     if date:
@@ -32,6 +33,10 @@ def moneyftm_filter(value, places=2, curr='', sep='.', dp=',',
     build(neg if sign else pos)
     return ''.join(reversed(result))
 
+def tojson_filter(obj):
+    return json.dumps(obj, cls=ModelJSONEncoder)
+
 def configure_jinjafilters(app):
     app.jinja_env.filters['dateformat'] = dateformat_filter
     app.jinja_env.filters['moneyfmt'] = moneyftm_filter
+    app.jinja_env.filters['tojson'] = tojson_filter

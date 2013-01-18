@@ -37,3 +37,10 @@ class Supplier(Document):
     }
     required_fields = ['name']
     indexes = [{'fields': ['name']}]
+
+
+class PurchaseDocument(Document):
+    pass
+
+class PurchaseOrder(Document):
+    pass
