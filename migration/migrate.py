@@ -83,7 +83,7 @@ def migrar_proveedores(s):
             'web': _(p.web),
             'address': _(p.direccion),
             'zip_code': _(p.codigo_postal),
-            'term': int(p.plazo),
+            'std_payment_term': int(p.plazo),
             'account_number': _(p.numeroCuenta),
             'freight_type': freight,
             'created_at': datetime.fromordinal(fecha_de_ingreso.toordinal()),

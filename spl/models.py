@@ -61,7 +61,7 @@ class Supplier(Model):
         'web': unicode,
         'address': unicode,
         'zip_code': unicode,
-        'term': int,
+        'std_payment_term': int,
         'account_number': unicode,
         'freight_type': unicode, # TODO: use the right type
         'notes': unicode,
@@ -75,6 +75,7 @@ class Supplier(Model):
     required_fields = ['name']
     indexes = [{'fields': ['name']}]
     default_values = {
+        'std_payment_term': 0,
         'created_at': datetime.now,
     }
 
