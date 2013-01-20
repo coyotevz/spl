@@ -17,15 +17,12 @@ from spl.models import db
 manager = Manager(create_app)
 
 @manager.command
-def initdb():
-    """Creates database tables"""
-    db.create_all()
-
-@manager.command
 def dropdb():
-    """Drops all database tables"""
+    """Drops database"""
     if prompt_bool("Are you sure? You will lose all your data!"):
-        db.drop_all()
+        if not db.connected:
+            db.connect()
+        db.connection.drop_database(current_app.config['MONGODB_DATABASE'])
 
 def shell_make_context():
     from datetime import datetime
