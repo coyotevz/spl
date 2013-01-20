@@ -29,7 +29,7 @@ import ui
 OLD_DB_URL = 'mysql://augusto@localhost/gp1'
 
 def _(s):
-    return unicode(s.decode('utf-8'))
+    return unicode(s.decode('utf-8')) if s else None
 
 def _reenum_pedidos(s, number, pedidos_query, bar):
     n = number
@@ -59,7 +59,7 @@ def check_year(date):
     return date
 
 def clean_dict(dct):
-    return dict((k, v) for k, v in dct.iteritems() if v != '')
+    return dict((k, v) for k, v in dct.iteritems() if (v != '' and v is not None))
 
 def migrar_proveedores(s):
     tot = s.query(func.count(Proveedor.id)).scalar()
@@ -87,8 +87,19 @@ def migrar_proveedores(s):
             'account_number': _(p.numeroCuenta),
             'freight_type': freight,
             'created_at': datetime.fromordinal(fecha_de_ingreso.toordinal()),
-            'notes': _(notes) if notes else None
+            'notes': _(notes),
+            'contacts': [],
         }))
+
+        if p.nombre_contacto:
+            contact = db.Contact(clean_dict({
+                'name': _(p.nombre_contacto),
+                'phone': _(p.telefono_contacto),
+                'email': _(p.email_contacto),
+            }))
+            contact.save()
+            supplier.contacts.append({'contact': contact})
+
         supplier.save()
 
         bar.update_state(c)

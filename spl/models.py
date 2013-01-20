@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 
+import re
 from datetime import datetime
 from flask.ext.mongokit import MongoKit, Document
 
 db = MongoKit()
+
+_email_re = re.compile(r'(?:^|\s)[-a-z0-9_a.]+@(?:[-a-z0-9]+\.)+[a-z]{2,6}(?:\s|$)', re.IGNORECASE)
+
+def email_validator(value):
+    return bool(_email_re.match(value))
 
 
 def configure_db(app):
@@ -11,6 +17,7 @@ def configure_db(app):
 
 
 class Model(Document):
+
     use_dot_notation = True
     use_schemaless = True
     use_autorefs = True
@@ -27,6 +34,9 @@ class Contact(Model):
     }
 
     required_fields = ['name']
+    validators = {
+        'email': email_validator,
+    }
 
 
 @db.register
@@ -58,8 +68,8 @@ class Supplier(Model):
         'created_at': datetime,
 
         'contacts': [{
-            'contact': Contact,
             'role': unicode,
+            'contact': Contact,
         }],
     }
     required_fields = ['name']
