@@ -13,7 +13,7 @@ class ModelJSONEncoder(json.JSONEncoder):
             return unicode(value)
         elif isinstance(value, DBRef):
             return value.id
-        elif isinstance(value, datetime.datetme):
+        elif isinstance(value, datetime.datetime):
             return value.isoformat()
         elif isinstance(value, datetime.date):
             return value.strftime("%Y-%m-%d")

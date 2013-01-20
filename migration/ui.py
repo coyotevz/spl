@@ -1,39 +1,34 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
-import codecs
 import time
+import sys
 from datetime import datetime
 
-stdout = codecs.getwriter(sys.stdout.encoding)(sys.stdout)
-
-
-# Fancy progress ala (pacman) ArchLinux
 _colors = {
-    'BOLD':   u'\x1b[01;1m',
-    'RED':    u'\x1b[01;31m',
-    'GREEN':  u'\x1b[01;32m',
-    'YELLOW': u'\x1b[01;33m',
-    'BLUE':   u'\x1b[01;34m',
-    'PINK':   u'\x1b[01;35m',
-    'CYAN':   u'\x1b[01;36m',
-    'NORMAL': u'\x1b[0m',
-    'cursor_on':  u'\x1b[?25h',
-    'cursor_off': u'\x1b[?25l',
+    'BOLD':   '\x1b[01;1m',
+    'RED':    '\x1b[01;31m',
+    'GREEN':  '\x1b[32m',
+    'YELLOW': '\x1b[33m',
+    'PINK':   '\x1b[35m',
+    'BLUE':   '\x1b[01;34m',
+    'CYAN':   '\x1b[36m',
+    'NORMAL': '\x1b[0m',
+    'cursor_on': '\x1b[?25h',
+    'cursor_off': '\x1b[?25l',
 }
 
 class ProgressBar(object):
+    rot_idx = 0
+    rot_chr = ['\\', '|', '/', '-']
     indicator = '\x1b[K%s%s%s\r'
     end_color = _colors['NORMAL']
 
-    def __init__(self, name, total, stream=stdout, suffix=True,
-                 color='BOLD', sec_color='BLUE', interval=0.1):
+    def __init__(self, name, total, stream=sys.stdout, suffix=False, color=None, sec_color=None):
         self.name = name
         self.total = total
         self.start_color = _colors.get(color, _colors['NORMAL'])
         self.sec_start_color = _colors.get(sec_color, _colors['NORMAL'])
-        self._interval = interval
-        self._last_update = 0
         self._stream = stream
         self._cast = float if suffix and (total > 2040) else type(total)
         self._total_n = self._calc_total_len(total, suffix)
@@ -46,49 +41,50 @@ class ProgressBar(object):
         self.start_timer()
 
     def update_state(self, current):
-        if time.time() < (self._last_update + self._interval):
-            return
-        return self.force_update_state(current)
-
-    def finish(self):
-        self.force_update_state(self.total, eta=False)
-        self._stream.write(u'\n')
-        self._stream.flush()
-
-    def force_update_state(self, current, eta=True):
-        self._last_update = time.time()
         n = self._total_n
         q = self._format_qty
         sc, ssc, ec = self.start_color, self.sec_start_color, self.end_color
         total = self.total
+        self.rot_idx += 1
+        ind = self.rot_chr[self.rot_idx % 4]
 
         pc = (100.*current)/self.total
-        eta = self.get_elapsed_time(current=(current if eta else None))
-        left = u"%s*%s %s%-22s%s  %s %s  %s [" % (ssc, ec, sc, self.name[:22], ec, q(current), q(total), eta)
-        right = u'] %s%3d%%%s' % (sc, pc, ec)
+        eta = self.get_elapsed_time()
+        left = "[%s/%s][%s%2d%%%s][%s%s%s][" % (q(current), q(total), sc, pc, ec, ssc, ind, ec)
+        right = '][%s%s%s]' % (sc, eta, ec)
 
-        cols = 22
+        cols = 80 - len(left)  - len(right) + self._color_n
+        if cols < 7: cols = 7
 
-        ratio = int((cols*current)/total)
-        bar = (u'#'*ratio+'-'*cols)[:cols]
+        ratio = int((cols*current)/total) - 1
+        bar = ('='*ratio+'>').ljust(cols)
         self._stream.write(self.indicator % (left, bar, right))
         self._stream.flush()
 
-    def get_elapsed_time(self, current=None, start=None):
+    def get_elapsed_time(self, start=None):
+        """
+        Format a time delta (datetime.timedelta) using the format DdHhMmS.MSs
+        """
         if start is None: start = self._start
         delta = datetime.now() - start
-        if current:
-            # estimated time averange
-            delta = ((self.total*delta)/current) - delta
-        return unicode(delta).split('.')[0]
+        days = int(delta.days)
+        hours = int(delta.seconds / 3600)
+        minutes = int((delta.seconds - hours * 3600) / 60)
+        seconds = delta.seconds - hours * 3600 - minutes * 60 \
+                + float(delta.microseconds) / 1000 / 1000
+        result = ''
+        if days: result += '%dd' % days
+        if days or hours: result += '%dh' % hours
+        if days or hours or minutes: result += '%dm' % minutes
+        return '%s%.3fs' % (result, seconds)
 
     def _simple_format_qty(self, qty):
-        return (u"%%%dd" % self._total_n) % qty
+        return ("%%%dd" % self._total_n) % qty
 
     def _suffix_format_qty(self, qty):
         sizes = ['K', 'M', 'G', 'T']
         idx = 0
-        size = ' '
+        size = ''
         while qty > 2048.0:
             qty /= 1024.0
             size = sizes[idx]
@@ -97,7 +93,7 @@ class ProgressBar(object):
         if self._cast is int: d = '%dd' % self._total_n
         elif self._cast is float: d = '%d.1f' % self._total_n
         else: d = 's'
-        return ((u"%%%s%%s" % d) % (self._cast(qty), size)).replace(u".", u",")
+        return ("%%%s%%s" % d) % (self._cast(qty), size)
 
     def _calc_total_len(self, total, suffix=False):
         if suffix:
@@ -110,48 +106,52 @@ class ProgressBar(object):
     def start_timer(self):
         self._start = datetime.now()
 
-NORMAL = _colors['NORMAL']
-BOLD = _colors['BOLD']
-BLUE = _colors['BLUE']
-PINK = _colors['PINK']
+    def finish(self):
+        self._stream.write(u'\n')
+        self._stream.flush()
 
-INFO = _colors['GREEN']
-WARNING = _colors['YELLOW']
-ERROR = _colors['RED']
 
-def info(s):
-    stdout.write(INFO + u'INFO:' + NORMAL + u" " + s + u"\n")
-    stdout.flush()
+class PacmanProgress(ProgressBar):
 
-def warn(s):
-    stdout.write(WARNING + u'WARNING:' + NORMAL + u" " + s + u"\n")
-    stdout.flush()
+    def get_elapsed_time(self, start=None):
+        if start is None: start = self._start
+        return str(datetime.now() - start).split('.')[0]
 
-def error(s):
-    stdout.write(ERROR + u'ERROR:' + NORMAL + u" " + s + u"\n")
-    stdout.flush()
-    sys.exit(1)
+    def update_state(self, current):
+        n = self._total_n
+        q = self._format_qty
+        sc, ssc, ec = self.start_color, self.sec_start_color, self.end_color
+        total = self.total
+        self.rot_idx += 1
+        ind = self.rot_chr[self.rot_idx % 4]
 
-def msg(s):
-    stdout.write(BLUE + u'::' + NORMAL + u' ' + BOLD + s + NORMAL + u'\n')
-    stdout.flush()
+        pc = (100.*current)/self.total
+        eta = self.get_elapsed_time()
+        left = "%s*%s %s%-26s%s  %s %s  %s [" % (ssc, ec, sc, self.name[:22], ec, q(current), q(total), eta)
+        right = '] %s%3d%%%s' % (sc, pc, ec)
 
-def ptime(s, l=u'tiempo'):
-    stdout.write(PINK + u'**' + NORMAL + u' ' + l + u': ' + s + u'\n')
+        cols = 26
 
-def nl(c=1):
-    while c > 0:
-        stdout.write(u"\n")
-        c -= 1
-    stdout.flush()
+        ratio = int((cols*current)/total)
+        bar = ('#'*ratio+'-'*cols)[:cols]
+        self._stream.write(self.indicator % (left, bar, right))
+        self._stream.flush()
 
-def report_time(func, *args):
-    t0 = datetime.now()
-    retval = func(*args)
-    t1 = datetime.now()
-    t = t1 - t0
-    secs = t.days*24*60*60+t.seconds
-    mins, sec = divmod(secs, 60)
-    hrs, mins = divmod(mins, 60)
-    ptime(u"%2dh%2dm%2d.%ss\n" % (hrs, mins, sec, str(t.microseconds)[:3]))
-    return retval
+if __name__ == '__main__':
+    bar = ProgressBar('testing bar', 512)
+    for i in xrange(512+1):
+        bar.update_state(i)
+        time.sleep(0.01)
+    bar.finish()
+
+    bar = ProgressBar('big test', 1024*1024*8)
+    for i in xrange(0, 1024*1024*8+1, 1024*1024/64):
+        bar.update_state(i)
+        time.sleep(0.01)
+    bar.finish()
+
+    bar = PacmanProgress('esto es algo que tiene que ser bastante largo', 1024*1024*1024*8, suffix=True, color='BOLD', sec_color='BLUE')
+    for i in xrange(0, 1024*1024*8+1, 1024*1024/64):
+        bar.update_state(i*1024)
+        time.sleep(0.01)
+    bar.finish()

@@ -14,6 +14,7 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
     ASSETS_DEBUG = True
+    MONGODB_DATABASE = 'spldata-dev'
 
 class TestingConfig(Config):
     TESTING = True

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
 from flask.ext.mongokit import MongoKit, Document
 
 db = MongoKit()
@@ -8,10 +9,29 @@ db = MongoKit()
 def configure_db(app):
     db.init_app(app)
 
-@db.register
-class Supplier(Document):
-    __collection__ = 'supplier'
+
+class Model(Document):
     use_dot_notation = True
+    use_schemaless = True
+    use_autorefs = True
+
+
+@db.register
+class Contact(Model):
+    __collection__ = 'contact'
+
+    structure = {
+        'name': basestring,
+        'phone': basestring,
+        'email': basestring,
+    }
+
+    required_fields = ['name']
+
+
+@db.register
+class Supplier(Model):
+    __collection__ = 'supplier'
 
     FREIGHT_SUPPLIER = u'FREIGHT_SUPPLIER'
     FREIGHT_CUSTOMER = u'FREIGHT_CUSTOMER'
@@ -34,13 +54,23 @@ class Supplier(Document):
         'term': int,
         'account_number': unicode,
         'freight_type': unicode, # TODO: use the right type
+        'notes': unicode,
+        'created_at': datetime,
+
+        'contacts': [{
+            'contact': Contact,
+            'role': unicode,
+        }],
     }
     required_fields = ['name']
     indexes = [{'fields': ['name']}]
+    default_values = {
+        'created_at': datetime.now,
+    }
 
 
-class PurchaseDocument(Document):
+class PurchaseDocument(Model):
     pass
 
-class PurchaseOrder(Document):
+class PurchaseOrder(Model):
     pass
