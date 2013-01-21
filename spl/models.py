@@ -3,6 +3,7 @@
 import re
 from datetime import datetime
 from flask.ext.mongokit import MongoKit, Document
+from mongokit import IS
 
 db = MongoKit()
 
@@ -63,7 +64,7 @@ class Supplier(Model):
         'zip_code': unicode,
         'std_payment_term': int,
         'account_number': unicode,
-        'freight_type': unicode, # TODO: use the right type
+        'freight_type': IS(*_freight_types.keys()),
         'notes': unicode,
         'created_at': datetime,
 
@@ -78,6 +79,11 @@ class Supplier(Model):
         'std_payment_term': 0,
         'created_at': datetime.now,
     }
+
+    @property
+    def freight_str(self):
+        return self._freight_types[self.freight_type]
+
 
 
 class PurchaseDocument(Model):
