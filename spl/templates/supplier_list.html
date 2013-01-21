@@ -1,6 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
+<h3>Proveedores</h3>
+<table class="table table-condensed">
+  <tbody>
+    {% for supplier in pagination.items %}
+    <tr id="supplier:{{ supplier._id|string }}">
+      <td class="supplier-name">{{ supplier.name }}</td>
+      <td class="supplier-phone">{{ supplier.phone }}</td>
+      <td class="supplier-term">{{ supplier.std_payment_term }} días</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block dummy %}
 <h2>Proveedores</h2>
 <div class="content">
   <table class="table table-condensed">

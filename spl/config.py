@@ -7,6 +7,7 @@ class Config(object):
     TESTING = False
     SECRET_KEY = '<must be secret>'
     ASSETS_OUTPUT_DIR = 'assets'
+    MAX_ITEMS_PER_PAGE = 100
 
 class ProductionConfig(Config):
     MONGODB_DATABASE = 'spldata'

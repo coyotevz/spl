@@ -3,7 +3,7 @@
 import datetime
 import decimal
 from math import ceil
-from flask import json, make_response, request
+from flask import json, make_response, request, abort
 from bson.dbref import DBRef
 from bson.objectid import ObjectId
 
@@ -36,6 +36,8 @@ class Pagination(object):
     """
 
     def __init__(self, cursor, page, per_page):
+        if page < 1:
+            abort(404)
         #: the unlimited cursor object that was used to create this
         #: pagination object.
         self.cursor = cursor
@@ -46,7 +48,10 @@ class Pagination(object):
         #: the total number of items matching the cursor
         self.total = cursor.count()
         #: the items for the current page
-        self.items = list(cursor.clone().skip((page - 1) * per_page).limit(per_page))
+        items = list(cursor.clone().skip((page - 1) * per_page).limit(per_page))
+        if not items and page != 1:
+            abort(404)
+        self.items = items
 
     @property
     def pages(self):

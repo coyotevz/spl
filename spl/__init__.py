@@ -6,7 +6,7 @@ import locale
 
 locale.setlocale(locale.LC_ALL, '')
 
-from flask import Flask
+from flask import Flask, request
 from spl.models import configure_db
 from spl.views import configure_views
 from spl.api import configure_api
@@ -42,3 +42,9 @@ def configure_app(app, config=None):
     def index():
         from flask import escape
         return '<pre>'+str(escape(str(app.url_map)))+'</pre>'
+
+    @app.before_request
+    def before_request():
+        max_per_page = app.config.get('MAX_ITEMS_PER_PAGE', 100)
+        request.page = int(request.args.get('page', 1))
+        request.per_page = min(int(request.args.get('per_page', 25)), max_per_page)

@@ -9,10 +9,9 @@ supplier = Blueprint('supplier', __name__)
 
 @supplier.route('/')
 def suppliers_list():
-    page = int(request.args.get('page', 1))
-    per_page = int(request.args.get('per_page', 25))
     suppliers = db.Supplier.find().sort('name')
-    pagination = Pagination(suppliers, page, per_page)
+    pagination = Pagination(suppliers, page=request.page,
+                            per_page=request.per_page)
     return render_template('supplier_list.html', suppliers=suppliers, pagination=pagination)
 
 @supplier.route('/<ObjectId:id>/')
