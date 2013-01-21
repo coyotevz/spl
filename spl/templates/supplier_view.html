@@ -12,24 +12,25 @@
     {% if supplier.fax %}<dt>Fax</dt><dd>{{ supplier.fax }}</dd>{% endif %}
     {% if supplier.email %}<dt>Email</dt><dd>{{ supplier.email }}</dd>{% endif %}
     {% if supplier.web %}<dt>Web</dt><dd>{{ supplier.web }}</dd>{% endif %}
-    {% if supplier.term %}<dt>Plazo pago</dt><dd>{{ supplier.term }} días</dd>{% endif %}
+    {% if supplier.std_payment_term %}<dt>Plazo pago</dt><dd>{{ supplier.std_payment_term }} días</dd>{% endif %}
     <dt>Flete</dt><dd>{{ supplier.freight_str }}</dd>
   </dl>  
 </div>
 
 <div class="supplier-contacts">
-  <h4>Contactos <small>({{ supplier.supplier_contacts.count() }})</small></h4>
+  <h4>Contactos <small>({{ supplier.contacts|length }})</small></h4>
   <ul class="unstyled">
-    {% for contact in supplier.contacts %}
+    {% for c in supplier.contacts %}
     <li>
-    <span class="supplier-contact-name">{{ contact.name }}</span>
-    {% if contact.phone %}<span class="supplier-contact-phone">{{ contact.phone }}</span>{% endif %}
-    {% if contact.email %}<span class="supplier-contact-email">{{ contact.email }}</span>{% endif %}
+    <span class="supplier-contact-name">{{ c.contact.name }}</span>
+    {% if c.contact.phone %}<span class="supplier-contact-phone">{{ c.contact.phone }}</span>{% endif %}
+    {% if c.contact.email %}<span class="supplier-contact-email">{{ c.contact.email }}</span>{% endif %}
     </li>
     {% endfor %}
   </ul>
 </div>
 
+{#
 <div class="supplier-documents">
   <h3>Facturas <small>({{ supplier.documents.count() }})</small></h3>
   <div class="invoice-list">
@@ -67,7 +68,7 @@
       </tbody>
     </table>
   </div>
-</div>
+</div>#}
 {% endblock %}
 
 {# vim: ft=html.jinja:sw=2

@@ -4,19 +4,19 @@
 <h2>Proveedores</h2>
 <div class="content">
   <table class="table table-condensed">
-    {% for supplier in pagination.items %}
+    {% for supplier in suppliers %}
     <tr>
-      <td class="supplier-name"><a href="{{ url_for('.supplier_view', id=supplier.id) }}">{{ supplier.name }}</a></td>
-      <td class="supplier-cuit">{{ supplier.cuit }}</td>
+      <td class="supplier-name"><a href="{{ url_for('.supplier_view', id=supplier._id) }}">{{ supplier.name }}</a></td>
       <td class="supplier-address">{{ supplier.address }}</td>
       <td class="supplier-phone">{{ supplier.phone }}</td>
-      <td class="supplier-term">{{ supplier.term }} días</td>
+      <td class="supplier-term">{{ supplier.std_payment_term }} días</td>
       <td class="supplier-freight">{{ supplier.freight_str }}</td>
     </tr>
     {% endfor %}
   </table>
 </div>
 
+{#
 <div class="total-count">
   {{ (pagination.page-1)*pagination.per_page }}-{{ (((pagination.page-1)*pagination.per_page)+(pagination.items|length)) }} de {{ pagination.total }} proveedores
 </div>
@@ -33,7 +33,7 @@
   <span class="ellipsis">…</span>
   {% endif %}
   {%- endfor %}
-</div>
+</div>#}
 {% endblock %}
 {# vim: ft=html.jinja:sw=2
 #}
