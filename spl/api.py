@@ -3,10 +3,11 @@
 from flask import Blueprint, request
 from flask.views import MethodView
 from spl.models import db
-from spl.utils import json_response
+from spl.utils import json_response, Pagination
 
 
 api = Blueprint('api', __name__, url_prefix='/api')
+
 
 def register_api(view, endpoint, url, pk='id', pk_type='int'):
     view_func = view.as_view(endpoint)
@@ -25,7 +26,15 @@ class SupplierAPI(MethodView):
     /suppliers/         POST        - Create a new supplier
     """
     def get(self, id):
-        return json_response({'objects': list(db.Supplier.find())})
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 25))
+        p = Pagination(db.Supplier.find(), page=page, per_page=per_page)
+        return json_response({
+            'objects': p.items,
+            'page': p.page,
+            'num_results': p.total,
+            'num_pages': p.pages,
+        })
 
 
 register_api(SupplierAPI, 'supplier_api', '/suppliers/')

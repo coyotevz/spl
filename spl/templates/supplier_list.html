@@ -4,7 +4,7 @@
 <h2>Proveedores</h2>
 <div class="content">
   <table class="table table-condensed">
-    {% for supplier in suppliers %}
+    {% for supplier in pagination.items %}
     <tr>
       <td class="supplier-name"><a href="{{ url_for('.supplier_view', id=supplier._id) }}">{{ supplier.name }}</a></td>
       <td class="supplier-address">{{ supplier.address }}</td>
@@ -16,7 +16,6 @@
   </table>
 </div>
 
-{#
 <div class="total-count">
   {{ (pagination.page-1)*pagination.per_page }}-{{ (((pagination.page-1)*pagination.per_page)+(pagination.items|length)) }} de {{ pagination.total }} proveedores
 </div>
@@ -33,7 +32,7 @@
   <span class="ellipsis">…</span>
   {% endif %}
   {%- endfor %}
-</div>#}
+</div>
 {% endblock %}
 {# vim: ft=html.jinja:sw=2
 #}

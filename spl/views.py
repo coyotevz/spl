@@ -3,6 +3,7 @@
 from flask import Blueprint, request, render_template
 
 from spl.models import db
+from spl.utils import Pagination
 
 supplier = Blueprint('supplier', __name__)
 
@@ -11,14 +12,12 @@ def suppliers_list():
     page = int(request.args.get('page', 1))
     per_page = int(request.args.get('per_page', 25))
     suppliers = db.Supplier.find().sort('name')
-#    suppliers = Supplier.query.order_by(Supplier.name)
-#    pagination = suppliers.paginate(page, per_page=per_page)
-    return render_template('supplier_list.html', suppliers=suppliers)
+    pagination = Pagination(suppliers, page, per_page)
+    return render_template('supplier_list.html', suppliers=suppliers, pagination=pagination)
 
 @supplier.route('/<ObjectId:id>/')
 def supplier_view(id):
     supplier = db.Supplier.get_or_404(id)
-#    supplier = Supplier.query.get_or_404(id)
     return render_template('supplier_view.html', supplier=supplier)
 
 
