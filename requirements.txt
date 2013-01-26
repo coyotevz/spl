@@ -1,3 +1,5 @@
 Flask
 Flask-Script
 Flask-MongoKit
+Flask-Assets
+PyYAML

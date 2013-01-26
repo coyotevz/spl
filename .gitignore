@@ -1,3 +1,5 @@
 *.db
 *.pyc
 *.swp
+spl/static/assets/
+spl/static/.webassets-cache/

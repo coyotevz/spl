@@ -11,6 +11,7 @@ from spl.models import configure_db
 from spl.views import configure_views
 from spl.api import configure_api
 from spl.jinjafilters import configure_jinjafilters
+from spl.assets import configure_bundles
 
 DEFAULT_APPNAME = 'spl'
 
@@ -26,6 +27,7 @@ def create_app(app_name=None, config=None):
     configure_views(app)
     configure_api(app)
     configure_jinjafilters(app)
+    configure_bundles(app)
 
     return app
 
