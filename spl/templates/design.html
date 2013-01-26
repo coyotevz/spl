@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SPL Web design</title>
+    <link rel="stylesheet" href="/static/css/design.css" type="text/css" media="screen">
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <header>
+        <nav class="appbar">
+          <ul>
+            <li><a href="#"><span>Fibra</span></a></li>
+            <li class="selected"><a href="#"><span>SPL</span></a></li>
+            <li><a href="#"><span>Clientes</span></a></li>
+            <li><a href="#"><span>Inventario</span></a></li>
+            <li><a href="#"><span>Email</span></a></li>
+          </ul>
+        </nav>
+        <div id="banner">
+        </div>
+      </header>
+
+      <div id="page" class="clearfix">
+        <aside>
+          <header>
+            <div class="title">
+              <span>Proveedores</span>
+            </div>
+          </header>
+          <div class="content">
+            <div class="action">
+              <div class="button">Nuevo Proveedor</div>
+            </div>
+            <nav>
+              <ul>
+                <li><span>left</span></li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+        <section id="main">
+          <div class="toolbar clearfix">
+            <div class="btn-group pull-left">
+              <a class="btn">Test button</a>
+            </div>
+            <div class="btn-group pull-right">
+              <a class="btn">Close session</a>
+            </div>
+            <div class="btn-group pull-right">
+              <a class="btn">&lt;</a>
+              <a class="btn">&gt;</a>
+            </div>
+          </div>
+          <div id="content_wrapper">
+            <div id="scroll_wrapper">
+              <div class="content">
+                <table id="suppliers-list">
+                  <colgroup>
+                    <col class="col0" style="width: 2px;">
+                    <col class="col1" style="width: 30px;">
+                    <col class="col2">
+                    <col class="col3">
+                    <col class="col4">
+                    <col class="col5">
+                  </colgroup>
+                  <tbody>
+                    {% for supplier in db.Supplier.find().limit(40).sort("name") %}
+                    <tr>
+                      <td></td>
+                      <td>
+                        <label class="checkbox inline">
+                          <input id="supplier:{{ supplier._id }}" type="checkbox">
+                          <span></span>
+                        </label>
+                      </td>
+                      <td>
+                        <span class="name">{{ supplier.name }}</span>
+                      </td>
+                      <td>
+                        <span class="email">{{ supplier.email }}</span>
+                      </td>
+                      <td>
+                        <span class="phone">{{ supplier.phone }}</span>
+                      </td>
+                      <td></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <footer>
+                  <span class="copy-notice">&copy;2013&nbsp;Rocctech</span>
+                  -
+                  <a target="_blank" href="http://www.rocctech.com.ar/">Condiciones</a>
+                  -
+                  <a target="_blank" href="http://www.rocctech.com.ar/">Políticas de privacidad</a>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <script type="text/javascript" src="/static/js/jquery-1.9.0.js"></script>
+
+    <script type="text/javascript" src="/static/js/resize.design.js"></script>
+    <script type="text/javascript" src="/static/js/checkboxes.js"></script>
+    <script type="text/javascript" src="/static/js/scroll.js"></script>
+
+  </body>
+</html>
+
+{# vim: ft=html.jinja:sw=2
+#}

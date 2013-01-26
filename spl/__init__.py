@@ -43,6 +43,12 @@ def configure_app(app, config=None):
         from flask import escape
         return '<pre>'+str(escape(str(app.url_map)))+'</pre>'
 
+    @app.route('/design/')
+    def dev_design():
+        from flask import render_template
+        from spl.models import db
+        return render_template('design.html', db=db)
+
     @app.before_request
     def before_request():
         max_per_page = app.config.get('MAX_ITEMS_PER_PAGE', 100)

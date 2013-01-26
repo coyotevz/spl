@@ -1,0 +1,283 @@
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font: 13px/27px Arial,sans-serif;
+  color: #333;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+a {
+  color: #08c;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #005580;
+  text-decoration: underline;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+
+.pull-left { float: left; }
+.pull-right { float: right; }
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: block;
+}
+
+nav ul > li {
+  display: inline-block;
+}
+
+/* start inline checkboxes */
+label.checkbox.inline {
+  padding: 0px;
+  line-height: 15px;
+  min-height: 15px;
+  margin-left: 7px;
+  position: relative;
+}
+
+label.checkbox.inline input {
+  cursor: default;
+}
+.checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  margin-left: 1px;
+}
+
+input[type="checkbox"] {
+  margin: 3px 0;
+  line-height: normal;
+  cursor: pointer;
+  height: 14px;
+  width: 14px;
+}
+
+.checkbox input[type="checkbox"]:checked + span::before {
+  background-position: -4px -23px;
+}
+
+.checkbox input[type="checkbox"] + span::before {
+  content: "";
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin: 0 0 1px;
+  border-radius: 1px;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 0 1px 0 #ccc;
+  background: url("/static/img/sprite.png") no-repeat scroll -2px -2px white;
+}
+/* end inline checkboxes */
+
+/* start appbar */
+header nav.appbar {
+  background-color: #2d2d2d;
+  height: 23px;
+  line-height: 23px;
+  border-bottom: 1px solid #000;
+}
+
+header nav.appbar ul {
+  margin: 0 6px;
+}
+
+header nav.appbar ul a {
+  color: #bbb;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+
+header nav.appbar ul span {
+  padding: 0 9px;
+  display: inline;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+
+header nav.appbar li.selected a span,
+header nav.appbar li a:hover span {
+  color: #fff !important;
+}
+/* end appbar */
+
+
+/* start banner */
+#banner {
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #e5e5e5;
+  height: 45px;
+}
+/* end banner */
+
+/* start page style */
+#page {
+  padding-top: 5px;
+}
+
+/* aside panel style */
+aside {
+  float: left;
+  width: 180px;
+}
+
+aside header {
+  margin-left: 9px;
+  padding: 4px 16px 15px 1px;
+}
+
+aside header .title {
+  color: #dd4b39;
+  cursor: pointer;
+  font-size: 14pt;
+  padding: 0 7px;
+}
+
+aside .action {
+  margin-left: 16px;
+  padding: 0 4px 8px 0;
+}
+
+aside .action .button {
+  background-color: #d14836;
+  background-image: -moz-linear-gradient(center top, #dd4b39, #d14836);
+  border: 1px solid transparent;
+  color: #fff;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: default;
+  font-size: 11px;
+  font-weight: bold;
+  height: 27px;
+  line-height: 27px;
+  margin-right: 16px;
+  min-width: 54px;
+  outline: 0 none;
+  padding: 0 8px;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-block;
+
+}
+/* end aside panel */
+
+/* start section#main */
+section#main {
+  float: left;
+}
+
+section#main .toolbar {
+  border-bottom: 1px solid #e5e5e5;
+  margin-left: -400px;
+  margin-top: 2px;
+  padding: 0 16px 7px 400px;
+}
+
+section#main .toolbar.fixed {
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+section#main .toolbar .btn-group {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+section#main .toolbar .btn {
+  border: 1px solid #e1e1e1;
+  font-size: 14px;
+  line-height: 20px;
+  display: inline-block;
+  padding: 4px 12px;
+  color: #888;
+  background-color: #f1f1f1;
+}
+
+#content_wrapper {
+  overflow: hidden;
+}
+
+#scroll_wrapper {
+  overflow-y: scroll;
+}
+
+/* table style */
+section#main table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  cursor: pointer;
+  padding: 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+section#main table tr {
+  height: 21px;
+  line-height: 15px;
+  color: #222;
+}
+
+section#main table tr.selected {
+  background-color: #ffc;
+}
+
+section#main table td {
+  border-bottom: 1px solid #e5e5e5;
+  empty-cells: show;
+  padding: 2px 0;
+  white-space: nowrap;
+}
+
+section#main table td span.name {
+  font-weight: bold;
+}
+
+
+section#main footer {
+  color: #777;
+  font-size: 85%;
+  text-align: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-top: 8px;
+}
+
+section#main footer a {
+  color: #777;
+  text-decoration: underline;
+}
+/* end section#main */
