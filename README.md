@@ -1,4 +1,4 @@
 spl
 ===
 
-Manejo de Proveedores
+Manejo de Proveedores en desarrolo.
