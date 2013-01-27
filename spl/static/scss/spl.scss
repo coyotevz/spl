@@ -22,6 +22,12 @@ aside .content .action .btn {
   text-transform: uppercase;
 }
 
+table td.no-data-message span {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
 section#main {
   float: left;
 
