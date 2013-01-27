@@ -1,8 +1,9 @@
 style_bundle:
     filters: scss
-    output: assets/style.css
+    output: assets/tesla.css
     contents:
-        - scss/style.scss
+        - scss/tesla/tesla.scss
+        - scss/spl.scss
 modernizr_bundle:
     output: assets/modernizr.js
     contents:

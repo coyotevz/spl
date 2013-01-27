@@ -1,0 +1,48 @@
+/*
+ * Navs
+ */
+
+// Base style
+nav {
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: block;
+
+    & > li {
+      display: inline-block;
+    }
+  }
+
+  &.appbar {
+    background-color: $appbarBackgroundColor;
+    height: $appbarHeight;
+    line-height: $appbarHeight;
+    border-bottom: 1px solid $appbarBorderColor;
+
+    ul {
+      margin: 0 6px;
+
+      a {
+        color: $appbarFontColor;
+        font-weight: bold;
+        cursor: pointer;
+        display: block;
+        text-decoration: none;
+      }
+
+      span {
+        padding: 0 9px;
+        display: inline;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+      }
+
+      li.selected a,
+      li a:hover {
+        span { color: #fff !important; }
+      }
+    }
+  }
+}

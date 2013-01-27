@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css" media="screen">
     {%- endassets %}
     <!-- page-specific style -->
-    {% block css %}{% endblock %}
+    {%- block css %}{% endblock %}
     <!-- end page-specific style -->
     <script type="text/javascript">
       var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
@@ -47,7 +47,7 @@
           </header>
           <div class="content">
             <div class="action">
-              <div class="button">Nuevo Proveedor</div>
+              <a href="#" class="btn btn-danger">Nuevo Proveedor</a>
             </div>
             <nav>
               <ul>
@@ -58,21 +58,21 @@
         </aside>
         <section id="main">
           <div class="toolbar clearfix">
-            <div class="btn-group pull-left">
-              <a class="btn">Test button</a>
+            <div class="btn-group">
+              <a href="#" class="btn">Test button</a>
             </div>
             <div class="btn-group pull-right">
-              <a class="btn">Close session</a>
+              <a href="#" class="btn disabled">Close session</a>
             </div>
             <div class="btn-group pull-right">
-              <a class="btn">&lt;</a>
-              <a class="btn">&gt;</a>
+              <a href="#" class="btn" disabled>&lt;</a>
+              <a href="#" class="btn">&gt;</a>
             </div>
           </div>
           <div id="content_wrapper">
             <div id="scroll_wrapper">
               <div class="content">
-                <table id="suppliers-list">
+                <table id="suppliers-list" class="list">
                   <colgroup>
                     <col class="col0" style="width: 2px;">
                     <col class="col1" style="width: 30px;">
@@ -86,7 +86,7 @@
                     <tr>
                       <td></td>
                       <td>
-                        <label class="checkbox inline">
+                        <label class="checkbox inline-control">
                           <input id="supplier:{{ supplier._id }}" type="checkbox">
                           <span></span>
                         </label>
@@ -124,10 +124,11 @@
     {%- assets "js_bundle" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {%- endassets %}
-
+    
     <!-- page-specific script -->
-    {% block js %}{% endblock %}
+    {%- block js %}{% endblock %}
     <!-- end page-specific script -->
+    
   </body>
 </html>
 

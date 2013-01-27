@@ -1,0 +1,25 @@
+/*
+ * Aside style
+ */
+
+aside {
+  float: left;
+  width: $asideWidth;
+
+  header {
+    margin-left: 9px;
+    padding: 4px 16px 15px 1px;
+
+    .title {
+      color: $asideTitleColor;
+      cursor: pointer;
+      font-size: $asideTitleFontSize;
+      padding: 0 7px;
+    }
+  }
+
+  .action {
+    margin-left: 16px;
+    padding: 0 4px 8px 0;
+  }
+}

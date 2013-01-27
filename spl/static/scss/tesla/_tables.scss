@@ -1,0 +1,36 @@
+/*
+ * Tables
+ */
+
+table {
+  width: 100%;
+  background-color: $tableBackground;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+
+  &.list {
+    cursor: pointer;
+
+    tr {
+      height: 21px;
+      line-height: 15px;
+      color: $grayDarker;
+
+      &.selected {
+        background-color: #ffc;
+      }
+    }
+
+    td {
+      border-bottom: 1px solid #e5e5e5;
+      empty-cells: show;
+      padding: 2px 0;
+      white-space: nowrap;
+
+      span.name {
+        font-weight: bold;
+      }
+    }
+  }
+}

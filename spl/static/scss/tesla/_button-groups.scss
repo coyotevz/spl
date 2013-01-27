@@ -1,0 +1,56 @@
+/*
+ * Button Groups
+ */
+
+// Make div behave like a button
+.btn-group {
+  position: relative;
+  @include clearfix();
+}
+
+// Space out series of button groups
+.btn-group + .btn-group {
+  margin-left: 5px;
+}
+
+// Optional: Group multiple button sgroups together for a toolbar
+.btn-toolbar {
+  margin-top: $baseLineHeight / 2;
+  margin-bottom: $baseLineHeight / 2;
+  .btn-group {
+    display: inline-block;
+  }
+}
+
+.btn-group {
+  & > .btn {
+    position: relative;
+    float: left;
+    margin-left: -1px;
+    @include border-radius(0);
+
+    &:first-child {
+      margin-left: 0;
+      @include border-left-radius($btnBorderRadius);
+    }
+
+    &:last-child,
+    &.dropdown-toggle {
+      @include border-right-radius($btnBorderRadius);
+    }
+
+    &:hover, &:focus, &:active, &.active {
+      z-index: 2;
+    }
+
+    &.large {
+      &:first-child {
+        margin-left: 0;
+        @include border-left-radius($btnLargeBorderRadius);
+      }
+      &:last-child {
+        @include border-right-radius($btnLargeBorderRadius);
+      }
+    }
+  }
+}

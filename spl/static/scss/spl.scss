@@ -1,0 +1,67 @@
+/* style for spl */
+
+@import "tesla/custom_variables";
+@import "tesla/variables";
+@import "tesla/mixins";
+
+body {
+  overflow: hidden;
+}
+
+#banner {
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #e5e5e5;
+  height: 45px;
+}
+
+#page {
+  padding-top: 5px;
+}
+
+aside .content .action .btn {
+  text-transform: uppercase;
+}
+
+section#main {
+  float: left;
+
+  .toolbar {
+    border-bottom: 1px solid #e5e5e5;
+    margin-left: -400px;
+    margin-top: 2px;
+    padding: 0 16px 7px 400px;
+    &.fixed {
+      @include box-shadow(0 2px 2px -1px rgba(0, 0, 0, 0.1));
+    }
+
+    .btn-group {
+      float: left;
+
+      &.pull-right { /* redefine for specificity */
+        float: right;
+      }
+    }
+  }
+
+  footer {
+    color: $footerColor;
+    font-size: 85%;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-top: 8px;
+
+    a {
+      color: $footerColor;
+      text-decoration: underline;
+    }
+  }
+}
+
+#content_wrapper {
+  overflow: hidden;
+}
+
+#scroll_wrapper {
+  overflow-y: scroll;
+}
