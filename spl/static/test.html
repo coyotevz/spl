@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing parent :hover</title>
+        <style type="text/css" media="screen">
+            body { font-family: Arial,sans-serif; }
+            .parent {
+                height: 300px;
+                width: 600px;
+                padding: 50px;
+                background-color: #eee;
+                border: 1px solid red;
+            }
+            .parent:hover {
+                background-color: #999;
+            }
+            .child {
+                height: 100%;
+                background-color: #aaa;
+                border: 1px solid #333;
+                text-align: center;
+            }
+            .child:hover {
+                background-color: #777;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="parent">
+            <div class="child">
+                <span>child</span>
+            </div>
+        </div>
+        <script type="text/javascript" src="spl/static/js/jquery-1.9.0.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+            });
+        </script>
+    </body>
+</html>
