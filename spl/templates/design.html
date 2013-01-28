@@ -47,11 +47,56 @@
           </header>
           <div class="content">
             <div class="action">
-              <a href="#" class="btn btn-danger">Nuevo Proveedor</a>
+              <button class="btn btn-danger">Nuevo Proveedor</button>
             </div>
-            <nav>
+            <nav class="sidenav">
               <ul>
-                <li><span>left</span></li>
+                <li class="nav-heder active">
+                <div class="caret open">
+                  <span role="link" title="Ocultar etiqueta: Todos ({{ db.Supplier.find().count() }})"></span>
+                </div>
+                <div>
+                  <span>
+                    <a href="#">Todos ({{ db.Supplier.find().count() }})</a>
+                  </span>
+                </div>
+                </li>
+                <li class="sub">
+                <div>
+                  <span>
+                    <a href="#">Mercaderías ({{ db.Supplier.find().count() }})</a>
+                  </span>
+                </div>
+                </li>
+                <li class="sub">
+                <div>
+                  <a href="#">Fletes (0)</a>
+                </div>
+                </li>
+                <li class="sub">
+                <div>
+                  <a href="#">Insumos (0)</a>
+                </div>
+                </li>
+                <li class="sub">
+                <div>
+                  <a href="#">Servicios (0)</a>
+                </div>
+                </li>
+              </ul>
+              <div class="divider"></div>
+              <ul>
+                <li class="nav-header">Otros criterios</li>
+                <li>
+                <div>
+                  <a href="#">Facturas vencidas</a>
+                </div>
+                </li>
+                <li>
+                <div>
+                  <a href="#">Pedidos en curso</a>
+                </div>
+                </li>
               </ul>
             </nav>
           </div>
@@ -126,11 +171,11 @@
     {%- assets "js_bundle" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {%- endassets %}
-    
+
     <!-- page-specific script -->
     {%- block js %}{% endblock %}
     <!-- end page-specific script -->
-    
+
   </body>
 </html>
 
