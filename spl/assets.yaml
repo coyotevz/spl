@@ -12,7 +12,7 @@ js_bundle:
     output: assets/all.js
     contents:
         - js/jquery-1.9.0.js
-        - js/resize.design.js
-        - js/hover.js
-        - js/checkboxes.js
-        - js/scroll.js
+        - js/spl.resize.design.js
+        - js/spl.hover.js
+        - js/spl.checkboxes.js
+        - js/spl.scroll.js
