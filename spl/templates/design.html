@@ -11,6 +11,7 @@
     {%- assets "style_bundle" %}
     <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css" media="screen">
     {%- endassets %}
+    <link rel="stylesheet" href="/static/css/jquery.custom-scrollbar.css" type="text/css" media="screen">
     <!-- page-specific style -->
     {%- block css %}{% endblock %}
     <!-- end page-specific style -->
@@ -114,9 +115,9 @@
               <a href="#" class="btn">&gt;</a>
             </div>
           </div>
-          <div id="content_wrapper">
-            <div id="scroll_wrapper">
-              <div class="content">
+          <!-- div id="content_wrapper">
+            <div id="scroll_wrapper" -->
+              <div id="content" class="gray-skin">
                 <table id="suppliers-list" class="list">
                   <colgroup>
                     <col class="col0" style="width: 2px;">
@@ -159,8 +160,8 @@
                   -
                   <a target="_blank" href="http://www.rocctech.com.ar/">Políticas de privacidad</a>
                 </footer>
-              </div>
-            </div>
+              <!-- /div>
+            </div -->
           </div>
         </section>
       </div>
@@ -171,6 +172,12 @@
     {%- assets "js_bundle" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {%- endassets %}
+
+    <script type="text/javascript">
+      $(function() {
+        $('#content').customScrollbar();      
+      });
+    </script>
 
     <!-- page-specific script -->
     {%- block js %}{% endblock %}
