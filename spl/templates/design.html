@@ -149,7 +149,13 @@
                       <td></td>
                     </tr>
                     {% else %}
-                    <tr><td colspan="6" class="no-data-message"><span>No hay proveedores cargados.</span></td></tr>
+                    {% for i in range(5) %}
+                    <tr><td colspan="6" class="no-data-message"></td></tr>
+                    {% endfor %}
+                    <tr><td colspan="6" class="no-data-message"><span>No hay proveedores en este grupo.</span></td></tr>
+                    {% for i in range(5) %}
+                    <tr><td colspan="6" class="no-data-message"></td></tr>
+                    {% endfor %}
                     {% endfor %}
                   </tbody>
                 </table>
