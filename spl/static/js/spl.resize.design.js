@@ -7,7 +7,7 @@
   "use strict"; // jshint ;_;
 
   var resize = function() {
-    var table_avl_width = $(window).width() - $('aside').width() - 17,
+    var table_avl_width = $(window).width() - $('aside').width(),
         content_wrapper = $('#content_wrapper'),
         scroll_wrapper = $('#scroll_wrapper'),
         content_avl_height = $(window).height() - content_wrapper.position().top;
