@@ -52,7 +52,7 @@
             <nav class="sidenav">
               <ul>
                 <li class="nav-header active">
-                <div class="caret open">
+                <div id="category-toggle" class="caret open">
                   <span role="link" title="Ocultar etiqueta: Todos ({{ db.Supplier.find().count() }})"></span>
                 </div>
                 <div>
@@ -61,24 +61,24 @@
                   </span>
                 </div>
                 </li>
-                <li class="sub">
+                <li class="sub category">
                 <div>
                   <span>
                     <a href="#">Mercaderías ({{ db.Supplier.find().count() }})</a>
                   </span>
                 </div>
                 </li>
-                <li class="sub">
+                <li class="sub category">
                 <div>
                   <a href="#">Fletes (0)</a>
                 </div>
                 </li>
-                <li class="sub">
+                <li class="sub category">
                 <div>
                   <a href="#">Insumos (0)</a>
                 </div>
                 </li>
-                <li class="sub">
+                <li class="sub category">
                 <div>
                   <a href="#">Servicios (0)</a>
                 </div>

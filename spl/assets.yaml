@@ -17,3 +17,4 @@ js_bundle:
         - js/spl.hover.js
         - js/spl.checkboxes.js
         - js/spl.scroll.js
+        - js/spl.application.js
