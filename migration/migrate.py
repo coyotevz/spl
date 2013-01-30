@@ -45,11 +45,11 @@ def _reenum_pedidos(s, number, pedidos_query, bar):
 
 def reenumerar_pedidos(s):
     pedidos = s.query(PedidoSub).order_by(PedidoSub.fecha_de_pedido.asc(), PedidoSub.numero_pedido.asc())
-    bar = ProgressBar(u'enumerando pedidos 1ra pasada', s.query(func.count(PedidoSub.numero_pedido)).scalar())
+    bar = ui.PacmanProgress(u'enumerando pedidos 1ra pasada', s.query(func.count(PedidoSub.numero_pedido)).scalar(), color='BOLD', sec_color='BLUE')
     _reenum_pedidos(s, 10000, pedidos, bar)
     bar.finish()
     pedidos = s.query(PedidoSub).order_by(PedidoSub.numero_pedido.asc())
-    bar = ProgressBar(u'enumerando pedidos 2da pasada', s.query(func.count(PedidoSub.numero_pedido)).scalar())
+    bar = ui.PacmanProgress(u'enumerando pedidos 2da pasada', s.query(func.count(PedidoSub.numero_pedido)).scalar(), color='BOLD', sec_color='BLUE')
     _reenum_pedidos(s, 0, pedidos, bar)
     bar.finish()
 
@@ -106,8 +106,12 @@ def migrar_proveedores(s):
     bar.finish()
 
 if __name__ == '__main__':
+    if len(sys.argv) > 2 and sys.argv[1] == '-c':
+        conffile = sys.argv[2]
+    else:
+        conffile = None
     session = configure_session(OLD_DB_URL)
-    app = create_app()
+    app = create_app(config=conffile)
     with app.app_context():
         #reenumerar_pedidos(session)
         migrar_proveedores(session)
