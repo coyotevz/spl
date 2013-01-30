@@ -3,3 +3,4 @@
 *.swp
 spl/static/assets/
 spl/static/.webassets-cache/
+spl/local.cfg

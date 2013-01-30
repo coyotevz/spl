@@ -38,7 +38,7 @@ def configure_app(app, config=None):
     #app.logger.info("Config: Development")
 
     if config is not None:
-        app.config.from_object(config)
+        app.config.from_pyfile(config)
 
     @app.route('/')
     def index():

@@ -18,6 +18,8 @@ from spl.models import db
 manager = Manager(create_app)
 manager.add_command("assets", ManageAssets())
 
+manager.add_option('-c', '--config', dest='config', required=False)
+
 @manager.command
 def dropdb():
     """Drops database"""
