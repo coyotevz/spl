@@ -1,6 +1,57 @@
 {% extends "layout.html" %}
 
+
 {% block content %}
+<table id="suppliers-list" class="list">
+  <colgroup>
+    <col class="col0" style="width: 2px;">
+    <col class="col1" style="width: 30px;">
+    <col class="col2">
+    <col class="col3">
+    <col class="col4">
+    <col class="col5">
+  </colgroup>
+
+  <tbody>
+    {% for supplier in pagination.items %}
+    <tr>
+      <td></td>
+      <td>
+        <label class="checkbox inline-control">
+          <input id="supplier:{{ supplier._id|string }}" type="checkbox">
+          <span></span>
+        </label>
+      </td>
+      <td><span class="name">{{ supplier.name }}</span></td>
+      <td><span class="email">{{ supplier.email }}</span></td>
+      <td><span class="phone">{{ supplier.phone }}</span></td>
+      <td></td>
+    </tr>
+    {% else %}
+    {% for i in range(5) %}
+    <tr><td colspan="6" class="no-data-message"></td></tr>
+    {% endfor %}
+    <tr><td colspan="6" class="no-data-message"><span>No hay proveedores en este grupo.</span></td></tr>
+    {% for i in range(5) %}
+    <tr><td colspan="6" class="no-data-message"></td></tr>
+    {% endfor %}
+    {% endfor %}
+  </tbody>
+
+</table>
+
+<footer>
+  <span class="copy-notice">&copy;2013&nbsp;Rocctech</span>
+  -
+  <a target="_blank" href="http://www.rocctech.com.ar">Condiciones</a>
+  <a target="_blank" href="http://www.rocctech.com.ar">Políticas de Privacidad</a>
+</footer>
+
+
+{% endblock %}
+
+
+{% block content2 %}
 
 <h3>Proveedores</h3>
 <table class="table table-condensed">

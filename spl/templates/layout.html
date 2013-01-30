@@ -24,12 +24,73 @@
 
   <body>
 
-    {% block content %}{% endblock %}
+    <div id="wrapper">
+      <header>
+        <nav class="appbar">
+          <ul>
+            <li><a href="#"><span>Fibra</span></a></li>
+            <li class="selected"><a href="#"><span>SPL</span></a></li>
+            <li><a href="#"><span>Inventario</span></a></li>
+            <li><a href="#"><span>Clientes</span></a></li>
+            <li><a href="#"><span>Email</span></a></li>
+          </ul>
+        </nav>
+        <div id="banner"></div>
+      </header>
 
-    <script src="/static/js/jquery-1.9.0.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/underscore-min.js"></script>
-    <script src="/static/js/backbone-min.js"></script>
+      <div id="page" class="clearfix">
+        <aside>
+          <header>
+            <div class="title">
+              <span>Proveedores</span>
+            </div>
+          </header>
+          <div class="content">
+            <div class="action">
+              <button class="btn btn-danger">Nuevo Proveedor</button>
+            </div>
+            <div class="sidenav">
+
+            </div>
+          </div>
+        </aside>
+
+        <section id="main">
+          <div class="toolbar clearfix">
+            <div class="btn-group"><button class="btn">Test Button</button></div>
+            <div class="btn-group pull-right">
+              <button class="btn disabled">Close session</button>
+            </div>
+            <div class="btn-group pull-right">
+              <button class="btn" disabled>&lt;</button>
+              <button class="btn">&gt;</button>
+            </div>
+          </div>
+
+          <div id="content_wrapper">
+            <div id="scroll_wrapper">
+              <div id="content">
+                {% block content %}{% endblock %}
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- javascript at the bottom for fast page loading -->
+    {%- assets "js_bundle" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {%- endassets %}
+
+    <!-- page-specific script -->
+    {%- block js %}{% endblock %}
+    <!-- end page-specific script -->
+
   </body>
 </html>
 
