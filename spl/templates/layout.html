@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SPL for bussiness</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" media="screen">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SPL for bussiness</title>
+    <meta name="description" content="">
+    <meta name="author" content="Augusto Roccasalva <augusto@rocctech.com.ar>">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    {%- assets "style_bundle" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css" media="screen">
+    {%- endassets %}
+    <!-- page-specific style -->
+    {%- block css %}{% endblock %}
+    <!-- end page-specific style -->
+    <script type="text/javascript">
+      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    {%- assets "modernizr_bundle" %}
+    <script src="{{ ASSET_URL }}"></script>
+    {%- endassets %}
   </head>
+
   <body>
+
     {% block content %}{% endblock %}
+
     <script src="/static/js/jquery-1.9.0.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/underscore-min.js"></script>
