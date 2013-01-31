@@ -1,11 +1,9 @@
 {% extends "layout.html" %}
+{% from "macros.html" import render_alpha_pagination with context %}
 
 
 {%- block toolbar %}
-<div class="btn-group pull-right">
-  <a href="{{ url_for(request.endpoint, page=pagination.prev_num, per_page=pagination.per_page if pagination.per_page != 25 else None) }}" class="btn"{% if not pagination.has_prev %} disabled{% endif %}>&lt;</a>
-  <a href="{{ url_for(request.endpoint, page=pagination.next_num, per_page=pagination.per_page if pagination.per_page != 25 else None) }}" class="btn"{% if not pagination.has_next %} disabled{% endif %}>&gt;</a>
-</div>
+{{ render_alpha_pagination(pagination, 'name') }}
 {%- endblock %}
 
 {%- block content %}

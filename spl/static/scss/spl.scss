@@ -48,6 +48,20 @@ section#main {
         float: right;
       }
     }
+
+    .pager {
+      .pages {
+        border: 1px solid transparent;
+        line-height: 20px;
+        float: left;
+        margin: 1px 12px;
+        padding: 3px;
+        span {
+          //font-weight: bold;
+          font-size: 90%;
+        }
+      }
+    }
   }
 
   footer {

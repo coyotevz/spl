@@ -1,0 +1,19 @@
+
+{% macro render_alpha_pagination(p, field='name') %}    
+{%- if p.pages > 1 %}
+<div class="pager pull-right">
+  <div class="pages">
+    <span>{{ p.items[0][field].split()[0] }}</span>
+    -
+    <span>{{ p.items[-1][field].split()[0] }}</span>
+  </div>
+  <div class="btn-group">
+    <a href="{{ url_for(request.endpoint, page=p.prev_num, per_page=p.per_page if p.per_page != 25 else None) if p.has_prev else '#' }}" class="btn"{% if not p.has_prev %} disabled{% endif %}>&lt;</a>
+    <a href="{{ url_for(request.endpoint, page=p.next_num, per_page=p.per_page if p.per_page != 25 else None) if p.has_next else '#'}}" class="btn"{% if not p.has_next %} disabled{% endif %}>&gt;</a>
+  </div>
+</div>
+{%- endif %}
+{% endmacro %}
+
+{# vim: ft=html.jinja:sw=2
+#}
