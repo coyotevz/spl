@@ -81,7 +81,7 @@ class Pagination(object):
         return self.page < self.pages
 
     @property
-    def next_num(elf):
+    def next_num(self):
         return self.page + 1
 
     def iter_pages(self, left_edge=2, left_current=2,

@@ -1,7 +1,14 @@
 {% extends "layout.html" %}
 
 
-{% block content %}
+{%- block toolbar %}
+<div class="btn-group pull-right">
+  <a href="{{ url_for(request.endpoint, page=pagination.prev_num, per_page=pagination.per_page if pagination.per_page != 25 else None) }}" class="btn"{% if not pagination.has_prev %} disabled{% endif %}>&lt;</a>
+  <a href="{{ url_for(request.endpoint, page=pagination.next_num, per_page=pagination.per_page if pagination.per_page != 25 else None) }}" class="btn"{% if not pagination.has_next %} disabled{% endif %}>&gt;</a>
+</div>
+{%- endblock %}
+
+{%- block content %}
 <table id="suppliers-list" class="list">
   <colgroup>
     <col class="col0" style="width: 2px;">
@@ -44,10 +51,9 @@
   <span class="copy-notice">&copy;2013&nbsp;Rocctech</span>
   -
   <a target="_blank" href="http://www.rocctech.com.ar">Condiciones</a>
+  -
   <a target="_blank" href="http://www.rocctech.com.ar">Políticas de Privacidad</a>
 </footer>
-
-
 {% endblock %}
 
 
