@@ -37,17 +37,11 @@
         </nav>
         <div id="banner"></div>
       </header>
-
       <div id="page" class="clearfix">
-        <aside>
-          {% block sidebar %}{% endblock %}
-        </aside>
+        <aside>{% block sidebar %}{% endblock %}</aside>
 
         <section id="main">
-          <div class="toolbar clearfix">
-            {% block toolbar %}{% endblock %}
-          </div>
-
+          <div class="toolbar clearfix">{% block toolbar %}{% endblock %}</div>
           <div id="content_wrapper">
             <div id="scroll_wrapper">
               <div id="content">
@@ -56,10 +50,7 @@
             </div>
           </div>
         </section>
-
       </div>
-
-
     </div>
 
 
