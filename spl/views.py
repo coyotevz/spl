@@ -26,6 +26,16 @@ def supplier_order_view(id):
     return render_template('supplier_order_view.html', order=order)
 
 
+contact = Blueprint('contact', __name__)
+
+@contact.route('/')
+def contacts_list():
+    contacts = db.Contact.find().sort('name')
+    pagination = Pagination(contacts, page=request.page,
+                            per_page=request.per_page)
+    return render_template('contacts/list.html', pagination=pagination)
+
+
 invoice = Blueprint('invoice', __name__)
 
 @invoice.route('/')
@@ -48,3 +58,4 @@ def invoice_view(id):
 def configure_views(app):
     app.register_blueprint(supplier, url_prefix='/suppliers')
     app.register_blueprint(invoice, url_prefix='/invoices')
+    app.register_blueprint(contact, url_prefix='/contacts')
