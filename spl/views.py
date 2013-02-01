@@ -12,18 +12,18 @@ def suppliers_list():
     suppliers = db.Supplier.find().sort('name')
     pagination = Pagination(suppliers, page=request.page,
                             per_page=request.per_page)
-    return render_template('supplier_list.html', suppliers=suppliers, pagination=pagination)
+    return render_template('supplier/list.html', suppliers=suppliers, pagination=pagination)
 
 @supplier.route('/<ObjectId:id>/')
 def supplier_view(id):
     supplier = db.Supplier.get_or_404(id)
-    return render_template('supplier_view.html', supplier=supplier)
+    return render_template('supplier/view.html', supplier=supplier)
 
 
 @supplier.route('/orders/<int:id>/')
 def supplier_order_view(id):
     order = PurchaseOrder.query.get_or_404(id)
-    return render_template('supplier_order_view.html', order=order)
+    return render_template('supplier/order_view.html', order=order)
 
 
 contact = Blueprint('contact', __name__)
@@ -47,12 +47,12 @@ def invoices_list():
     pending = invoices.filter(PurchaseDocument.status==PurchaseDocument.STATUS_PENDING)
     paid = invoices.filter(PurchaseDocument.status==PurchaseDocument.STATUS_PAID)
     pagination = invoices.paginate(page, per_page=per_page)
-    return render_template('invoice_list.html', pagination=pagination, expired=expired, pending=pending, paid=paid, page=page, per_page=per_page)
+    return render_template('invoice/list.html', pagination=pagination, expired=expired, pending=pending, paid=paid, page=page, per_page=per_page)
 
 @invoice.route('/<int:id>/')
 def invoice_view(id):
     invoice = PurchaseDocument.query.get_or_404(id)
-    return render_template('invoice_view.html', invoice=invoice)
+    return render_template('invoice/view.html', invoice=invoice)
 
 
 def configure_views(app):
