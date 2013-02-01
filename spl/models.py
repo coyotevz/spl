@@ -39,6 +39,10 @@ class Contact(Model):
         'email': email_validator,
     }
 
+    @property
+    def suppliers(self):
+        return db.Supplier.find({'contacts.contact': self.get_dbref()})
+
 
 @db.register
 class Supplier(Model):

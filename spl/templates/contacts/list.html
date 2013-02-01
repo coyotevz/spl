@@ -45,7 +45,7 @@
       <td><span class="name">{{ contact.name }}</span></td>
       <td><span class="email">{{ contact.email }}</span></td>
       <td><span class="phone">{{ contact.phone }}</span></td>
-      <td></td>
+      <td>{{ contact.suppliers|list|join(", ", attribute='name') }}</td>
     </tr>
     {% else %}
     {% for i in range(5) %}
