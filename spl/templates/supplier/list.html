@@ -1,6 +1,20 @@
 {% extends "layout.html" %}
 {% from "macros.html" import render_alpha_pagination with context %}
 
+{%- block sidebar %}
+<header>
+  <div class="title">
+    <span>Proveedores</span>
+  </div>
+</header>
+<div class="content">
+  <div class="action">
+    <button class="btn btn-danger">Nuevo Proveedor</button>
+  </div>
+  <div class="sidenav">
+  </div>
+</div>
+{%- endblock %}
 
 {%- block toolbar %}
 {{ render_alpha_pagination(pagination, 'name') }}
