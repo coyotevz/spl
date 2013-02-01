@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% from "macros.html" import render_alpha_pagination with context %}
+
+
+{%- block toolbar %}
+{{ render_alpha_pagination(pagination, 'name') }}
+{%- endblock %}
+
+{%- block content %}
+<table id="contacts-list" class="list">
+  <colgroup>
+    <col class="col0" style="width: 2px;">
+    <col class="col1" style="width: 30px;">
+    <col class="col2">
+    <col class="col3">
+    <col class="col4">
+    <col class="col5">
+  </colgroup>
+
+  <tbody>
+    {% for contact in pagination.items %}
+    <tr>
+      <td></td>
+      <td>
+        <label class="checkbox inline-control">
+          <input id="contact:{{ contact._id|string }}" type="checkbox">
+          <span></span>
+        </label>
+      </td>
+      <td><span class="name">{{ contact.name }}</span></td>
+      <td><span class="email">{{ contact.email }}</span></td>
+      <td><span class="phone">{{ contact.phone }}</span></td>
+      <td></td>
+    </tr>
+    {% else %}
+    {% for i in range(5) %}
+    <tr><td colspan="6" class="no-data-message"></td></tr>
+    {% endfor %}
+    <tr><td colspan="6" class="no-data-message"><span>No hay contactos en este grupo.</span></td></tr>
+    {% for i in range(5) %}
+    <tr><td colspan="6" class="no-data-message"></td></tr>
+    {% endfor %}
+    {% endfor %}
+  </tbody>
+
+</table>
+
+<footer>
+  <span class="copy-notice">&copy;2013&nbsp;Rocctech</span>
+  -
+  <a target="_blank" href="http://www.rocctech.com.ar">Condiciones</a>
+  -
+  <a target="_blank" href="http://www.rocctech.com.ar">Políticas de Privacidad</a>
+</footer>
+{% endblock %}
+{# vim: ft=html.jinja:sw=2
+#}
