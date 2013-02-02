@@ -48,7 +48,7 @@ class Pagination(object):
         #: the total number of items matching the cursor
         self.total = cursor.count()
         #: the items for the current page
-        items = list(cursor.clone().skip((page - 1) * per_page).limit(per_page))
+        items = list(cursor.skip((page - 1) * per_page).limit(per_page))
         if not items and page != 1:
             abort(404)
         self.items = items
@@ -61,7 +61,7 @@ class Pagination(object):
     def prev(self):
         """Returns a :class:`Pagination` object for the previous page."""
         assert self.cursor is not None, 'a cursor object is required'
-        return Pagination(self.cursor, self.page - 1, self.per_page)
+        return Pagination(self.cursor.rewind(), self.page - 1, self.per_page)
 
     @property
     def prev_num(self):
@@ -74,7 +74,7 @@ class Pagination(object):
 
     def next(self):
         assert self.cursor is not None, 'a cursor object is required'
-        return Pagination(self.cursor, self.page + 1, self.per_page)
+        return Pagination(self.cursor.rewind(), self.page + 1, self.per_page)
 
     @property
     def has_next(self):
