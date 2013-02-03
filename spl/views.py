@@ -20,6 +20,11 @@ def supplier_view(id):
     return render_template('supplier/view.html', supplier=supplier)
 
 
+@supplier.route('/new/')
+def supplier_new():
+    return render_template('supplier/new.html')
+
+
 @supplier.route('/orders/<int:id>/')
 def supplier_order_view(id):
     order = PurchaseOrder.query.get_or_404(id)

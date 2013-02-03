@@ -3,78 +3,8 @@
  */
 
 // Core
-button,
-[role=button],
 .btn {
   display: inline-block;
-  @include ie7-inline-block();
-  padding: 0 8px;
-  color: #444;
-  font-size: $btnFontSize;
-  font-family: $baseFontFamily;
-  font-weight: $btnFontWeight;
-  line-height: $btnLineHeight;
-  text-align: center;
-  vertical-align: baseline;
-  white-space: nowrap;
-  word-wrap: normal;
-  cursor: pointer;
-  border: 1px solid $btnBorder;
-  min-width: 54px;
-  @include gradient-vertical($btnBackground, $btnBackgroundHighlight);
-  @include border-radius($btnBorderRadius);
-  @include ie7-restore-left-whitespace();
-  @include box-shadow(none);
-  @include transition(all 0.218s ease 0s);
-  * {
-    @include opacity(70);
-  }
-
-  /* states */
-  &.disabled,
-  &[disabled] {
-    &,
-    &:hover,
-    &:focus,
-    &:focus:hover,
-    &:active,
-    &:active:hover {
-      cursor: default;
-      background-image: none;
-      @include box-shadow(none);
-      border-color: $btnBorder;
-      color: #b8b8b8;
-      * {
-        @include opacity(65);
-      }
-    }
-  }
-
-  &:hover {
-    color: #333;
-    border-color: #c6c6c6;
-    text-decoration: none;
-    @include box-shadow(0 1px 1px rgba(0,0,0,0.1));
-    @include transition(all 0s ease 0s);
-    * {
-      @include opacity(90);
-    }
-  }
-
-  &.focus,
-  &:focus {
-    outline: none;
-    border-color: $btnBorderFocusedColor;
-  }
-
-  &.btn-thin {
-    min-width: 34px;
-    padding: 0px;
-  }
-}
-
-
-.btn-old {
   @include ie7-inline-block();
   padding: 4px 12px;
   margin-bottom: 0;

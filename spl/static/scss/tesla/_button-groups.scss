@@ -23,6 +23,8 @@
 }
 
 .btn-group {
+  & > button,
+  & > [role=button],
   & > .btn {
     position: relative;
     float: left;

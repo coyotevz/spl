@@ -8,8 +8,8 @@
     <span>{{ p.items[-1][field].split()[0] }}</span>
   </div>
   <div class="btn-group">
-    <a href="{{ url_for(request.endpoint, page=p.prev_num, per_page=p.per_page if p.per_page != 25 else None) if p.has_prev else '#' }}" class="btn"{% if not p.has_prev %} disabled{% endif %}>&lt;</a>
-    <a href="{{ url_for(request.endpoint, page=p.next_num, per_page=p.per_page if p.per_page != 25 else None) if p.has_next else '#'}}" class="btn"{% if not p.has_next %} disabled{% endif %}>&gt;</a>
+    <button name="prev-page" data-target="{{ url_for(request.endpoint, page=p.prev_num, per_page=p.per_page if p.per_page != 25 else None) if p.has_prev else '#' }}" rel="tooltip" title="Anterior" data-placement="bottom" class="btn-thin"{% if not p.has_prev %} disabled{% endif %}><i class="icon-chevron-left"></i></button>
+    <button name="next-page" data-target="{{ url_for(request.endpoint, page=p.next_num, per_page=p.per_page if p.per_page != 25 else None) if p.has_next else '#'}}" rel="tooltip" title="Siguiente" data-placement="bottom" class="btn-thin"{% if not p.has_next %} disabled{% endif %}><i class="icon-chevron-right"></i></button>
   </div>
 </div>
 {%- endif %}

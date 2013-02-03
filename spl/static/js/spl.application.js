@@ -9,4 +9,9 @@
     $('.sub.category').toggle();
   });
 
+  $('[rel=tooltip]').tooltip({
+    delay: {show: 500},
+    placement: 'bottom'
+  });
+
 })(window.jQuery);
