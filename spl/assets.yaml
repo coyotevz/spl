@@ -18,4 +18,5 @@ js_bundle:
         - js/spl.checkboxes.js
         - js/spl.scroll.js
         - js/spl.tooltip.js
+        - js/spl.dropdown.js
         - js/spl.application.js

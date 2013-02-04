@@ -12,10 +12,14 @@ aside {
 
     .title {
       color: $asideTitleColor;
-      cursor: pointer;
       font-size: $asideTitleFontSize;
       padding: 0 7px;
+      .caret {
+        border-top-color: $asideTitleColor;
+        margin-top: 12px;
+      }
     }
+
   }
 
   .action {

@@ -1,0 +1,104 @@
+/*
+ * Dropdown menus
+ */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  *margin-bottom: -3px;
+  cursor: pointer;
+}
+
+.dropdown-toggle:active,
+.open .dropdown-toggle {
+  outline: 0;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-top:   4px solid $black;
+  border-right: 4px solid transparent;
+  border-left:  4px solid transparent;
+  content: "";
+}
+
+// Place the caret
+.dropdown .caret  {
+  margin-top: 8px;
+  margin-left: 2px;
+}
+
+// The dropdown menu (ul)
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: $zindexDropdown;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 6px 0;
+  margin: 0;
+  list-style: none;
+  background-color: $dropdownBackground;
+  border: 1px solid #ccc;
+  border: 1px solid $dropdownBorder;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  @include border-radius(2px);
+  @include box-shadow(0 2px 4px $dropdownBorder);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  @include transition(all .218s ease 0s);
+  font-size: 13px;
+  line-height: 15px;
+
+  li > a {
+    padding: 2px 30px 2px 30px;
+    white-space: nowrap;
+    display: block;
+    color: $dropdownFontColor;
+    &:hover {
+      text-decoration: none;
+      background-color: $dropdownHoverColor;
+    }
+
+    &:focus {
+      outline: none;
+    }
+    &[disabled], &[disabled]:hover,
+    &.disabled, &.disabled:hover {
+      color: rgb(204,204,204);
+      background-color: #fff;
+      cursor: default;
+    }
+  }
+
+  li.current > a {
+    color: $asideTitleColor;
+    font-weight: bold;
+    &:hover { color: $dropdownFontColor; }
+  }
+
+  li.divider {
+    border-top: 1px solid #ebebeb;
+    margin-top: 5px;
+    margin-bottom: 6px;
+  }
+}
+
+/* Open state for the dropdown */
+
+.open {
+  *z-index: $zindexDropdown;
+
+  & > .dropdown-menu {
+    display: block;
+  }
+}
