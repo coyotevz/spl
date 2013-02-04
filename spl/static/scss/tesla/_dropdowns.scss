@@ -53,8 +53,8 @@
   @include border-radius(2px);
   @include box-shadow(0 2px 4px $dropdownBorder);
   -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
   @include transition(all .218s ease 0s);
   font-size: 13px;
   line-height: 15px;
