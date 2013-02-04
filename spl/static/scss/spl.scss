@@ -79,6 +79,13 @@ section#main {
   }
 }
 
+button#settings {
+  .icon-cog {
+    font-size: 18px;
+    vertical-align: middle;
+  }
+}
+
 #content_wrapper {
   overflow: hidden;
 }

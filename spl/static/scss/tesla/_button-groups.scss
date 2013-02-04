@@ -10,7 +10,7 @@
 
 // Space out series of button groups
 .btn-group + .btn-group {
-  margin-left: 5px;
+  margin-left: 16px;
 }
 
 // Optional: Group multiple button sgroups together for a toolbar
@@ -54,5 +54,15 @@
         @include border-right-radius($btnLargeBorderRadius);
       }
     }
+  }
+}
+
+// Reposition the caret
+button,
+[role=button],
+.btn {
+  .caret {
+    margin-top: 11px;
+    margin-left: 2px;
   }
 }

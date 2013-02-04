@@ -113,11 +113,25 @@
         <section id="main">
           <div class="toolbar clearfix">
             <div class="btn-group">
-              <a href="#" class="btn">Test button</a>
+              <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Test button <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action 1</a></li>
+                <li><a href="#">Action 2</a></li>
+                <li><a href="#" disabled>Action 3</a></li>
+                <li><a href="#">Action 4</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Crear nuevo grupo ...</a></li>
+                <li><a href="#">Editar grupos ...</a></li>
+              </ul>
             </div>
             <div class="btn-group">
               <button rel="tooltip" title="Test Button 1" name="btn-test1">T1</button>
               <button rel="tooltip" title="Test Button 2" name="btn-test2">Test 2</button>
+            </div>
+            <div class="btn-group pull-right">
+              <button id="settings" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-cog"></i><b class="caret"></b>
+              </button>
             </div>
             <div class="btn-group pull-right">
               <a href="#" class="btn disabled">Close session</a>
