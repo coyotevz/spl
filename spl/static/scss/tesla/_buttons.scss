@@ -67,6 +67,14 @@ button,
     border-color: $btnBorderFocusedColor;
   }
 
+  .open &,
+  &.active,
+  &:active {
+    @include gradient-vertical(#eee, #e0e0e0);
+    @include box-shadow(inset 0 1px 2px rgba(0,0,0,0.1));
+    border-color: $btnBorder;
+  }
+
   &.btn-thin {
     min-width: 34px;
     padding: 0px;
@@ -74,6 +82,10 @@ button,
 
   & [class^="icon-"] + .caret {
     margin-left: 7px;
+  }
+
+  .inline-control {
+    margin-right: 10px;
   }
 }
 

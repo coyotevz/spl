@@ -60,6 +60,13 @@
   font-size: 13px;
   line-height: 15px;
 
+  // Aligns the dropdown menu to right
+  &.pull-right,
+  .pull-right & {
+    right: 0;
+    left: auto;
+  }
+
   li > a {
     padding: 2px 30px 2px 30px;
     white-space: nowrap;
@@ -79,6 +86,12 @@
       background-color: #fff;
       cursor: default;
     }
+
+    &.checked {
+      background-image: url("/static/img/checkmark.png");
+      background-repeat: no-repeat;
+      background-position: left center;
+    }
   }
 
   li.current > a {
@@ -91,6 +104,11 @@
     border-top: 1px solid #ebebeb;
     margin-top: 5px;
     margin-bottom: 6px;
+  }
+
+  li > span {
+    padding: 2px 8px;
+    color: $dropdownFontColor;
   }
 }
 

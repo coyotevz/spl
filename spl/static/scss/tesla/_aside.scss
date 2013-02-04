@@ -14,9 +14,8 @@ aside {
       color: $asideTitleColor;
       font-size: $asideTitleFontSize;
       padding: 0 7px;
-      .caret {
-        border-top-color: $asideTitleColor;
-        margin-top: 12px;
+      .icon-caret-down {
+        font-size: 14px;
       }
     }
 

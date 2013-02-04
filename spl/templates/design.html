@@ -42,7 +42,7 @@
         <aside>
           <header>
             <div class="title dropdown">
-              <span class="dropdown-toggle" data-toggle="dropdown">Proveedores <b class="caret"></b></span>
+              <span class="dropdown-toggle" data-toggle="dropdown">Proveedores <i class="icon-caret-down"></i></span>
               <ul class="dropdown-menu" role="menu">
                 <li><a tabindex="-1" href="http://google.com">Action</a></li>
                 <li class="current"><a tabindex="-1" href="/suppliers/">Proveedores</a></li>
@@ -61,7 +61,7 @@
             <nav class="sidenav">
               <ul>
                 <li class="nav-header active">
-                <div id="category-toggle" class="caret open">
+                <div id="category-toggle" class="caret-toggle open">
                   <span role="link" title="Ocultar etiqueta: Todos ({{ db.Supplier.find().count() }})"></span>
                 </div>
                 <div>
@@ -113,7 +113,7 @@
         <section id="main">
           <div class="toolbar clearfix">
             <div class="btn-group">
-              <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Test button <span class="caret"></span></a>
+              <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><label class="checkbox inline-control"><input id="select_all" type="checkbox"><span></span></label><span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Action 1</a></li>
                 <li><a href="#">Action 2</a></li>
@@ -132,6 +132,17 @@
               <button id="settings" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-cog"></i><b class="caret"></b>
               </button>
+              <ul class="dropdown-menu">
+                <li><span>Densidad de visualización:</span></li>
+                <li><a href="#">Normal (en pantallas más grandes)</a></li>
+                <li><a href="#">Cómoda (en pantallas más grandes)</a></li>
+                <li><a class="checked" href="#">Compacta</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Configuración</a></li>
+                <li><a href="#">Temas</a></li>
+                <li><a href="#">Enviar comentarios</a></li>
+                <li><a href="#">Ayuda</a></li>
+              </ul>
             </div>
             <div class="btn-group pull-right">
               <a href="#" class="btn disabled">Close session</a>

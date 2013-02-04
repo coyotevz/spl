@@ -5,7 +5,7 @@
 (function($, undefined) {
   "use strict"; // jshint ;_;
 
-  $('.nav-header div.caret').hover(
+  $('.nav-header div.caret-toggle').hover(
     function() {
       $(this).parent().addClass("no-hover");
     },
