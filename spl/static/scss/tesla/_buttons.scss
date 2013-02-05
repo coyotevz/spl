@@ -87,75 +87,6 @@ button,
   .inline-control {
     margin-right: 10px;
   }
-}
-
-
-.btn-old {
-  @include ie7-inline-block();
-  padding: 4px 12px;
-  margin-bottom: 0;
-  font-size: $btnFontSize;
-  font-family: $baseFontFamily;
-  font-weight: $btnFontWeight;
-  line-height: $btnLineHeight;
-  text-align: center;
-  vertical-align: baseline;
-  white-space: nowrap;
-  word-wrap: normal;
-  cursor: pointer;
-  @include buttonBackground($btnBackground, $btnBackgroundHighlight, $gray, none);
-  border: 1px solid $btnBorder;
-  border-bottom-color: darken($btnBorder, 10%);
-  @include border-radius($btnBorderRadius);
-  @include ie7-restore-left-whitespace();
-  @include box-shadow(inset 0 0 1px 0 $white);
-  @include transition(all 0.218s ease 0s);
-
-  /* states */
-  &.disabled,
-  &[disabled] {
-    &,
-    &:hover,
-    &:focus,
-    &:focus:hover,
-    &:active,
-    &:active:hover {
-      cursor: default;
-      background-image: none;
-      @include opacity(65);
-      @include box-shadow(none);
-      border-color: $btnBorder;
-      color: $gray;
-    }
-  }
-
-  &:hover {
-    color: $grayDark;
-    text-decoration: none;
-    @include transition(all 0s ease 0s);
-    @include box-shadow(0 1px 2px rgba(0,0,0,0.25), inset 0 0 3px $white);
-    border-color: $grayLight;
-    .caret {
-      @include opacity(100);
-    }
-  }
-
-  &.focus,
-  &:focus {
-    outline: none;
-    border-color: $btnBorderFocusedColor;
-    @include box-shadow(0 0 1px rgba(red($blue), green($blue), blue($blue), 0.5));
-  }
-
-  &.active,
-  &.active:hover,
-  &:active,
-  &:active:hover,
-  .btn-group.open &.dropdown-toggle {
-    @include gradient-vertical(#e6e6e6, #dcdcdc);
-    border-color: #999 #aaa #ccc;
-    @include box-shadow(inset 0 1px 1px 0 #aaa);
-  }
 
   /* reposition the caret */
   .caret {
@@ -211,6 +142,33 @@ button,
     border-color: $color $color darken($color,15%);
     border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) fadein(rgba(0,0,0,0.1),15%);
   }
+}
+
+// Sample button
+.btn-danger {
+  @include buttonBackground(#dd4b36, #d14836);
+  border: 1px solid transparent;
+  color: $white;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+
+  &:hover,
+  &:focus:hover {
+    @include buttonBackground(#dd4b39, #c53727);
+    border-color: #b0281a;
+  }
+
+  &.focus,
+  &:focus {
+    border-color: transparent;
+    @include box-shadow(inset 0 0 0 1px $white);
+  }
+
+  &.active,
+  &:active {
+    @include buttonBackground(#dd4b39, #b0281a);
+    @include box-shadow(inset 0 1px 2px rgba(0,0,0,0.3));
+  }
+
 }
 
 /* Alternate buttons */
@@ -272,7 +230,7 @@ button,
 }
 
 @include build-button(primary, $btnPrimaryBackground, $btnPrimaryBackgroundHighlight);
-@include build-button(danger, $btnDangerBackground, $btnDangerBackgroundHighlight);
+//@include build-button(danger, $btnDangerBackground, $btnDangerBackgroundHighlight);
 @include build-button(warning, $btnWarningBackground, $btnWarningBackgroundHighlight);
 @include build-button(success, $btnSuccessBackground, $btnSuccessBackgroundHighlight);
 @include build-button(info, $btnInfoBackground, $btnInfoBackgroundHighlight);
