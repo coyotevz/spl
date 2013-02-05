@@ -21,10 +21,14 @@
   width: 0;
   height: 0;
   vertical-align: top;
-  border-top:   4px solid $black;
+  border-top:   4px solid #595959;
   border-right: 4px solid transparent;
   border-left:  4px solid transparent;
   content: "";
+
+  :hover > & {
+    border-top-color: #505050;
+  }
 }
 
 // Place the caret
