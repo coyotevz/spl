@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% from "macros.html" import render_alpha_pagination with context %}
+{% from "macros.html" import render_app_section with context %}
 
 
 {%- block sidebar %}
 <header>
-  <div class="title"><span>Contactos</span></div>
+{{ render_app_section() }}
 </header>
-
 <div class="content">
   <div class="action">
     <button class="btn btn-danger">Nuevo Contacto</button>

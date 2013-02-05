@@ -15,5 +15,21 @@
 {%- endif %}
 {% endmacro %}
 
+
+{% macro render_app_section() %}
+<div class="title dropdown">
+  <span class="dropdown-toggle" data-toggle="dropdown">{{ request.current_section }} <i class="icon-caret-down"></i></span>
+  <ul class="dropdown-menu" role="menu">
+    {%- for current, section_index, title in request.sections %}
+    {%- if not section_index %}
+    <li><a tabindex="-1" href="#" disabled>{{ title }}</a></li>
+    {%- else %}
+    <li{% if current %} class="current"{% endif %}><a tabindex="-1" href="{{ url_for(section_index) }}">{{ title }}</a></li>
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</div>
+{% endmacro %}
+
 {# vim: ft=html.jinja:sw=2
 #}

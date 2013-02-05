@@ -64,3 +64,20 @@ def configure_views(app):
     app.register_blueprint(supplier, url_prefix='/suppliers')
     app.register_blueprint(invoice, url_prefix='/invoices')
     app.register_blueprint(contact, url_prefix='/contacts')
+
+    app_sections = [
+        (None, None, 'Facturas'),
+        (None, None, 'Pedidos'),
+        ('supplier', 'supplier.suppliers_list', 'Proveedores'),
+        ('contact', 'contact.contacts_list', 'Contactos'),
+    ]
+
+    @app.before_request
+    def sections_before_request():
+        sections = []
+        for e, es, title in app_sections:
+            current = request.endpoint.startswith(e) if e else False
+            if current:
+                request.current_section = title
+            sections.append((current, es, title))
+        request.sections = sections
