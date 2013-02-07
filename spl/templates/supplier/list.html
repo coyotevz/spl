@@ -31,6 +31,22 @@
   </colgroup>
 
   <tbody>
+    <!-- _.template definition -->
+    <tr id="supplier-row-template" style="display:none">
+      <td></td>
+      <td>
+        <label class="checkbox inline-control">
+          <input id="supplier:[%= id %]" type="checkbox">
+          <span></span>
+        </label>
+      </td>
+      <td><span class="name">[%= name %]</span></td>
+      <td><span class="email">[%= email %]</span></td>
+      <td><span class="phone">[%= phone %]</span></td>
+      <td></td>
+    </tr>
+    <!-- end _.template definition -->
+
     {% for supplier in pagination.items %}
     <tr>
       <td></td>
