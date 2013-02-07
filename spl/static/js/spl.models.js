@@ -45,6 +45,11 @@
     },
     checked: function() {
       var $checkbox = this.$('input[type=checkbox]');
+      console.log("current value:", $checkbox.prop('checked'))
+      $checkbox.attr('checked', !$checkbox.attr('checked'));
+      console.log("post value:", $checkbox.attr('checked'));
+      console.log("checked?", $checkbox.is(':checked'));
+
       if ($checkbox.is(':checked')) {
         console.log("checkbox is checked");
         this.$el.addClass('selected');
@@ -52,8 +57,9 @@
         console.log("checkbox is not checked");
         this.$el.removeClass('selected');
       }
-      window.console.log("checked:", this, this.$el, this.$('input[type=checkbox]').is(':checked'));
+      window.console.log("checked:", this, this.$el, $checkbox);
       // handle checkbox
+      return false;
     },
     remove: function() {
       window.console.log("remove:", this);
