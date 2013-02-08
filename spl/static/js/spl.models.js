@@ -34,32 +34,26 @@
     tagName: 'tr',
     events: {
       'click td': 'open',
-      'click input[type=checkbox]': 'checked'
     },
     template: _.template($('#supplier-row-template').html()),
     initialize: function() {
       _.bindAll(this, 'open', 'checked', 'remove', 'render');
     },
-    open: function() {
+    open: function(e) {
+      if ($(e.target).is('.checkbox input[type=checkbox]')) return this.checked(e);
       window.console.log("open:", this);
     },
     checked: function() {
-      var $checkbox = this.$('input[type=checkbox]');
-      console.log("current value:", $checkbox.prop('checked'))
-      $checkbox.attr('checked', !$checkbox.attr('checked'));
-      console.log("post value:", $checkbox.attr('checked'));
-      console.log("checked?", $checkbox.is(':checked'));
+      var $checkbox = this.$('.checkbox input[type=checkbox]');
 
       if ($checkbox.is(':checked')) {
-        console.log("checkbox is checked");
         this.$el.addClass('selected');
       } else {
-        console.log("checkbox is not checked");
         this.$el.removeClass('selected');
       }
-      window.console.log("checked:", this, this.$el, $checkbox);
+
+      window.console.log("checked:", this);
       // handle checkbox
-      return false;
     },
     remove: function() {
       window.console.log("remove:", this);
