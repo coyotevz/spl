@@ -41,7 +41,6 @@
     },
     open: function(e) {
       if ($(e.target).is('.checkbox input[type=checkbox]')) return this.checked(e);
-      window.console.log("open:", this);
     },
     checked: function() {
       var $checkbox = this.$('.checkbox input[type=checkbox]');
@@ -51,15 +50,10 @@
       } else {
         this.$el.removeClass('selected');
       }
-
-      window.console.log("checked:", this);
-      // handle checkbox
     },
     remove: function() {
-      window.console.log("remove:", this);
     },
     render: function() {
-      window.console.log("render:", this);
     }
   });
 
