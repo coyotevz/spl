@@ -34,22 +34,17 @@
     tagName: 'tr',
     events: {
       'click td': 'open',
+      'change [type=checkbox]': 'checked',
     },
     template: _.template($('#supplier-row-template').html()),
     initialize: function() {
       _.bindAll(this, 'open', 'checked', 'remove', 'render');
     },
     open: function(e) {
-      if ($(e.target).is('.checkbox input[type=checkbox]')) return this.checked(e);
+      if ($(e.target).is('[type=checkbox]')) return;
     },
     checked: function() {
-      var $checkbox = this.$('.checkbox input[type=checkbox]');
-
-      if ($checkbox.is(':checked')) {
-        this.$el.addClass('selected');
-      } else {
-        this.$el.removeClass('selected');
-      }
+      this.$el.toggleClass('selected', this.$('[type=checkbox]').is(':checked'));
     },
     remove: function() {
     },
