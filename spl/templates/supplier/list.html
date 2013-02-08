@@ -47,6 +47,7 @@
     </tr>
     <!-- end _.template definition -->
 
+    {#
     {% for supplier in pagination.items %}
     <tr>
       <td></td>
@@ -70,6 +71,7 @@
     <tr><td colspan="6" class="no-data-message"></td></tr>
     {% endfor %}
     {% endfor %}
+    #}
   </tbody>
 
 </table>
@@ -84,56 +86,16 @@
 {% endblock %}
 
 
-{% block content2 %}
-
-<h3>Proveedores</h3>
-<table class="table table-condensed">
-  <tbody>
-    {% for supplier in pagination.items %}
-    <tr id="supplier:{{ supplier._id|string }}">
-      <td class="supplier-name">{{ supplier.name }}</td>
-      <td class="supplier-phone">{{ supplier.phone }}</td>
-      <td class="supplier-term">{{ supplier.std_payment_term }} días</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-{% endblock %}
-
-{% block dummy %}
-<h2>Proveedores</h2>
-<div class="content">
-  <table class="table table-condensed">
-    {% for supplier in pagination.items %}
-    <tr>
-      <td class="supplier-name"><a href="{{ url_for('.supplier_view', id=supplier._id) }}">{{ supplier.name }}</a></td>
-      <td class="supplier-address">{{ supplier.address }}</td>
-      <td class="supplier-phone">{{ supplier.phone }}</td>
-      <td class="supplier-term">{{ supplier.std_payment_term }} días</td>
-      <td class="supplier-freight">{{ supplier.freight_str }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-
-<div class="total-count">
-  {{ (pagination.page-1)*pagination.per_page }}-{{ (((pagination.page-1)*pagination.per_page)+(pagination.items|length)) }} de {{ pagination.total }} proveedores
-</div>
-
-<div class="pagination">
-  {%- for page in pagination.iter_pages() %}
-  {% if page %}
-  {% if page != pagination.page %}
-  <a href="{{ url_for(request.endpoint, page=page, per_page=pagination.per_page if pagination.per_page != 25 else None) }}">{{ page }}</a>
-  {% else %}
-  <strong>{{ page }}</strong>
-  {% endif %}
-  {% else %}
-  <span class="ellipsis">…</span>
-  {% endif %}
-  {%- endfor %}
-</div>
+{% block js %}
+<script type="text/javascript">
+  $(function() {
+    if (typeof Suppliers !== 'undefined')
+      Suppliers.page = {{ pagination.page }};
+      Suppliers.num_pages = {{ pagination.pages }};
+      Suppliers.num_results = {{ pagination.total }};
+      Suppliers.reset({{ pagination.items|tojson|safe }});
+  });
+</script>
 {% endblock %}
 {# vim: ft=html.jinja:sw=2
 #}

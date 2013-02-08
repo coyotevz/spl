@@ -6,7 +6,7 @@
 
   "use strict"; // jshint ;_;
 
-  var Supplier, Suppliers, SupplierRow, SuppliersListView,
+  var Supplier, Suppliers, SuppliersCollection, SupplierRow, SuppliersListView,
       SupplierControls, AppView;
 
   _.templateSettings = {
@@ -21,6 +21,44 @@
     collection: Suppliers
   });
 
+  SupplierRow = Backbone.View.extend({
+    tagName: 'tr',
+    template: _.template($('#supplier-row-template').html()),
+
+    events: {
+      'click td': 'open',
+      'change [type=checkbox]': 'select',
+    },
+
+    initialize: function() {
+      _.bindAll(this, 'open', 'select', 'remove', 'render');
+    },
+
+    open: function(e) {
+      if ($(e.target).is('[type=checkbox]')) return;
+      console.log("TODO: go to supplier view");
+    },
+
+    select: function() {
+      var checked = this.$('[type=checkbox]').is(':checked');
+      this.$el.toggleClass('selected', checked);
+      this.trigger('selected', checked);
+    },
+
+    remove: function() {
+    },
+
+    render: function() {
+      this.$el.html(this.template({
+        id: this.model.id,
+        name: this.model.get('name'),
+        email: this.model.get('email'),
+        phone: this.model.get('phone')
+      }));
+      return this;
+    },
+  });
+
   Backbone.PaginatedCollection = Backbone.Collection.extend({
     parse: function(resp, options) {
       this.page = resp.page;
@@ -31,42 +69,18 @@
   });
 
   /* suppliers collection */
-  Suppliers = Backbone.PaginatedCollection.extend({
+  SuppliersCollection = Backbone.PaginatedCollection.extend({
     model: Supplier,
+
     url: '/api/suppliers/',
+
     comparator: function(d) {
       return d.get('name') && d.get('name').toLowerCase();
     }
+
   });
 
-  SupplierRow = Backbone.View.extend({
-    tagName: 'tr',
-    events: {
-      'click td': 'open',
-      'change [type=checkbox]': 'checked',
-    },
-    template: _.template($('#supplier-row-template').html()),
-    initialize: function() {
-      _.bindAll(this, 'open', 'checked', 'remove', 'render');
-    },
-    open: function(e) {
-      if ($(e.target).is('[type=checkbox]')) return;
-    },
-    checked: function() {
-      this.$el.toggleClass('selected', this.$('[type=checkbox]').is(':checked'));
-    },
-    remove: function() {
-    },
-    render: function() {
-      this.$el.html(this.template({
-        id: this.model.id,
-        name: this.model.get('name'),
-        email: this.model.get('email'),
-        phone: this.model.get('phone')
-      }));
-      return this;
-    }
-  });
+  Suppliers = new SuppliersCollection;
 
   /* Suppliers list view */
   SuppliersListView = Backbone.View.extend({
@@ -77,21 +91,35 @@
     },
 
     initialize: function() {
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'render', 'selectionChange');
       this.collection.bind('reset', this.render);
     },
 
     addSupplier: function(supplier) {
       supplier.rowView = new SupplierRow({model: supplier});
+      supplier.rowView.bind('selected', this.selectionChange);
       this.$el.append(supplier.rowView.render().el);
     },
 
     render: function(suppliers) {
       var self = this;
-      console.log(suppliers);
       suppliers.each(function(supplier) {
         self.addSupplier(supplier);
       });
+    },
+
+    selected: function() {
+      return this.collection.filter(function(s) {
+        return s.rowView.$el.hasClass('selected');
+      });
+    },
+
+    unselected: function() {
+      return this.collection.without.apply(this.collection, this.selected());
+    },
+
+    selectionChange: function() {
+      console.log("selection changed to %s selected", this.selected().length);
     }
 
   });
@@ -99,7 +127,7 @@
 
   AppView = Backbone.View.extend({
     initialize: function() {
-      this.supplier_list = new SuppliersListView;
+      this.list_view = new SuppliersListView();
     }
   });
 

@@ -26,7 +26,7 @@ class SupplierAPI(MethodView):
     /suppliers/         POST        - Create a new supplier
     """
     def get(self, id):
-        p = Pagination(db.Supplier.find(), page=request.page,
+        p = Pagination(db.Supplier.find().sort('name'), page=request.page,
                        per_page=request.per_page)
         return json_response({
             'objects': p.items,
