@@ -22,5 +22,6 @@ js_bundle:
         - js/spl.scroll.js
         - js/spl.tooltip.js
         - js/spl.dropdown.js
+        - js/spl.paginated.js
         - js/spl.models.js
         - js/spl.application.js

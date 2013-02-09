@@ -15,9 +15,11 @@
 </div>
 {%- endblock %}
 
+{#
 {%- block toolbar %}
 {{ render_alpha_pagination(pagination, 'name') }}
 {%- endblock %}
+#}
 
 {%- block content %}
 <table id="suppliers-list" class="list">
@@ -36,7 +38,7 @@
       <td></td>
       <td>
         <label class="checkbox inline-control">
-          <input id="supplier:[%= id %]" type="checkbox">
+          <input id="supplier:[%= _id %]" type="checkbox">
           <span></span>
         </label>
       </td>
@@ -46,6 +48,9 @@
       <td></td>
     </tr>
     <!-- end _.template definition -->
+    <tr id="empty-supplier-message">
+      <td colspan="6"><span>No hay proveedores en este grupo.</span></td>
+    </tr>
 
     {#
     {% for supplier in pagination.items %}

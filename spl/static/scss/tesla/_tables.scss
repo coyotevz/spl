@@ -20,6 +20,13 @@ table {
       &.selected {
         background-color: #ffc;
       }
+
+      &#empty-supplier-message {
+        display: none;
+        height: 231px;
+        cursor: default;
+        td { text-align: center; }
+      }
     }
 
     td {
@@ -30,11 +37,6 @@ table {
 
       span.name {
         font-weight: bold;
-      }
-
-      &.no-data-message {
-        border-bottom: none;
-        cursor: default;
       }
     }
   }
