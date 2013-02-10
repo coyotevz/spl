@@ -151,10 +151,11 @@ button,
   color: $white;
   text-shadow: 0 1px 0 rgba(0,0,0,0.1);
 
-  &:hover,
-  &:focus:hover {
+  &:hover {
     @include buttonBackground(#dd4b39, #c53727);
     border-color: #b0281a;
+    @include box-shadow(0 1px 1px rgba(0,0,0,0.2));
+    text-shadow: 0 1px rgba(0,0,0,0.1);
   }
 
   &.focus,
