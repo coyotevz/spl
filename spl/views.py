@@ -76,8 +76,9 @@ def configure_views(app):
     def sections_before_request():
         sections = []
         for e, es, title in app_sections:
-            current = request.endpoint.startswith(e) if e else False
-            if current:
-                request.current_section = title
-            sections.append((current, es, title))
+            if request.endpoint:
+                current = request.endpoint.startswith(e) if e else False
+                if current:
+                    request.current_section = title
+                sections.append((current, es, title))
         request.sections = sections
