@@ -136,103 +136,45 @@ button,
 }
 
 
-/* border for alternative buttons */
-@mixin button-border($color) {
-  &, &:focus {
-    border-color: $color $color darken($color,15%);
-    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) fadein(rgba(0,0,0,0.1),15%);
-  }
-}
+/* Alternate buttons
 
-// Sample button
-.btn-danger {
-  @include buttonBackground(#dd4b36, #d14836);
-  border: 1px solid transparent;
-  color: $white;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.1);
-
-  &:hover {
-    @include buttonBackground(#dd4b39, #c53727);
-    border-color: #b0281a;
-    @include box-shadow(0 1px 1px rgba(0,0,0,0.2));
-    text-shadow: 0 1px rgba(0,0,0,0.1);
-  }
-
-  &.focus,
-  &:focus {
-    border-color: transparent;
-    @include box-shadow(inset 0 0 0 1px $white);
-  }
-
-  &.active,
-  &:active {
-    @include buttonBackground(#dd4b39, #b0281a);
-    @include box-shadow(inset 0 1px 2px rgba(0,0,0,0.3));
-  }
-
-}
-
-/* Alternate buttons */
-@mixin build-button($name, $bgcolor, $hightcolor) {
+   color1: 1st color of normal button
+   color2: 2nd color of normal button
+   color3: 1st color of hover button
+   color4: 2nd color of hover button
+   color5: border color of hover button
+*/
+@mixin build-button($name, $color1, $color2, $color3, $color4, $color5) {
   .btn-#{$name} {
+    @include buttonBackground($color1, $color2);
+    border: 1px solid transparent;
     color: $white;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-    @include buttonBackground($bgcolor, $hightcolor);
-    @include button-border($hightcolor);
-    @include box-shadow(none);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.1);
 
-    &:hover,
-    &:focus:hover {
-      color: $white;
-      @include box-shadow(0 1px 2px rgba(0,0,0,0.25), inset 0 0 1px $white);
-      border-color: darken($hightcolor, 10);
+    &:hover {
+      @include buttonBackground($color3, $color4);
+      border-color: $color5;
+      @include box-shadow(0 1px 1px rgba(0,0,0,0.2));
+      text-shadow: 0 1px rgba(0,0,0,0.1);
     }
+
+    &.focus,
     &:focus {
-      outline: none;
+      border-color: transparent;
       @include box-shadow(inset 0 0 0 1px $white);
     }
 
     &.active,
-    &.active:hover,
-    &:active,
-    &:active:hover,
-    .btn-group.open &.dropdown-toggle {
-      @include box-shadow(inset 0 1px 1px 0 rgba(0,0,0,0.5));
-      background-image: none;
-      background-color: $bgcolor;
-      border-color: darken($hightcolor, 10);
-    }
-
-    /* sates */
-    &.disabled,
-    &[disabled] {
-      &,
-      &:hover,
-      &:focus,
-      &:focus:hover,
-      &:active,
-      &:active:hover {
-        cursor: default;
-        background-image: none;
-        @include opacity(65);
-        @include box-shadow(none);
-        border-color: darken($hightcolor, 10);
-        background-color: $bgcolor;
-        color: $white;
-      }
-    }
-
-    .caret {
-      border-top-color: $white;
-      border-bottom-color: $white;
-      @include opacity(75);
+    &:active {
+      @include buttonBackground($color3, $color5);
+      @include box-shadow(inset 0 1px 2px rgba(0,0,0,0.3));
     }
   }
 }
 
-@include build-button(primary, $btnPrimaryBackground, $btnPrimaryBackgroundHighlight);
-//@include build-button(danger, $btnDangerBackground, $btnDangerBackgroundHighlight);
-@include build-button(warning, $btnWarningBackground, $btnWarningBackgroundHighlight);
-@include build-button(success, $btnSuccessBackground, $btnSuccessBackgroundHighlight);
-@include build-button(info, $btnInfoBackground, $btnInfoBackgroundHighlight);
-@include build-button(inverse, $btnInverseBackground, $btnInverseBackgroundHighlight);
+@include build-button(primary, #4d90fe, #4787ed, #4d90fe, #357ae8, #2f5bb7);
+@include build-button(info, #5bc0de, #5bc0de, #5bc0de, #46b8da, #2ea5c9);
+@include build-button(success, #35aa47, #35aa47, #35aa47, #2f973f, #2e863e);
+@include build-button(warning, #fbb450, #faa218, #fbb450, #fa9f1e, #f9980f);
+@include build-button(danger, #dd4b36, #d14836, #dd4b39, #c53727, #b0281a);
+@include build-button(inverse, #515151, #515151, #515151, #444444, #3a3a3a);
