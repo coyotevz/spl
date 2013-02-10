@@ -60,7 +60,10 @@
       if ($this.is('.disabled, :disabled')) return;
       $parent = getParent($this);
       isActive = $parent.hasClass('open');
-      if (!isActive || (isActive && e.keyCode == 27)) return $this.click();
+      if (!isActive || (isActive && e.keyCode == 27)) {
+        if (e.which == 27) $parent.find(toggle).focus();
+        return $this.click();
+      }
       $items = $('[role=menu] li:not(.divider):visible a', $parent);
 
       if (!$items.length) return;
@@ -91,8 +94,8 @@
       selector = selector && /#/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '');
     }
 
-    $parent = $(selector);
-    $parent.length || ($parent = $this.parent());
+    $parent = selector && $(selector);
+    if (!$parent || !$parent.length) $parent = $this.parent());
 
     return $parent;
   }
