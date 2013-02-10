@@ -76,7 +76,7 @@
     // Re-rendering the app just means refreshing pager and statistics -- the
     // rest of the app doesn't change
     render: function() {
-      this.toolbar.html(this.pager.render().el);
+      this.pager.render();
     },
 
     // Re-rendering collection and then the rest

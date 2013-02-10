@@ -16,12 +16,9 @@
 </div>
 {%- endblock %}
 
-{#
 {%- block toolbar %}
-{#{{ render_alpha_pagination(pagination, 'name') }}#}
 {{ render_pagination() }}
 {%- endblock %}
-#}
 
 {%- block content %}
 <table id="suppliers-list" class="list">
@@ -53,32 +50,6 @@
     <tr id="empty-supplier-message">
       <td colspan="6"><span>No hay proveedores en este grupo.</span></td>
     </tr>
-
-    {#
-    {% for supplier in pagination.items %}
-    <tr>
-      <td></td>
-      <td>
-        <label class="checkbox inline-control">
-          <input id="supplier:{{ supplier._id|string }}" type="checkbox">
-          <span></span>
-        </label>
-      </td>
-      <td><span class="name">{{ supplier.name }}</span></td>
-      <td><span class="email">{{ supplier.email }}</span></td>
-      <td><span class="phone">{{ supplier.phone }}</span></td>
-      <td></td>
-    </tr>
-    {% else %}
-    {% for i in range(5) %}
-    <tr><td colspan="6" class="no-data-message"></td></tr>
-    {% endfor %}
-    <tr><td colspan="6" class="no-data-message"><span>No hay proveedores en este grupo.</span></td></tr>
-    {% for i in range(5) %}
-    <tr><td colspan="6" class="no-data-message"></td></tr>
-    {% endfor %}
-    {% endfor %}
-    #}
   </tbody>
 
 </table>

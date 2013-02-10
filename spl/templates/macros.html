@@ -15,12 +15,11 @@
 {%- endif %}
 {% endmacro %}
 
+
 {% macro render_pagination() %}
 <div class="pager pull-right">
   <div class="pages">
-    <span class="prev"></span>
-    -
-    <span class="next"></span>
+    <span class="prev"></span>&nbsp;-&nbsp;<span class="next"></span>
   </div>
   <div class="btn-group">
     <button name="prev-page" rel="tooltip" title="Anterior" data-placement="bottom" class="btn-thin">

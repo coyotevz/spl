@@ -22,9 +22,7 @@ var SPL = SPL || {};
   });
 
   SPL.Pager = Backbone.View.extend({
-    tagName: 'div',
-    className: 'pager pull-right',
-    template: _.template($('#pager-template').html()),
+    el: $('.toolbar .pager'),
 
     events: {
       'click button[name=prev-page]': 'prevPage',
@@ -32,10 +30,13 @@ var SPL = SPL || {};
     },
 
     render: function() {
+      this.$('.prev').text('Prev');
+      this.$('.next').text('Next');
+      /*
       this.$el.html(this.template({
         first: this.collection.first().get('name').split(' ')[0],
         last: this.collection.last().get('name').split(' ')[0],
-      }));
+      })); */
       return this;
     },
 
