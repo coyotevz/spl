@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% from "macros.html" import render_alpha_pagination with context %}
-{% from "macros.html" import render_pagination %}
+{% from "macros.html" import render_pagination, render_footer %}
 {% from "macros.html" import render_app_section with context %}
 
 {%- block sidebar %}
@@ -54,13 +54,7 @@
 
 </table>
 
-<footer>
-  <span class="copy-notice">&copy;2013&nbsp;Rocctech</span>
-  -
-  <a target="_blank" href="http://www.rocctech.com.ar">Condiciones</a>
-  -
-  <a target="_blank" href="http://www.rocctech.com.ar">Políticas de Privacidad</a>
-</footer>
+{{ render_footer() }}
 {% endblock %}
 
 

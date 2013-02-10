@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
+{% from "macros.html" import render_footer %}
+{% from "macros.html" import render_app_section with context %}
 
 {%- block sidebar %}
 <header>
-  <div class="title"><span>Proveedores</span></div>
+  {{ render_app_section() }}
 </header>
 <div class="content">
   <div class="action">
@@ -14,6 +16,7 @@
 {%- endblock %}
 
 {%- block content %}
+{{ render_footer() }}
 {%- endblock %}
 
 {# vim: ft=html.jinja:sw=2
