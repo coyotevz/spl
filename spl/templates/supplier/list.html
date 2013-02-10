@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% from "macros.html" import render_alpha_pagination with context %}
+{% from "macros.html" import render_pagination %}
 {% from "macros.html" import render_app_section with context %}
 
 {%- block sidebar %}
@@ -16,7 +17,8 @@
 {%- endblock %}
 
 {%- block toolbar %}
-{{ render_alpha_pagination(pagination, 'name') }}
+{#{{ render_alpha_pagination(pagination, 'name') }}#}
+{{ render_pagination() }}
 {%- endblock %}
 
 {%- block content %}

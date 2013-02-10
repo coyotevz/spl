@@ -7,7 +7,7 @@
   "use strict"; // jshint ;_;
 
   var Supplier, Suppliers, SuppliersCollection, SupplierRow, SuppliersListView,
-      SupplierControls, AppView;
+      SupplierControls, SuppliersView;
 
   _.templateSettings = {
     evaluate    : /\[%([\s\S]+?)%\]/g,
@@ -119,19 +119,34 @@
     },
 
     selectionChange: function() {
-      console.log("selection changed to %s selected", this.selected().length);
+      this.trigger("selection-change");
     }
 
   });
 
-
-  AppView = Backbone.View.extend({
+  SuppliersView = Backbone.View.extend({
+    el: $('div#page'),
     initialize: function() {
-      this.list_view = new SuppliersListView();
+      _.bindAll(this, 'selectionChange');
+      this.listView = new SuppliersListView;
+      this.listView.on('selection-change', this.selectionChange);
+      this.toolbar = $('#main .toolbar');
+    },
+
+    selectionChange: function() {
+      console.log("selection changed on appView");
+
+      var selected = this.listView.selected().length;
+      if (selected) {
+        this.toolbar.show();
+        this.toolbar.append('<span>' + selected + ' items</span>');
+      } else {
+        this.toolbar.hide();
+      }
     }
   });
 
-  var appView = new AppView();
+  var appView = new SuppliersView();
   window.appView = appView;
   window.Supplier = Supplier;
   window.Suppliers = Suppliers;
