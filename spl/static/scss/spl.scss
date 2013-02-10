@@ -50,6 +50,7 @@ section#main {
     }
 
     .pager {
+      display: hide;
       .pages {
         border: 1px solid transparent;
         line-height: 20px;
@@ -57,7 +58,7 @@ section#main {
         margin: 1px 12px;
         padding: 3px;
         span {
-          //font-weight: bold;
+          font-weight: bold;
           font-size: 90%;
         }
       }

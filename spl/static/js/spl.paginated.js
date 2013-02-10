@@ -30,22 +30,30 @@ var SPL = SPL || {};
     },
 
     render: function() {
-      this.$('.prev').text('Prev');
-      this.$('.next').text('Next');
-      /*
-      this.$el.html(this.template({
-        first: this.collection.first().get('name').split(' ')[0],
-        last: this.collection.last().get('name').split(' ')[0],
-      })); */
+      if (this.collection.num_pages > 1) {
+        this.$('.first').text(this.collection.first().get('name').split(' ')[0]);
+        this.$('.last').text(this.collection.last().get('name').split(' ')[0]);
+        this.$('[name=prev-page]').prop('disabled', this.collection.page <= 1);
+        this.$('[name=next-page]').prop('disabled', this.collection.page >= this.collection.num_pages);
+        this.$el.show();
+      } else {
+        this.$el.hide();
+      }
       return this;
     },
 
     prevPage: function() {
-      console.log('go to prev page');
+      this.$('[rel=tooltip]').tooltip('hide');
+      this.collection.fetch({ data: $.param({
+        page: this.collection.page - 1
+      })});
     },
 
     nextPage: function() {
-      console.log('go to next page');
+      this.$('[rel=tooltip]').tooltip('hide');
+      this.collection.fetch({ data: $.param({
+        page: this.collection.page + 1
+      })});
     }
   });
 

@@ -81,6 +81,7 @@
 
     // Re-rendering collection and then the rest
     renderCollection: function(suppliers) {
+      this.table.empty();
       var self = this;
       if (suppliers.length) {
         this.$('#empty-supplier-message').hide();
