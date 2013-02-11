@@ -46,6 +46,7 @@ a:focus {
 a:hover,
 a:active {
   outline: 0;
+  cursor: pointer;
 }
 
 // Prevents sub and sup affecting line-height in all browsers

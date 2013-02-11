@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SPL Web design</title>
+    <meta name="description" content="">
+    <meta name="author" content="Augusto Roccasalva <augusto@rocctech.com.ar>">
+    <meta name="viewport" content="width=device-with,initial-scale=1">
+
+    {%- assets "style_bundle" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css" media="screen">
+    {%- endassets %}
+    <!-- page-specific style -->
+    {%- block css %}{% endblock %}
+    <!-- end page-specific style -->
+    <script type="text/javascript">
+      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    {%- assets "modernizr_bundle" %}
+    <script src="{{ ASSET_URL }}"></script>
+    {%- endassets %}
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <header>
+        <nav class="appbar">
+          <ul>
+            <li><a href="#"><span>Fibra</span></a></li>
+            <li class="selected"><a href="#"><span>SPL</span></a></li>
+            <li><a href="#"><span>Clientes</span></a></li>
+            <li><a href="#"><span>Inventario</span></a></li>
+            <li><a href="#"><span>Email</span></a></li>
+          </ul>
+        </nav>
+        <div id="banner">
+        </div>
+      </header>
+
+      <div id="page" class="clearfix">
+        <aside>
+          <header>
+            <div class="title dropdown">
+              <span class="dropdown-toggle" data-toggle="dropdown">Proveedores <i class="icon-caret-down"></i></span>
+              <ul class="dropdown-menu" role="menu">
+                <li><a tabindex="-1" href="http://google.com">Action</a></li>
+                <li class="current"><a tabindex="-1" href="/suppliers/">Proveedores</a></li>
+                <li><a tabindex="-1" href="/contacts/">Contactos</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#">Separated Link</a></li>
+                <li><a tabindex="-1" href="#" disabled>Disabled Link</a></li>
+              </ul>
+
+            </div>
+          </header>
+          <div class="content">
+            <div class="action">
+              <button class="btn btn-danger">Nuevo Proveedor</button>
+            </div>
+            <nav class="sidenav">
+              <ul>
+                <li class="nav-header active">
+                <div id="category-toggle" class="caret-toggle open">
+                  <span role="link" title="Ocultar etiqueta: Todos ({{ db.Supplier.find().count() }})"></span>
+                </div>
+                <div>
+                  <span>
+                    <a href="#">Todos ({{ db.Supplier.find().count() }})</a>
+                  </span>
+                </div>
+                </li>
+                <li class="sub category">
+                <div>
+                  <span>
+                    <a href="#">Mercaderías ({{ db.Supplier.find().count() }})</a>
+                  </span>
+                </div>
+                </li>
+                <li class="sub category">
+                <div>
+                  <a href="#">Fletes (0)</a>
+                </div>
+                </li>
+                <li class="sub category">
+                <div>
+                  <a href="#">Insumos (0)</a>
+                </div>
+                </li>
+                <li class="sub category">
+                <div>
+                  <a href="#">Servicios (0)</a>
+                </div>
+                </li>
+              </ul>
+              <div class="divider"></div>
+              <ul>
+                <li class="nav-header">Otros criterios</li>
+                <li>
+                <div>
+                  <a href="#">Facturas vencidas</a>
+                </div>
+                </li>
+                <li>
+                <div>
+                  <a href="#">Pedidos en curso</a>
+                </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+        <section id="main">
+          <div class="toolbar clearfix">
+            <div class="btn-group">
+              <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><label class="checkbox inline-control"><input id="select_all" type="checkbox"><span></span></label><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action 1</a></li>
+                <li><a href="#">Action 2</a></li>
+                <li><a href="#" disabled>Action 3</a></li>
+                <li><a href="#">Action 4</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Crear nuevo grupo ...</a></li>
+                <li><a href="#">Editar grupos ...</a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button rel="tooltip" title="Test Button 1" name="btn-test1">T1</button>
+              <button rel="tooltip" title="Test Button 2" name="btn-test2">Test 2</button>
+            </div>
+            <div class="btn-group">
+              <button name="button-more" class="dropdown-toggle" data-toggle="dropdown">Más <i class="icon-caret-down"></i></button>
+              <ul class="dropdown-menu">
+                <li><a id="remove-supplier">Eliminar proveedor</a></li>
+                <li class="divider"></li>
+                <li><a id="export-supplier">Exportar...</a></li>
+                <li><a id="import-supplier">Importar...</a></li>
+              </ul>
+            </div>
+            <div class="btn-group pull-right">
+              <button id="settings" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-cog"></i><b class="caret"></b>
+              </button>
+              <ul class="dropdown-menu">
+                <li><span>Densidad de visualización:</span></li>
+                <li><a href="#">Normal (en pantallas más grandes)</a></li>
+                <li><a href="#">Cómoda (en pantallas más grandes)</a></li>
+                <li><a class="checked" href="#">Compacta</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Configuración</a></li>
+                <li><a href="#">Temas</a></li>
+                <li><a href="#">Enviar comentarios</a></li>
+                <li><a href="#">Ayuda</a></li>
+              </ul>
+            </div>
+            <div class="btn-group pull-right">
+              <a href="#" class="btn btn-primary">Guardar ahora</a>
+            </div>
+            <div class="btn-group pull-right">
+              <button name="prev-page" class="btn-thin" title="Anterior" disabled><i class="icon-chevron-left"></i></button>
+              <button name="next-page" class="btn-thin" title="Siguiente"><i class="icon-chevron-right"></i></button>
+            </div>
+          </div>
+          <div id="content_wrapper">
+            <div id="scroll_wrapper">
+              <div id="content">
+
+                <div class="name-row">
+                  <span>Nombre:</span>
+                  <input type="text" name="name" spellcheck="false" class="big" value="Proveedor 1">
+                </div>
+                <div class="other-row">
+                  <span>Campo:</span>
+                  <input type="text" name="test" spellcheck="false" value="Valor campo">
+                </div>
+
+                <footer>
+                  <span class="copy-notice">&copy;2013&nbsp;Rocctech</span>
+                  -
+                  <a target="_blank" href="http://www.rocctech.com.ar/">Condiciones</a>
+                  -
+                  <a target="_blank" href="http://www.rocctech.com.ar/">Políticas de privacidad</a>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <!-- JavaScript at the bottom for fast page loading -->
+    {%- assets "js_bundle" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {%- endassets %}
+
+    <!-- page-specific script -->
+    {%- block js %}{% endblock %}
+    <!-- end page-specific script -->
+
+  </body>
+</html>
+
+{# vim: ft=html.jinja:sw=2
+#}

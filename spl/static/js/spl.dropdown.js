@@ -95,7 +95,7 @@
     }
 
     $parent = selector && $(selector);
-    if (!$parent || !$parent.length) $parent = $this.parent());
+    if (!$parent || !$parent.length) $parent = $this.parent();
 
     return $parent;
   }

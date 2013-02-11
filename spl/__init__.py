@@ -49,7 +49,7 @@ def configure_app(app, config=None):
     def dev_design():
         from flask import render_template
         from spl.models import db
-        return render_template('design.html', db=db)
+        return render_template('design2.html', db=db)
 
     @app.before_request
     def before_request():
