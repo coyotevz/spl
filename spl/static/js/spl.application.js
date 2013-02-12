@@ -14,4 +14,6 @@
     placement: 'bottom'
   });
 
+  $('input.autogrow').autogrow();
+
 })(window.jQuery);
