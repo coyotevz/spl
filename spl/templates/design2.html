@@ -16,10 +16,10 @@
     <!-- end page-specific style -->
     <script type="text/javascript">
       var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    </script>
-    {%- assets "modernizr_bundle" %}
-    <script src="{{ ASSET_URL }}"></script>
-    {%- endassets %}
+</script>
+{%- assets "modernizr_bundle" %}
+<script src="{{ ASSET_URL }}"></script>
+{%- endassets %}
   </head>
 
   <body>
@@ -165,15 +165,41 @@
             <div id="scroll_wrapper">
               <div id="content">
 
-                <div class="name-row">
-                  <span>Nombre:</span>
-                  <input type="text" name="name" spellcheck="false" class="big noborder autogrow" value="Proveedor 1">
+                <div class="edit-layout">
+                  <div class="edit-head">
+                    <div class="edit-left-panel">
+                      <div class="edit-row">
+                        <div class="edit-row-title">
+                          <div id="avatar"></div>
+                        </div>
+                        <div class="edit-row-value">
+                          <input type="text" name="name" spellcheck="false" class="big noborder autogrow" placeholder="Añade un nombre.">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="edit-right-panel">
+                      <div class="edit-row">
+                        <span>Esto es un espectaculo.</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="edit-body">
+                    <div class="edit-left-panel">
+                      <div class="edit-row">
+                        <div class="edit-row-title">
+                          <span>Title:</span>
+                        </div>
+                        <div class="edit-row-value">
+                    <input type="text" name="test" spellcheck="false" placeholder="Valor campo" class="autogrow">                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="edit-right-panel">
+                      <textarea class="note" placeholder="Añade una nota" spellcheck="false"></textarea>
+                    </div>
+                  </div>
                 </div>
-                <div class="other-row">
-                  <span>Campo:</span>
-                  <input type="text" name="test" spellcheck="false" placeholder="Valor campo" class="autogrow">
-                </div>
-
+ 
                 <footer>
                   <span class="copy-notice">&copy;2013&nbsp;Rocctech</span>
                   -
