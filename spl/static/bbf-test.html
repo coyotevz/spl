@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Testing Backbone Forms</title>
+
+  </head>
+
+  <body>
+
+    <div id="form-container">
+      
+    </div>
+
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/backbone-min.js"></script>
+    <script type="text/javascript" src="js/backbone-forms.min.js"></script>
+    <script type="text/javascript" src="js/backbone-forms.list.min.js"></script>
+
+    <script type="text/javascript">
+      var User = Backbone.Model.extend({
+        schema: {
+          title: { type: 'Select', options: ['', 'Mr', 'Mrs', 'Ms'] },
+          name: 'Text',
+          email: { validators: ['required', 'email']},
+          birthay: 'Date',
+          password: 'Password',
+          notes: { type: 'List' }
+        }
+      });
+
+      var user = new User({
+        title: 'Mr',
+        name: 'Augusto Roccasalva',
+        email: 'augusto@rioplomo.com.ar',
+        birthday: new Date(1980,2,18),
+        password: 'danger',
+        notes: [
+          'Note 1',
+          'Note 2'
+        ]
+      });
+
+      var form = new Backbone.Form({
+        model: user
+      }).render();
+
+      $('#form-container').append(form.el);
+    </script>
+  </body>
+</html>
