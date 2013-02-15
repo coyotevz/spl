@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Testing Nested</title>
+  </head>
+
+  <body>
+
+    <pre id="codeResult">
+To be filled by script.
+    </pre>
+
+    <script src="js/jquery-1.9.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/json2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/underscore.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/backbone.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/backbone-nested.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" charset="utf-8">
+
+      var person = new Backbone.NestedModel({
+        name: {
+          first: 'Augusto',
+          last: 'Roccasalva'
+        }
+      });
+
+      person.bind('change:name', function(){
+        alert("hooray!");
+      });
+      
+      person.set('name.first', 'C. Augusto');
+    </script>
+  </body>
+</html>
