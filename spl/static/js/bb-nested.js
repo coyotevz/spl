@@ -2,7 +2,7 @@
  * Backbone-Nested
  */
 
-(function($) {
+(function($, _, Backbone) {
 
   "use strict";
 
@@ -43,6 +43,38 @@
     },
 
 
+  }, {
+    // class methods
+    
+    attrPath: function(attrStrOrPath) {
+      var path;
+
+      if (_.isString(attrStrOrPath)) {
+        path = (attrStrOrPath === '') ? [''] : attrStrOrPath.match(/[^\.\[\]]/g);
+        path = _.map(path, function(val);
+            // TODO: contninue heres
+      } else {
+      }
+
+      return path;
+    },
+
+    createAttrStr: function(attrPath) {
+      var attrStr = attrPath[0];
+      _.each(_.rest(attrPath), function(attr) {
+        attrStr += _.isNumber(attr) ? ('[' + attr + ']') : ('.'  + attr);
+      });
+
+      return attrStr;
+    },
+
+    deepClone: function(obj) {
+      return $.extend(true, {}, obj);
+    },
+
+    walkPath = function(obj, attrPath, callback, scope) {
+    }
+
   });
 
-})(jQuery);
+})(jQuery, _, Backbone);
