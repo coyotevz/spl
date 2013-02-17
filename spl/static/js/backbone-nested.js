@@ -39,6 +39,8 @@
       var newAttrs = Backbone.NestedModel.deepClone(this.attributes),
         attrPath;
 
+      this.changed = {};
+
       if (_.isString(key)){
         // Backbone 0.9.0+ syntax: `model.set(key, val)` - convert the key to an attribute path
         attrPath = Backbone.NestedModel.attrPath(key);

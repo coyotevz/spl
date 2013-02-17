@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Testing Nested</title>
+
+    <style type="text/css" media="screen">
+      body { background-color: #aaa; }
+      #codeResult { width: 47%; float: left; border: 1px solid #e4e4e4; background-color: #fff; padding: 10px;  }
+      form { width: 47%; float: left; padding: 10px; margin: 12px 0; }
+    </style>
+
   </head>
 
   <body>
@@ -11,11 +18,23 @@
 To be filled by script.
     </pre>
 
-    <script src="js/jquery-1.9.0.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/json2.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/underscore.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/backbone.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/backbone-nested.js" type="text/javascript" charset="utf-8"></script>
+    <form>
+      <label>First Name:</label>
+      <input name="name.first"><br/>
+      <label>Last Name:</label>
+      <input name="name.last">
+    </form>
+
+    <footer>
+      <p>Hello <span name="name.first"></span> <span name="name.last"></span>, welcome.</p>
+    </footer>
+
+    <script type="text/javascript" src="js/jquery-1.9.0.js"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/backbone.js"></script>
+    <script type="text/javascript" src="js/backbone-nested.js"></script>
+    <script type="text/javascript" src="js/Backbone.ModelBinder.js"></script>
 
     <script type="text/javascript" charset="utf-8">
 
@@ -23,14 +42,32 @@ To be filled by script.
         name: {
           first: 'Augusto',
           last: 'Roccasalva'
+        },
+        addresses: []
+      });
+
+      var PersonView = Backbone.View.extend({
+        el: $('body'),
+        _modelBinder: undefined,
+
+        initialize: function() {
+          this._modelBinder = new Backbone.ModelBinder();
+          this.model.on('change', this.render, this);
+        },
+
+        close: function() {
+          this._modelBinder.unbind();
+        },
+
+        render: function() {
+          $('#codeResult').html(JSON.stringify(person.toJSON()));
+          this._modelBinder.bind(this.model, this.el);
         }
       });
 
-      person.bind('change:name', function(){
-        alert("hooray!");
-      });
-      
-      person.set('name.first', 'C. Augusto');
+      var personView = new PersonView({model: person});
+      personView.render();
+
     </script>
   </body>
 </html>
