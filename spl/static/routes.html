@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="utf-8" />
+      <title>Testing router</title>
+  </head>
+
+  <body>
+    <h1>Testing router, <span id="page">Page 1</span></h1>
+
+    <script type="text/javascript" src="js/jquery-1.9.0.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/backbone.js"></script>
+
+    <script type="text/javascript">
+      $(function() {
+        var TestRouter = Backbone.Router.extend({
+          routes: {
+              "": "index",
+              "about": "showAbout",
+              "test/case": "testCase"
+          },
+          index: function() {
+            console.log('index');
+          },
+          showAbout: function() {
+            console.log('showAout');
+          }
+        }); 
+        var testRouter = new TestRouter();
+      });
+
+      Backbone.history.start();
+    </script>
+
+  </body>
+</html>
