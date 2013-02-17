@@ -7,6 +7,9 @@
 
   <body>
     <h1>Testing router, <span id="page">Page 1</span></h1>
+    <p><a href="#">index</a></p>
+    <p><a href="#about">about</a></p>
+    <p><a href="#test/case">test</a></p>
 
     <script type="text/javascript" src="js/jquery-1.9.0.js"></script>
     <script type="text/javascript" src="js/underscore.js"></script>
@@ -21,10 +24,13 @@
               "test/case": "testCase"
           },
           index: function() {
-            console.log('index');
+            $('#page').text('index');
           },
           showAbout: function() {
-            console.log('showAout');
+            $('#page').text('about page');
+          },
+          testCase: function() {
+            $('#page').text('test case');
           }
         }); 
         var testRouter = new TestRouter();
