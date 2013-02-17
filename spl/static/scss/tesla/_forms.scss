@@ -57,7 +57,7 @@ input[type="text"],
 textarea {
   border-width: 1px;
   border-style: solid;
-  border-color: #c0c0c0 #d9d9d9 #d9d9d9 #d9d9d9;
+  border-color: transparent;
   background-color: $white;
   color: #222;
   font-size: 13px;
@@ -67,8 +67,9 @@ textarea {
   display: inline-block;
   @include border-radius(1px);
 
-  &.noborder {
-    border-color: transparent;
+  &.void,
+  &.bordered {
+    border-color: #c0c0c0 #d9d9d9 #d9d9d9 #d9d9d9;
   }
 
   &:hover {

@@ -16,4 +16,11 @@
 
   $('input.autogrow').autogrow();
 
+  $('input.voidable').on('blur', function(e) {
+    $(this).toggleClass('void', $(this).val() == '' ? true : false);
+  }).each(function() {
+    // check current state
+    $(this).toggleClass('void', $(this).val() == '' ? true : false);
+  });
+
 })(window.jQuery);
