@@ -92,6 +92,12 @@ textarea {
   }
 }
 
+::-webkit-input-placeholder { color: #777; }
+::-moz-placeholder { color: #777; }
+:-ms-input-placeholder { color: #777; }
+input:-moz-placeholder { color: #777; }
+textarea:-moz-placeholder { color: #777; }
+
 textarea {
   height: 100%;
   width: 100%;
@@ -142,6 +148,10 @@ textarea {
 
   .edit-row {
     @include clearfix;
+    line-height: 21px;
+    margin-top: 5px;
+
+
     .edit-row-title,
     .edit-row-value {
       float: left;
@@ -154,6 +164,11 @@ textarea {
     }
     .edit-row-value {
     }
+  }
+
+  .action-row {
+    text-align: center;
+    padding-top: 10px;
   }
 }
 
