@@ -64,6 +64,7 @@ textarea {
   font-family: Arial,sans-serif;
   margin: 1px;
   padding: 1px 2px;
+  min-width: 40px;
   display: inline-block;
   @include border-radius(1px);
 
@@ -142,11 +143,14 @@ textarea {
   .edit-row {
     @include clearfix;
     .edit-row-title,
-    .edit-row-value { float: left; }
+    .edit-row-value {
+      float: left;
+    }
     .edit-row-title {
       width: 102px;
       margin-right: 29px;
       text-align: right;
+      color: #777;
     }
     .edit-row-value {
     }
