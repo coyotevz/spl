@@ -61,11 +61,12 @@
 {% block js %}
 <script type="text/javascript">
   $(function() {
-    if (typeof Suppliers !== 'undefined')
+    if (typeof Suppliers !== 'undefined') {
       Suppliers.page = {{ pagination.page }};
       Suppliers.num_pages = {{ pagination.pages }};
       Suppliers.num_results = {{ pagination.total }};
       Suppliers.reset({{ pagination.items|tojson|safe }});
+    }
   });
 </script>
 {% endblock %}

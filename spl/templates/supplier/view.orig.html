@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>{{ supplier.name }}</h2>
+<div class="supplier-info">
+  <dl class="dl-horizontal">
+    {% if supplier.account_number %}<dt>Nº Cuenta</dt><dd>{{ supplier.account_number }}</dd>{% endif %}
+    {% if supplier.cuit %}<dt>CUIT</dt><dd>{{ supplier.cuit }}</dd>{% endif %}
+    {% if supplier.iibb %}<dt>Ingresos Brutos</dt><dd>{{ supplier.iibb }}</dd>{% endif %}
+    {% if supplier.address %}<dt>Dirección</dt><dd>{{ supplier.address }}</dd>{% endif %}
+    {% if supplier.phone %}<dt>Teléfono</dt><dd>{{ supplier.phone }}</dd>{% endif %}
+    {% if supplier.fax %}<dt>Fax</dt><dd>{{ supplier.fax }}</dd>{% endif %}
+    {% if supplier.email %}<dt>Email</dt><dd>{{ supplier.email }}</dd>{% endif %}
+    {% if supplier.web %}<dt>Web</dt><dd>{{ supplier.web }}</dd>{% endif %}
+    {% if supplier.std_payment_term %}<dt>Plazo pago</dt><dd>{{ supplier.std_payment_term }} días</dd>{% endif %}
+    <dt>Flete</dt><dd>{{ supplier.freight_str }}</dd>
+  </dl>  
+</div>
+
+<div class="supplier-contacts">
+  <h4>Contactos <small>({{ supplier.contacts|length }})</small></h4>
+  <ul class="unstyled">
+    {% for c in supplier.contacts %}
+    <li>
+    <span class="supplier-contact-name">{{ c.contact.name }}</span>
+    {% if c.contact.phone %}<span class="supplier-contact-phone">{{ c.contact.phone }}</span>{% endif %}
+    {% if c.contact.email %}<span class="supplier-contact-email">{{ c.contact.email }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{#
+<div class="supplier-documents">
+  <h3>Facturas <small>({{ supplier.documents.count() }})</small></h3>
+  <div class="invoice-list">
+    <table class="table table-condensed">
+      <tbody>
+        {% for invoice in supplier.documents.order_by('issue_date desc') %}
+        <tr>
+          <td>{{ invoice.type_str }}</td>
+          <td><a href="{{ url_for('invoice.invoice_view', id=invoice.id) }}">{{ invoice.number_display }}</a></td>
+          <td>{{ invoice.amount|moneyfmt(curr='$ ') }}</td>
+          <td>{{ invoice.status_str }}</td>
+          <td>{{ invoice.issue_date|dateformat('%d/%b/%Y') }}</td>
+          <td>{{ invoice.expiration_date|dateformat('%d/%b/%Y') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="supplier-orders">
+  <h3>Pedidos <small>({{ supplier.orders.count() }})</small></h3>
+  <div class="order-list">
+    <table class="table table-condensed">
+      <tbody>
+        {% for order in supplier.orders.order_by('creation_date desc') %}
+        <tr>
+          <td><a href="{{ url_for('supplier.supplier_order_view', id=order.id) }}">{{ "%06d"|format(order.number) }}</a></td>
+          <td>{{ order.status_str }}</td>
+          <td>{{ order.creation_date|dateformat('%d/%b/%Y') }}</td>
+          <td>{{ order.method_str }}</td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+</div>#}
+{% endblock %}
+
+{# vim: ft=html.jinja:sw=2
+#}

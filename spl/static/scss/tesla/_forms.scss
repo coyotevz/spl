@@ -169,6 +169,9 @@ textarea {
   .action-row {
     text-align: center;
     padding-top: 10px;
+    .btn-group {
+      display: inline-block;
+    }
   }
 }
 

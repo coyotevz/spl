@@ -1,75 +1,92 @@
 {% extends "layout.html" %}
+{% from "macros.html" import render_footer %}
+{% from "macros.html" import render_app_section with context %}
 
-{% block content %}
-<h2>{{ supplier.name }}</h2>
-<div class="supplier-info">
-  <dl class="dl-horizontal">
-    {% if supplier.account_number %}<dt>Nº Cuenta</dt><dd>{{ supplier.account_number }}</dd>{% endif %}
-    {% if supplier.cuit %}<dt>CUIT</dt><dd>{{ supplier.cuit }}</dd>{% endif %}
-    {% if supplier.iibb %}<dt>Ingresos Brutos</dt><dd>{{ supplier.iibb }}</dd>{% endif %}
-    {% if supplier.address %}<dt>Dirección</dt><dd>{{ supplier.address }}</dd>{% endif %}
-    {% if supplier.phone %}<dt>Teléfono</dt><dd>{{ supplier.phone }}</dd>{% endif %}
-    {% if supplier.fax %}<dt>Fax</dt><dd>{{ supplier.fax }}</dd>{% endif %}
-    {% if supplier.email %}<dt>Email</dt><dd>{{ supplier.email }}</dd>{% endif %}
-    {% if supplier.web %}<dt>Web</dt><dd>{{ supplier.web }}</dd>{% endif %}
-    {% if supplier.std_payment_term %}<dt>Plazo pago</dt><dd>{{ supplier.std_payment_term }} días</dd>{% endif %}
-    <dt>Flete</dt><dd>{{ supplier.freight_str }}</dd>
-  </dl>  
-</div>
-
-<div class="supplier-contacts">
-  <h4>Contactos <small>({{ supplier.contacts|length }})</small></h4>
-  <ul class="unstyled">
-    {% for c in supplier.contacts %}
-    <li>
-    <span class="supplier-contact-name">{{ c.contact.name }}</span>
-    {% if c.contact.phone %}<span class="supplier-contact-phone">{{ c.contact.phone }}</span>{% endif %}
-    {% if c.contact.email %}<span class="supplier-contact-email">{{ c.contact.email }}</span>{% endif %}
-    </li>
-    {% endfor %}
-  </ul>
-</div>
-
-{#
-<div class="supplier-documents">
-  <h3>Facturas <small>({{ supplier.documents.count() }})</small></h3>
-  <div class="invoice-list">
-    <table class="table table-condensed">
-      <tbody>
-        {% for invoice in supplier.documents.order_by('issue_date desc') %}
-        <tr>
-          <td>{{ invoice.type_str }}</td>
-          <td><a href="{{ url_for('invoice.invoice_view', id=invoice.id) }}">{{ invoice.number_display }}</a></td>
-          <td>{{ invoice.amount|moneyfmt(curr='$ ') }}</td>
-          <td>{{ invoice.status_str }}</td>
-          <td>{{ invoice.issue_date|dateformat('%d/%b/%Y') }}</td>
-          <td>{{ invoice.expiration_date|dateformat('%d/%b/%Y') }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+{%- block sidebar %}
+<header>
+  {{ render_app_section() }}
+</header>
+<div class="content">
+  <div class="action">
+    <button class="btn btn-danger">Nuevo Proveedor</button>
+  </div>
+  <div class="sidenav">
   </div>
 </div>
+{%- endblock %}
 
-<div class="supplier-orders">
-  <h3>Pedidos <small>({{ supplier.orders.count() }})</small></h3>
-  <div class="order-list">
-    <table class="table table-condensed">
-      <tbody>
-        {% for order in supplier.orders.order_by('creation_date desc') %}
-        <tr>
-          <td><a href="{{ url_for('supplier.supplier_order_view', id=order.id) }}">{{ "%06d"|format(order.number) }}</a></td>
-          <td>{{ order.status_str }}</td>
-          <td>{{ order.creation_date|dateformat('%d/%b/%Y') }}</td>
-          <td>{{ order.method_str }}</td>
-        </tr>
-        {% endfor %}
+{%- block content %}
 
-      </tbody>
-    </table>
+<div class="edit-layout">
+  <div class="edit-head">
+    <div class="edit-left-panel">
+      <div class="edit-row">
+        <div class="edit-row-title">
+          <div id="avatar"></div>
+        </div>
+        <div class="edit-row-value">
+          <input type="text" name="name" spellcheck="false" class="big noborder autogrow" placeholder="Añade un nombre" />
+        </div>
+      </div>
+    </div>
+    <div class="edit-right-panel">
+      <div class="edit-row">
+        <span>Esto es un espectaculo.</span>
+      </div>
+    </div>
   </div>
-</div>#}
-{% endblock %}
+
+  <div class="edit-body">
+    <div class="edit-left-panel">
+      <div class="edit-row">
+        <div class="edit-row-title">
+          <span>Teléfono</span>
+        </div>
+        <div class="edit-row-value">
+          <input type="text" name="phone" spellcheck="false" class="autogrow voidable"/>
+        </div>
+      </div>
+      <div class="edit-row">
+        <div class="edit-row-title">
+          <span>Email</span>
+        </div>
+        <div class="edit-row-value">
+          <input type="text" name="email" spellcheck="false" class="autogrow voidable"/>
+        </div>
+      </div>
+      <div class="action-row">
+        <div class="btn-group">
+          <button class="dropdown-toggle" data-toggle="dropdown">Añadir <i class="icon-caret-down"></i></button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1" id="add-name">Nombre</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" id="add-mail">Correo</a></li>
+            <li><a tabindex="-1" id="add-phone">Teléfono</a></li>
+            <li><a tabindex="-1" id="add-address">Dirección</a></li>
+            <li><a tabindex="-1" id="add-custom-field">Personalizado...</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="edit-right-panel">
+      <textarea class="note bordered" name="note" spellcheck="false" placeholder="Añade una nota"></textarea>
+    </div>
+  </div>
+
+</div>
+
+{{ render_footer() }}
+{%- endblock %}
+
+{%- block js %}
+<script type="text/javascript">  
+  $(function() {
+    if (typeof Supplier !== 'undefined') {
+      var supplier = new Supplier({{ supplier|tojson|safe }});
+    }
+  });
+</script>
+{%- endblock %}
 
 {# vim: ft=html.jinja:sw=2
 #}

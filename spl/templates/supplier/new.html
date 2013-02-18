@@ -55,7 +55,17 @@
         </div>
       </div>
       <div class="action-row">
-        <button>Añadir</button>
+        <div class="btn-group">
+          <button class="dropdown-toggle" data-toggle="dropdown">Añadir <i class="icon-caret-down"></i></button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1" id="add-name">Nombre</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" id="add-mail">Correo</a></li>
+            <li><a tabindex="-1" id="add-phone">Teléfono</a></li>
+            <li><a tabindex="-1" id="add-address">Dirección</a></li>
+            <li><a tabindex="-1" id="add-custom-field">Personalizado...</a></li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="edit-right-panel">
