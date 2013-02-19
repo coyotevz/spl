@@ -9,7 +9,7 @@
 </header>
 <div class="content">
   <div class="action">
-    <button class="btn btn-danger">Nuevo Proveedor</button>
+    <button id="new-supplier" class="btn btn-danger">Nuevo Proveedor</button>
   </div>
   <div class="sidenav">
   </div>
@@ -61,6 +61,9 @@
 {% block js %}
 <script type="text/javascript">
   $(function() {
+
+    window.app = new SuppliersView();
+
     if (typeof Suppliers !== 'undefined') {
       Suppliers.page = {{ pagination.page }};
       Suppliers.num_pages = {{ pagination.pages }};

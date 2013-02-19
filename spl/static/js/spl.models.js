@@ -33,16 +33,24 @@
 
   SupplierRow = Backbone.View.extend({
     tagName: 'tr',
-    template: _.template($('#supplier-row-template').html()),
+    //template: _.template($('#supplier-row-template').html()),
 
     events: {
       'click td': 'open',
       'change [type=checkbox]': 'select'
     },
 
+    initialize: function() {
+      this.template = _.template($('#supplier-row-template').html());
+    },
+
     open: function(e) {
       if ($(e.target).is('[type=checkbox]')) return;
-      console.log("TODO: go to supplier view");
+      if (this.model.id) {
+        window.location.href = "/suppliers/" + this.model.id + "/";
+      } else {
+        console.warning("this model dosn't have id attribute");
+      }
     },
 
     select: function() {
@@ -59,10 +67,11 @@
 
   /* suppliers view */
   SuppliersView = Backbone.View.extend({
-    el: $('section#main'),
+    el: $('div#page'),
     collection: Suppliers,
 
     events: {
+      'click #new-supplier': 'newSupplierView'
     },
 
     initialize: function() {
@@ -102,13 +111,17 @@
 
     selectionChange: function() {
       /* this.render(); */
+    },
+
+    // TODO: move this to global app view
+    newSupplierView: function() {
+      window.location.href = "/suppliers/new/";
     }
   });
 
   window.Supplier = Supplier;
   window.Suppliers = Suppliers;
-
-  window.app = new SuppliersView();
+  window.SuppliersView = SuppliersView;
 
 })(window.jQuery);
 // vim:sw=2

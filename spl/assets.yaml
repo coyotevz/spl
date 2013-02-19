@@ -16,6 +16,7 @@ js_bundle:
         - js/json2.js
         - js/underscore.js
         - js/backbone.js
+        - js/Backbone.ModelBinder.js
         - js/spl.resize.design.js
         - js/spl.hover.js
         - js/spl.checkboxes.js

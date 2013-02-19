@@ -82,7 +82,29 @@
 <script type="text/javascript">  
   $(function() {
     if (typeof Supplier !== 'undefined') {
+      var _events = "blur focus load resize scroll unload beforeunload click dblclick mousedown mouseup mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error ready input paste cut";
+      $('input').on(_events, function(a, b, c) {
+        console.log("input event:", a, b, c);
+      });
+
       var supplier = new Supplier({{ supplier|tojson|safe }});
+      var SupplierView = Backbone.View.extend({
+        el: $('div#page'),
+        _modelBinder: undefined,
+
+        initialize: function() {
+          this._modelBinder = new Backbone.ModelBinder();
+          this.model.on('change', this.render, this);
+        },
+
+        render: function() {
+          this._modelBinder.bind(this.model, this.el);
+        }
+      });
+
+      var supplierView = new SupplierView({model: supplier});
+      supplierView.render();
+
     }
   });
 </script>
