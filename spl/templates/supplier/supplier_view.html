@@ -1,0 +1,59 @@
+<div class="edit-layout">
+  <div class="edit-head">
+    <div class="edit-left-panel">
+      <div class="edit-row">
+        <div class="edit-row-title">
+          <div id="avatar"></div>
+        </div>
+        <div class="edit-row-value">
+          <input type="text" name="name" spellcheck="false" class="big noborder autogrow" placeholder="Añade un nombre" />
+        </div>
+      </div>
+    </div>
+    <div class="edit-right-panel">
+      <div class="edit-row">
+        <span>Esto es un espectaculo.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-body">
+    <div class="edit-left-panel">
+      <div class="edit-row">
+        <div class="edit-row-title">
+          <span>Teléfono</span>
+        </div>
+        <div class="edit-row-value">
+          <input type="text" name="phone" spellcheck="false" class="autogrow voidable"/>
+        </div>
+      </div>
+      <div class="edit-row">
+        <div class="edit-row-title">
+          <span>Email</span>
+        </div>
+        <div class="edit-row-value">
+          <input type="text" name="email" spellcheck="false" class="autogrow voidable"/>
+        </div>
+      </div>
+      <div class="action-row">
+        <div class="btn-group">
+          <button class="dropdown-toggle" data-toggle="dropdown">Añadir <i class="icon-caret-down"></i></button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1" id="add-name">Nombre</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" id="add-mail">Correo</a></li>
+            <li><a tabindex="-1" id="add-phone">Teléfono</a></li>
+            <li><a tabindex="-1" id="add-address">Dirección</a></li>
+            <li><a tabindex="-1" id="add-custom-field">Personalizado...</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="edit-right-panel">
+      <textarea class="note bordered" name="note" spellcheck="false" placeholder="Añade una nota"></textarea>
+    </div>
+  </div>
+
+</div>
+{# vim: ft=html.jinja:sw=2
+#}

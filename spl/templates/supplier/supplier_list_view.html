@@ -1,0 +1,34 @@
+<table id="suppliers-list" class="list">
+  <colgroup>
+    <col class="col0" style="width: 2px;">
+    <col class="col1" style="width: 30px;">
+    <col class="col2">
+    <col class="col3">
+    <col class="col4">
+    <col class="col5">
+  </colgroup>
+
+  <tbody>
+    <!-- _.template definition -->
+    <tr id="supplier-row-template" class="hide">
+      <td></td>
+      <td>
+        <label class="checkbox inline-control">
+          <input id="supplier:[%= _id %]" type="checkbox">
+          <span></span>
+        </label>
+      </td>
+      <td><span class="name">[%= name %]</span></td>
+      <td><span class="email">[%= email %]</span></td>
+      <td><span class="phone">[%= phone %]</span></td>
+      <td></td>
+    </tr>
+    <!-- end _.template definition -->
+    <tr id="empty-supplier-message" class="hide">
+      <td colspan="6"><span>No hay proveedores en este grupo.</span></td>
+    </tr>
+  </tbody>
+
+</table>
+{# vim: ft=html.jinja:sw=2
+#}
