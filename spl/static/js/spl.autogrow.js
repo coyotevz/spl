@@ -40,7 +40,7 @@
         ts.html(input.val().replace(/ /g, '&nbsp;'));
         if (!input.val()) {
           return input.width(input._originalWidth);
-        } else {
+        } else if ((ts.width() + 3) < parseInt(input.css('max-width'))){
           return input.width(ts.width() + 3);
         }
       };
