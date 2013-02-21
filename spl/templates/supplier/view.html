@@ -99,16 +99,18 @@
         },
 
         initialize: function() {
-          this.model.on('change', this.render, this);
+          this.stickit();
         },
 
         render: function() {
-          this.stickit();
         }
       });
 
       var supplierView = new SupplierView({model: supplier});
       supplierView.render();
+
+      window.supplier = supplier;
+      window.supplierView = supplierView;
 
     }
   });
