@@ -60,10 +60,21 @@ def invoice_view(id):
     return render_template('invoice/view.html', invoice=invoice)
 
 
+spl = Blueprint('spl', __name__)
+
+@spl.route('/')
+def spl_app_view(id=None):
+    query = db.Supplier.find().sort('name')
+    suppliers = Pagination(query, page=request.page,
+                           per_page=request.per_page)
+    return render_template('supplier/index.html', suppilers=suppliers)
+
+
 def configure_views(app):
     app.register_blueprint(supplier, url_prefix='/suppliers')
     app.register_blueprint(invoice, url_prefix='/invoices')
     app.register_blueprint(contact, url_prefix='/contacts')
+    app.register_blueprint(spl, url_prefix='/spl')
 
     app_sections = [
         (None, None, 'Facturas'),
