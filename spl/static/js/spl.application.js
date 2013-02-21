@@ -16,7 +16,7 @@
 
   $('input.autogrow').autogrow();
 
-  $('input.voidable').on('blur', function(e) {
+  $('input.voidable').on('input', function(e) {
     $(this).toggleClass('void', $(this).val() == '' ? true : false);
   }).each(function() {
     // check current state
@@ -24,3 +24,4 @@
   });
 
 })(window.jQuery);
+// vim:sw=2
