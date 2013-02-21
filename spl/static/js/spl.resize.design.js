@@ -7,19 +7,24 @@
   "use strict"; // jshint ;_;
 
   var resize = function() {
-    var content_wrapper = $('#content_wrapper'),
-        scroll_wrapper = $('#scroll_wrapper'),
-        content_avl_width = $(window).width() - $('aside').width(),
-        content_avl_height = $(window).height() - content_wrapper.position().top,
-        edit_layout = $('.edit-layout', content_wrapper);
+    var contentWrapper = $('#content_wrapper'),
+        scrollWrapper = $('#scroll_wrapper'),
+        contentAvlWidth = $(window).width() - $('aside').width(),
+        contentAvlHeight = $(window).height() - contentWrapper.position().top,
+        editLayout = $('.edit-layout', contentWrapper);
 
-    content_wrapper.width(content_avl_width);
-    content_wrapper.height(content_avl_height);
-    scroll_wrapper.height(content_avl_height);
+    contentWrapper.width(contentAvlWidth);
+    contentWrapper.height(contentAvlHeight);
+    scrollWrapper.height(contentAvlHeight);
 
-    if (edit_layout.length) {
-      $('.edit-left-panel, .edit-right-panel', edit_layout)
-          .outerWidth((edit_layout.width() - 1) / 2);
+    if (editLayout.length) {
+      var panelWidth = (editLayout.width() - 1) / 2;
+      var maxWidth = panelWidth - (102 + 29 + 17 + 10);
+      $('.edit-left-panel, .edit-right-panel', editLayout)
+          .outerWidth(panelWidth);
+      $('.edit-row-title + .edit-row-value input', editLayout).css({
+        'max-width': maxWidth
+      });
     }
   };
 
