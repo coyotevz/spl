@@ -4,26 +4,27 @@ style_bundle:
     contents:
         - scss/tesla/tesla.scss
         - scss/spl.scss
-modernizr_bundle:
-    output: assets/modernizr.js
-    contents:
-        - js/modernizr-2.6.2.js
-js_bundle:
-    output: assets/all.js
-    contents:
-        - js/jquery-1.9.0.js
-        - js/jquery.dotimeout.js
-        - js/json2.js
-        - js/underscore.js
-        - js/backbone.js
-        - js/backbone.stickit.js
-        - js/spl.resize.design.js
-        - js/spl.hover.js
-        - js/spl.checkboxes.js
-        - js/spl.scroll.js
-        - js/spl.tooltip.js
-        - js/spl.dropdown.js
-        - js/spl.autogrow.js
-        - js/spl.paginated.js
-        - js/spl.models.js
-        - js/spl.application.js
+#modernizr_bundle:
+#    output: assets/modernizr.js
+#    contents:
+#        - js/vendor/modernizr.js
+#js_bundle:
+#    output: assets/all.js
+#    contents:
+#        - js/vendor/require.js
+#        - js/jquery-1.9.0.js
+#        - js/jquery.dotimeout.js
+#        - js/json2.js
+#        - js/underscore.js
+#        - js/backbone.js
+#        - js/backbone.stickit.js
+#        - js/spl.resize.design.js
+#        - js/spl.hover.js
+#        - js/spl.checkboxes.js
+#        - js/spl.scroll.js
+#        - js/spl.tooltip.js
+#        - js/spl.dropdown.js
+#        - js/spl.autogrow.js
+#        - js/spl.paginated.js
+#        - js/spl.models.js
+#        - js/spl.application.js
