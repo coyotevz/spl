@@ -26,11 +26,11 @@ require.config({
 
   // For easier development, disable broser caching
   // Of course, this sould be remove in a production environment
-  // urlArgs: 'ver=' + (new Date()).getTime()
+  ,urlArgs: 'ver=' + (new Date()).getTime()
 });
 
 // Bootsrap the application
 require(['application'], function(Application) {
   var app = new Application();
-  app.run();
+  app.initialize();
 });

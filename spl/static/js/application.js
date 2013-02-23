@@ -1,12 +1,13 @@
-define(['backbone'], function(Backbone) {
-  var Application = Backbone.View.extend({
+define(['chaplin', 'spl/resize'], function(Chaplin) {
+  var Application = Chaplin.Application.extend({
+
+    title: 'SPL',
 
     initialize: function() {
       console.log("Application initialization...");
-    },
-
-    run: function() {
-      console.log("Application running...");
+      this.initDispatcher();
+      this.initLayout();
+      this.initRouter();
     }
   });
 

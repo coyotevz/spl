@@ -2,9 +2,8 @@
  * resize routines
  */
 
-(function($, undefined) {
-
-  "use strict"; // jshint ;_;
+define(['jquery'], function($) {
+  "use strict";
 
   var resize = function() {
     var contentWrapper = $('#content_wrapper'),
@@ -32,6 +31,6 @@
   $(window).focus(resize);
   resize();
 
-})(window.jQuery);
+});
 
 // vim:sw=2
