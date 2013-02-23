@@ -4,22 +4,22 @@ require.config({
   // Path where JavaScript root modules are located
   baseUrl: "/static/js",
 
-  // Specify the paths of vendor libraries
   paths: {
-    'jquery': 'vendor/jquery',
-    'underscore': 'vendor/underscore',
-    'backbone': 'vendor/backbone',
-    'chaplin': 'vendor/chaplin'
+    // Specify the paths of vendor libraries
+    'json':       'vendor/json2',
+    'jquery':     'vendor/jquery-1.9.1',
+    'underscore': 'vendor/underscore-1.4.4',
+    'backbone':   'vendor/backbone-0.9.10',
+    'chaplin':    'vendor/chaplin-0.7.0'
   },
 
   // For not AMD-capable per default, declare dependencies
   shim: {
     'underscore': {
-      deps: ['jquery'],
       exports: '_'
     },
     'backbone': {
-      deps: ['underscore'],
+      deps: ['json', 'jquery', 'underscore'],
       exports: 'Backbone'
     }
   }
