@@ -1,19 +1,36 @@
+// Configure the AMD module loader
 require.config({
-  baseUrl: "/static/js/vendor",
+
+  // Path where JavaScript root modules are located
+  baseUrl: "/static/js",
+
+  // Specify the paths of vendor libraries
+  paths: {
+    'jquery': 'vendor/jquery',
+    'underscore': 'vendor/underscore',
+    'backbone': 'vendor/backbone',
+    'chaplin': 'vendor/chaplin'
+  },
+
+  // For not AMD-capable per default, declare dependencies
   shim: {
-    'vendor/underscore': {
+    'underscore': {
+      deps: ['jquery'],
       exports: '_'
     },
-    'vendor/backbone': {
-      deps: ['vendor/underscore', 'jquery'],
+    'backbone': {
+      deps: ['underscore'],
       exports: 'Backbone'
     }
   }
+
+  // For easier development, disable broser caching
+  // Of course, this sould be remove in a production environment
+  // urlArgs: 'ver=' + (new Date()).getTime()
 });
 
-require([
-  "jquery",
-  "underscore",
-  "backbone",
-], function($, _, Backbone) {
+// Bootsrap the application
+require(['application'], function(Application) {
+  var app = new Application();
+  app.run();
 });
