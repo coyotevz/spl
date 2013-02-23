@@ -14,12 +14,8 @@
     <!-- page-specific style -->
     {%- block css %}{% endblock %}
     <!-- end page-specific style -->
-    <script type="text/javascript">
-      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    </script>
-    {%- assets "modernizr_bundle" %}
-    <script src="{{ ASSET_URL }}"></script>
-    {%- endassets %}
+    <script src="/static/js/vendor/modernizr.js"></script>
+    <script data-main="/static/js/main" src="/static/js/vendor/require.js"></script>
   </head>
 
   <body>
@@ -52,14 +48,6 @@
         </section>
       </div>
     </div>
-
-    <!-- underscore templates -->
-    <!-- end underscore templates -->
-
-    <!-- javascript at the bottom for fast page loading -->
-    {%- assets "js_bundle" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {%- endassets %}
 
     <!-- page-specific script -->
     {%- block js %}{% endblock %}
