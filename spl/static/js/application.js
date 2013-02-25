@@ -1,36 +1,37 @@
 define([
-  'chaplin',
-  'views/layout',
-  'routes'
-], function(Chaplin, Layout, routes) {
+  'backbone',
+  'views/supplierrow'
+], function(Backbone, SupplierRow) {
   'use strict';
 
-  var Application = Chaplin.Application.extend({
+  var Application = Backbone.Router.extend({
 
-    title: 'SPL',
+    routes: {
+      '': 'index',
+      'suppliers': 'showSuppliers',
+      'contacts': 'showContacts',
+    },
 
     initialize: function() {
       console.log("Application initialization...");
-      this.initDispatcher();
-      this.initLayout();
-      this.initMediator();
-      this.initControllers();
-      this.initRouter(routes);
-
-      // Freeze the application instance to prevent further changes
-      if (Object.freeze) Object.freeze(this);
+      this.sr = new SupplierRow();
     },
 
-    initLayout: function() {
-      this.layout = new Layout({title: this.title});
+    run: function() {
+      console.log("Application running...");
+      Backbone.history.start();
     },
 
-    initControllers: function() {
+    index: function() {
+      console.log("index method");
     },
 
-    initMediator: function() {
-      // Seal the mediator
-      Chaplin.mediator.seal();
+    showSuppliers: function() {
+      console.log("showSuppliers method");
+    },
+
+    showContacts: function() {
+      console.log("showContacts method");
     }
   });
 
