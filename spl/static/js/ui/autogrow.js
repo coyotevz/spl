@@ -3,7 +3,7 @@
  * Based on: https://github.com/rkivalin/jquery-autogrow
  */
 
-(function($, undefined) {
+define(['jquery'], function($) {
 
   "use strict"; // jshint ;_;
 
@@ -50,5 +50,5 @@
     });
   };
 
-})(window.jQuery);
+});
 // vim:sw=2

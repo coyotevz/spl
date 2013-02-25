@@ -8,6 +8,8 @@ require.config({
     // Specify the paths of vendor libraries
     'json':       'vendor/json2',
     'jquery':     'vendor/jquery-1.9.1',
+    'jquery-dotimeout': 'vendor/jquery.dotimeout-1.0',
+    'moment':     'vendor/moment-2.0.0',
     'underscore': 'vendor/underscore-1.4.4',
     'backbone':   'vendor/backbone-0.9.10',
     'chaplin':    'vendor/chaplin-0.7.0',

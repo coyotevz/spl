@@ -1,6 +1,7 @@
 define([
   'backbone',
-  'views/supplierrow'
+  'views/supplierrow',
+  'ui/main'
 ], function(Backbone, SupplierRow) {
   'use strict';
 

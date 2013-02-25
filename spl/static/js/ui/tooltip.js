@@ -3,7 +3,7 @@
  * Copyright 2012 Twiter, Inc.
  */
 
-(function($, undefined) {
+define(['jquery'], function($) {
 
   "use strict"; // jshint ;_;
 
@@ -241,5 +241,5 @@
     html: false
   };
 
-})(window.jQuery);
+});
 // vim:sw=2
