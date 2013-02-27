@@ -5,7 +5,11 @@ define(function() {
    * `match` is match method of the Router
    */
   var routes = function(match) {
-    match('', 'main#index');
+    match('', 'dashboard#index');
+    match('dashboard', 'dashboard#index');
+    match('suppliers', 'suppliers#index');
+    match('contacts', 'contacts#index');
+    match('contacts/:id/edit', 'contacts#edit');
   };
 
   return routes;
