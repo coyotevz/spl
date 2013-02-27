@@ -35,5 +35,5 @@ require.config({
 // Bootsrap the application
 require(['application'], function(Application) {
   var app = new Application();
-  app.run();
+  app.initialize();
 });
