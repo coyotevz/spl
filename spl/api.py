@@ -22,21 +22,28 @@ class SupplierAPI(MethodView):
     Suppliers API definition
     ~~~~~~~~~~~~~~~~~~~~~~~~
 
-    /suppliers/         GET         - Index method that returns a suppliers list
-    /suppliers/         POST        - Create a new supplier
+    /suppliers/                 GET         - Gives a list of all suppliers (paginated)
+    /suppliers/                 POST        - Create a new supplier
+    /suppliers/<supplier_id>    GET         - Returns a specified supplier
+    /suppliers/<supplier_id>    PUT         - Updates a specified supplier
+    /suppliers/<supplier_id>    DELETE      - Delete a specified supplier
     """
-    def get(self, id):
-        p = Pagination(db.Supplier.find().sort('name'), page=request.page,
-                       per_page=request.per_page)
-        return json_response({
-            'objects': p.items,
-            'page': p.page,
-            'num_results': p.total,
-            'num_pages': p.pages,
-        })
+    def get(self, supplier_id):
+        if supplier_id is None:
+            p = Pagination(db.Supplier.find().sort('name'), page=request.page,
+                           per_page=request.per_page)
+            data = {
+                'objects': p.items,
+                'page': p.page,
+                'num_results': p.total,
+                'num_pages': p.pages,
+            }
+        else:
+            data = db.Supplier.get_or_404(supplier_id)
+        return json_response(data)
 
 
-register_api(SupplierAPI, 'supplier_api', '/suppliers/')
+register_api(SupplierAPI, 'supplier_api', '/suppliers/', pk='supplier_id', pk_type='ObjectId')
 
 
 def configure_api(app):

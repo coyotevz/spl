@@ -32,7 +32,7 @@ define([
       }
 
       return templateFunc;
-    }
+    },
   });
 
   return View;

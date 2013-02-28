@@ -8,9 +8,6 @@ define([
     // Automatically render after initialize
     autoRender: true,
 
-    tagName: 'p',
-    className: 'test-name',
-
     // Automatically append to the DOM on render
     container: '#content',
 
