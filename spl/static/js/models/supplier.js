@@ -1,13 +1,19 @@
-require([
-  'backbone',
-], function(Backbone) {
+define([
+  'models/base/model'
+], function(Model) {
 
-  var Supplier = Backbone.Model.extend({
+  var Supplier = Model.extend({
 
-    idAttribute: '_id'
+    urlRoot: '/api/suppliers/',
+
+    defaults: {
+      phone: '',
+      email: ''
+    },
 
   });
 
   return Supplier;
 
 });
+// vim:sw=2

@@ -1,6 +1,8 @@
 define([
-  'chaplin'
-], function(Chaplin) {
+  'chaplin',
+  'models/supplier',
+  'views/supplier_view'
+], function(Chaplin, Supplier, SupplierView) {
   "use strict";
 
   var SuppliersController = Chaplin.Controller.extend({
@@ -14,7 +16,9 @@ define([
     },
 
     show: function(params) {
-      console.log("suppliers#show:", params);
+      this.model = new Supplier({ _id: params.id });
+      this.view = new SupplierView({ model: this.model });
+      this.model.fetch();
     },
 
     edit: function(params) {

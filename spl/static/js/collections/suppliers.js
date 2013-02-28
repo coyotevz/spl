@@ -1,9 +1,10 @@
-require([
-  'backbone',
+define([
+  'collections/base/paginated',
   'models/supplier'
-], function(Backbone, Supplier) {
+], function(PaginatedCollection, Supplier) {
+  "use strict";
 
-  var Suppliers = Backbone.Collection.extend({
+  var Suppliers = PaginatedCollection.extend({
 
     model: Supplier,
 
@@ -19,3 +20,4 @@ require([
   return new Suppliers();
 
 });
+// vim:sw=2
