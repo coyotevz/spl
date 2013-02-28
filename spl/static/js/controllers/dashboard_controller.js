@@ -1,12 +1,9 @@
 define([
   'chaplin',
 ], function(Chaplin) {
+  "use strict";
 
   var DashboardController = Chaplin.Controller.extend({
-
-    initialize: function() {
-      console.log("DashboardController.initialize()");
-    },
 
     index: function(params) {
       console.log("dashboard#index:", params);
@@ -14,7 +11,6 @@ define([
 
   });
 
-  console.log("loading DashboardController");
   return DashboardController;
 
 });

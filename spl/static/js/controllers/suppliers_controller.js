@@ -7,12 +7,28 @@ define([
 
     index: function(params) {
       console.log("supplier#index:", params);
+    },
+
+    new: function(params) {
+      console.log("suppliers#new:", params);
+    },
+
+    show: function(params) {
+      console.log("suppliers#show:", params);
+    },
+
+    edit: function(params) {
+      console.log("suppliers#edit:", params);
+    },
+
+    delete: function(params) {
+      console.log("suppliers#delete:", params);
     }
 
   });
 
-  console.log("loading SuppliersController");
   return SuppliersController;
+
 });
 
 // vim:sw=2

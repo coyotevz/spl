@@ -5,11 +5,22 @@ define(function() {
    * `match` is match method of the Router
    */
   var routes = function(match) {
-    match('', 'dashboard#index');
+    match('', 'home#index');
     match('dashboard', 'dashboard#index');
-    match('suppliers', 'suppliers#index');
-    match('contacts', 'contacts#index');
-    match('contacts/:id/edit', 'contacts#edit');
+
+    /* suppliers controller */
+    match('suppliers',            'suppliers#index');
+    match('suppliers/new',        'suppliers#new');
+    match('suppliers/:id',        'suppliers#show');
+    match('suppliers/:id/edit',   'suppliers#edit');
+    match('suppliers/:id/delete', 'suppliers#delete');
+
+    /* contacts controller */
+    match('contacts',             'contacts#index');
+    match('contacts/new',         'contacts#new');
+    match('contacts/:id',         'contacts#show');
+    match('contacts/:id/edit',    'contacts#edit');
+    match('contacts/:id/delete',  'contacts#delete');
   };
 
   return routes;

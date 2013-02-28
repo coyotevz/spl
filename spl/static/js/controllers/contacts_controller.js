@@ -9,14 +9,26 @@ define([
       console.log("contacts#index:", params);
     },
 
+    new: function(params) {
+      console.log("contacts#new:", params);
+    },
+
+    show: function(params) {
+      console.log("contacts#view", params);
+    },
+
     edit: function(params) {
       console.log("contacts#edit:", params);
+    },
+
+    delete: function(params) {
+      console.log("contacts#delete", params);
     }
 
   });
 
-  console.log("loading ContactsController");
   return ContactsController;
+
 });
 
 // vim:sw=2
