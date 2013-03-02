@@ -1,8 +1,9 @@
 define([
   'jquery',
+  'chaplin',
   'views/base/view',
   'text!templates/supplier_row.html'
-], function($, View, template) {
+], function($, Chaplin, View, template) {
   "use strict";
 
   var SupplierRowView = View.extend({
@@ -26,7 +27,7 @@ define([
 
     open: function(evt) {
       if ($(evt.target).is('.checkbox input[type=checkbox]')) return this.checked(evt);
-      console.log("open:", this.model);
+      Chaplin.mediator.publish('!router:routeByName', 'supplier', { id: this.model.id });
     }
 
   });
