@@ -67,7 +67,7 @@ def spl_app_view(id=None):
     query = db.Supplier.find().sort('name')
     suppliers = Pagination(query, page=request.page,
                            per_page=request.per_page)
-    return render_template('supplier/index.html', suppilers=suppliers)
+    return render_template('spl/index.html', suppilers=suppliers)
 
 
 def configure_views(app):
