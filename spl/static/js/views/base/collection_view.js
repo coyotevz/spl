@@ -6,7 +6,7 @@ define([
 
   var CollectionView = Chaplin.CollectionView.extend({
     getTemplateFunction: View.prototype.getTemplateFunction,
-    useCssAnimation: true
+    animationDuration: 0
   });
 
   return CollectionView;

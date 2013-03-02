@@ -1,8 +1,9 @@
 define([
   'chaplin',
+  'views/layout',
   'routes',
   'ui/main'
-], function(Chaplin, routes) {
+], function(Chaplin, Layout, routes) {
   'use strict';
 
   var Application = Chaplin.Application.extend({
@@ -30,6 +31,10 @@ define([
 
       /* Freeze the application instance to prevent further changes */
       if (Object.freeze) Object.freeze(this);
+    },
+
+    initLayout: function() {
+      this.layout = new Layout({ title: this.title });
     },
 
     /* Instantiate common controllers */

@@ -1,5 +1,5 @@
 define([
-  'collections/base/paginated',
+  'models/base/paginated_collection',
   'models/supplier'
 ], function(PaginatedCollection, Supplier) {
   "use strict";
@@ -7,8 +7,12 @@ define([
   var Suppliers = PaginatedCollection.extend({
 
     model: Supplier,
-
     url: '/api/suppliers/',
+
+    initialize: function() {
+      PaginatedCollection.prototype.initialize.apply(this, arguments);
+      this.fetch();
+    },
 
     comparator: function(d) {
       return d.get('name') && d.get('name').toLowerCase();
@@ -16,8 +20,7 @@ define([
 
   });
 
-  // Returns a new Suppliers collection instance
-  return new Suppliers();
+  return Suppliers;
 
 });
 // vim:sw=2

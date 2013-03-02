@@ -6,21 +6,21 @@ define(function() {
    */
   var routes = function(match) {
     match('', 'home#index');
-    match('dashboard', 'dashboard#index');
+//    match('dashboard', 'dashboard#index');
 
     /* suppliers controller */
     match('suppliers',            'suppliers#index');
-    match('suppliers/new',        'suppliers#new');
+//    match('suppliers/new',        'suppliers#new');
     match('suppliers/:id',        'suppliers#show');
-    match('suppliers/:id/edit',   'suppliers#edit');
-    match('suppliers/:id/delete', 'suppliers#delete');
+//    match('suppliers/:id/edit',   'suppliers#edit');
+//    match('suppliers/:id/delete', 'suppliers#delete');
 
     /* contacts controller */
-    match('contacts',             'contacts#index');
-    match('contacts/new',         'contacts#new');
-    match('contacts/:id',         'contacts#show');
-    match('contacts/:id/edit',    'contacts#edit');
-    match('contacts/:id/delete',  'contacts#delete');
+//    match('contacts',             'contacts#index');
+//    match('contacts/new',         'contacts#new');
+//    match('contacts/:id',         'contacts#show');
+//    match('contacts/:id/edit',    'contacts#edit');
+//    match('contacts/:id/delete',  'contacts#delete');
   };
 
   return routes;

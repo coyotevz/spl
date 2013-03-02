@@ -1,39 +1,32 @@
 define([
   'chaplin',
-  'models/supplier',
-  'views/supplier_view',
-  'collections/suppliers',
-  'views/suppliers_collection_view'
-], function(Chaplin, Supplier, SupplierView, Suppliers, SuppliersCollectionView) {
+  'models/suppliers',
+  'views/suppliers_view'
+], function(Chaplin, Suppliers, SuppliersView) {
   "use strict";
 
   var SuppliersController = Chaplin.Controller.extend({
 
-    index: function(params) {
-      console.log("supplier#index:", params);
-      this.collection = Suppliers;
-      this.view = new SuppliersCollectionView({ collection: this.collection });
-      this.collection.fetch();
+    title: 'Suppliers',
+
+    historyURL: function(params) {
+      if (params.id) {
+        return "suppliers/" + params.id;
+      } else {
+        return '';
+      }
     },
 
-    new: function(params) {
-      console.log("suppliers#new:", params);
+    index: function(params) {
+      this.suppliers = new Suppliers();
+      this.view = new SuppliersView({
+        collection: this.suppliers
+      });
     },
 
     show: function(params) {
-      this.model = new Supplier({ _id: params.id });
-      this.view = new SupplierView({ model: this.model });
-      this.model.fetch();
-    },
-
-    edit: function(params) {
-      console.log("suppliers#edit:", params);
-    },
-
-    delete: function(params) {
-      console.log("suppliers#delete:", params);
+      console.log("suppliers#show to implement");
     }
-
   });
 
   return SuppliersController;
