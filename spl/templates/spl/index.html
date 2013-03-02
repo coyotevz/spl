@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% from "macros.html" import render_footer %}
+{% from "macros.html" import render_app_section with context %}
+
+{%- block sidebar %}
+<header>
+  {{ render_app_section() }}
+</header>
+<div class="content">
+  <div class="action">
+    <button class="btn btn-danger">Nuevo Proveedor</button>
+  </div>
+  <div class="sidenav"></div>
+</div>
+{%- endblock %}
+{# vim: ft=html.jinja:sw=2
+#}
