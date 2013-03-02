@@ -15,11 +15,9 @@ define([
     initialize: function(attributes, options) {
       Supplier.__super__.initialize.apply(this, arguments);
       if (options && options.loadDetails) {
-        this.initDeferred();
         this.fetch();
       }
     }
-
   });
 
   return Supplier;
