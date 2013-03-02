@@ -10,7 +10,7 @@ define([
     url: '/api/suppliers/',
 
     initialize: function() {
-      PaginatedCollection.prototype.initialize.apply(this, arguments);
+      Suppliers.__super__.initialize.apply(this, arguments);
       this.fetch();
     },
 

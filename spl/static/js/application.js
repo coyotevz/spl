@@ -12,9 +12,7 @@ define([
 
     initialize: function() {
       // call the parent constructor
-      Chaplin.Application.prototype.initialize.apply(this, arguments);
-
-      console.log("Application initialization...");
+      Application.__super__.initialize.apply(this, arguments);
 
       /* Initialize core components */
       this.initDispatcher();

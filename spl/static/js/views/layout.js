@@ -7,7 +7,7 @@ define([
   var Layout = Chaplin.Layout.extend({
 
     initialize: function() {
-      Chaplin.Layout.prototype.initialize.apply(this, arguments);
+      Layout.__super___super___super__y(this, arguments);
       this.subscribeEvent('startupController', this.removeFallbackContent);
     },
 
