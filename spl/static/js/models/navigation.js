@@ -5,7 +5,7 @@ define([
 
   var Navigation = Model.extend({
     defaults: {
-      current: 'suppliers',
+      current: '',
       items: [
         {
           name: 'invoices',
@@ -26,16 +26,6 @@ define([
           title: 'Contactos'
         }
       ]
-    },
-
-    checkCurrent: function() {
-      console.log('checking current');
-    },
-
-    initialize: function() {
-      Navigation.__super__.initialize.apply(this, arguments);
-      _.bindAll(this, 'checkCurrent');
-      this.on('change:current', this.checkCurrent);
     }
   });
 

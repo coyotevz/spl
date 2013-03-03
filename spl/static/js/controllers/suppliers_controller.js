@@ -13,7 +13,7 @@ define([
 
     initialize: function() {
       SuppliersController.__super__.initialize.apply(this, arguments);
-      this.publishEvent('navigation:change', 'supplier');
+      this.publishEvent('navigation:change', 'suppliers');
     },
 
     historyURL: function(params) {

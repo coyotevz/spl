@@ -1,6 +1,7 @@
-<span class="dropdown-toggle" data-toggle="dropdown">Proveedores <i class="icon-caret-down"></i></span>
+<span class="dropdown-toggle" data-toggle="dropdown">[%= current_title %] <i class="icon-caret-down"></i></span>
 <ul class="dropdown-menu" role="menu">
-  <li>
-  <a href="/suppliers/" tabindex="-1">Proveedores</a>
-  </li>
+  [% for (item in items) {
+     nav = items[item]; %]
+     <li [% if (nav.name == current) print('class="current"') %]><a tabindex="-1" [% nav.href ? print('href="' + nav.href + '"') : print("disabled") %]>[%= nav.title %]</a></li>
+  [% } %]
 </ul>
