@@ -7,7 +7,7 @@ define([
   var SupplierView = View.extend({
     id: 'supplier',
     container: '#content',
-    autoRender: true,
+    autoRender: false,
     template: template,
 
     listen: {
