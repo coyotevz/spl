@@ -1,9 +1,10 @@
 define([
   'chaplin',
   'views/layout',
+  'controllers/navigation_controller',
   'routes',
   'ui/main'
-], function(Chaplin, Layout, routes) {
+], function(Chaplin, Layout, NavigationController, routes) {
   'use strict';
 
   var Application = Chaplin.Application.extend({
@@ -43,7 +44,7 @@ define([
        * and views which are needed the whole time, for example header, footer
        * or navigation views.
        */
-      // new NavigationController();
+      new NavigationController();
     },
 
     /* Create additional mediator properties */

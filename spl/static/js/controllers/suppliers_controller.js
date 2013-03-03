@@ -11,6 +11,11 @@ define([
 
     title: 'Suppliers',
 
+    initialize: function() {
+      SuppliersController.__super__.initialize.apply(this, arguments);
+      this.publishEvent('navigation:change', 'supplier');
+    },
+
     historyURL: function(params) {
       if (params.id) {
         return "suppliers/" + params.id;

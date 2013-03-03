@@ -13,7 +13,7 @@ define([
       options = _.extend(options, {
          titleTemplate: _.template("[%= subtitle %] – [%= title %]"),
       });
-    Layout.__super__.initialize(this, arguments);
+      Layout.__super__.initialize.apply(this, arguments);
       this.subscribeEvent('startupController', this.removeFallbackContent);
     },
 
