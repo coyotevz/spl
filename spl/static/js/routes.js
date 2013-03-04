@@ -16,9 +16,9 @@ define(function() {
 //    match('suppliers/:id/delete', 'suppliers#delete');
 
     /* contacts controller */
-//    match('contacts',             'contacts#index');
+    match('contacts',             'contacts#index', {name: 'contacts'});
 //    match('contacts/new',         'contacts#new');
-//    match('contacts/:id',         'contacts#show');
+    match('contacts/:id',         'contacts#show', {name: 'contact'});
 //    match('contacts/:id/edit',    'contacts#edit');
 //    match('contacts/:id/delete',  'contacts#delete');
   };

@@ -1,30 +1,40 @@
 define([
-  'chaplin'
-], function(Chaplin) {
+  'chaplin',
+  'models/contact',
+  'views/contact_view',
+  'models/contacts',
+  'views/contacts_view'
+], function(Chaplin, Contact, ContactView, Contacts, ContactsView) {
   "use strict";
 
   var ContactsController = Chaplin.Controller.extend({
 
-    index: function(params) {
-      console.log("contacts#index:", params);
+    title: 'Contacts',
+
+    initialize: function() {
+      ContactsController.__super__.initialize.apply(this, arguments);
+      this.publishEvent('navigation:change', 'contacts');
     },
 
-    new: function(params) {
-      console.log("contacts#new:", params);
+    historyURL: function(params) {
+      if (params.id) {
+        return "contacts/" + params.id;
+      } else {
+        return '';
+      }
+    },
+
+    index: function(params) {
+      this.contacts = new Contacts();
+      this.view = new ContactsView({
+        collection: this.contacts
+      });
     },
 
     show: function(params) {
-      console.log("contacts#view", params);
-    },
-
-    edit: function(params) {
-      console.log("contacts#edit:", params);
-    },
-
-    delete: function(params) {
-      console.log("contacts#delete", params);
+      this.contact = new Contact({ _id: params.id }, { loadDetails: true });
+      this.view = new ContactView({ model: this.contact });
     }
-
   });
 
   return ContactsController;
