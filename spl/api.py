@@ -46,5 +46,33 @@ class SupplierAPI(MethodView):
 register_api(SupplierAPI, 'supplier_api', '/suppliers/', pk='supplier_id', pk_type='ObjectId')
 
 
+class ContactAPI(MethodView):
+    """
+    Contacts API definition
+    ~~~~~~~~~~~~~~~~~~~~~~~
+
+    /contacts/                  GET         - Gives a list of all contacts (paginated)
+    /contacts/                  POST        - Create a new contact
+    /contacts/<contact_id>      GET         - Returns a specified contact
+    /contacts/<contact_id>      PUT         - Updates a specified contact
+    /contacts/<contact_id>      DELETE      - Delete a specified contact
+    """
+    def get(self, contact_id):
+        if contact_id is None:
+            p = Pagination(db.Contacts.find().sort('name'), page=request.page,
+                           per_page=request.per_page)
+            data = {
+                'objects': p.items,
+                'page': p.page,
+                'num_results': p.total,
+                'num_pages': p.pages,
+            }
+        else:
+            data = db.Contacts.get_or_404(contact_id)
+        return json_response(data)
+
+register_api(ContactAPI, 'contact_api', '/contacts/', pk='contact_id', pk_type='ObjectId')
+
+
 def configure_api(app):
     app.register_blueprint(api)
