@@ -40,6 +40,7 @@ class SupplierAPI(MethodView):
             }
         else:
             data = db.Supplier.get_or_404(supplier_id)
+        import time; time.sleep(1)
         return json_response(data)
 
 
@@ -69,6 +70,7 @@ class ContactAPI(MethodView):
             }
         else:
             data = db.Contacts.get_or_404(contact_id)
+        import time; time.sleep(1)
         return json_response(data)
 
 register_api(ContactAPI, 'contact_api', '/contacts/', pk='contact_id', pk_type='ObjectId')

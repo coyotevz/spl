@@ -1,14 +1,14 @@
 define([
   'views/base/collection_view',
-  'views/supplier_row_view',
-  'text!templates/suppliers.html'
-], function(CollectionView, SupplierRowView, template) {
+  'views/contact_row_view',
+  'text!templates/contacts.html'
+], function(CollectionView, ContactRwView, template) {
   "use strict";
 
-  var SuppliersView = CollectionView.extend({
+  var ContactsView = CollectionView.extend({
     template: template,
     tagName: 'table',
-    id: 'suppliers-list',
+    id: 'contacts-list',
     className: 'list',
 
     container: '#content',
@@ -17,10 +17,10 @@ define([
     loadingSelector: '.loading',
 
     initItemView: function(item) {
-      return new SupplierRowView({ model: item });
+      return new ContactRowView({ model: item });
     }
   });
 
-  return SuppliersView;
+  return ContactsView;
 });
 // vim:sw=2

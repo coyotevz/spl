@@ -1,11 +1,11 @@
 define([
   'views/base/view',
-  'text!templates/supplier_view.html'
+  'text!templates/contact_view.html'
 ], function(View, template) {
   "use strict";
 
-  var SupplierView = View.extend({
-    id: 'supplier',
+  var ContactView = View.extend({
+    id: 'contact',
     container: '#content',
     autoRender: false,
     template: template,
@@ -16,6 +16,6 @@ define([
 
   });
 
-  return SupplierView;
+  return ContactView;
 });
 // vim:sw=2

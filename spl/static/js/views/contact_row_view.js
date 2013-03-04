@@ -2,7 +2,7 @@ define([
   'jquery',
   'chaplin',
   'views/base/view',
-  'text!templates/supplier_row.html'
+  'text!templates/contact_row.html'
 ], function($, Chaplin, View, template) {
   "use strict";
 
