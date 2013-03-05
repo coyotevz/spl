@@ -2,7 +2,7 @@ define([
   'views/base/collection_view',
   'views/contact_row_view',
   'text!templates/contacts.html'
-], function(CollectionView, ContactRwView, template) {
+], function(CollectionView, ContactRowView, template) {
   "use strict";
 
   var ContactsView = CollectionView.extend({

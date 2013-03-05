@@ -60,7 +60,7 @@ class ContactAPI(MethodView):
     """
     def get(self, contact_id):
         if contact_id is None:
-            p = Pagination(db.Contacts.find().sort('name'), page=request.page,
+            p = Pagination(db.Contact.find().sort('name'), page=request.page,
                            per_page=request.per_page)
             data = {
                 'objects': p.items,
@@ -69,7 +69,7 @@ class ContactAPI(MethodView):
                 'num_pages': p.pages,
             }
         else:
-            data = db.Contacts.get_or_404(contact_id)
+            data = db.Contact.get_or_404(contact_id)
         import time; time.sleep(1)
         return json_response(data)
 
