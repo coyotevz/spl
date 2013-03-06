@@ -56,13 +56,10 @@ class Filter(object):
 
 class SearchParameters(object):
 
-    def __init__(self, filters=None, fields=None, limit=None, offset=None,
-                 order_by=None):
-        self.filters = filters or []
-        self.fileds = fields or []
-        self.limit = limit
-        self.offset = offset
-        self.order_by = order_by or []
+    def __init__(self, filters=None, fields=None, order_by=None):
+        self.spec = filters or []
+        self.fields = fields or []
+        self.sort = order_by or []
 
     def __repr__(self):
-        return ('<SearchParameters filter={}, order_by={}, limit={}, offset={}>').format(self.filters, self.order_by, self.limit, self.offset)
+        return ('<SearchParameters spec={}, fields={}, sort={}>').format(self.spec, self.fields, self.sort)
