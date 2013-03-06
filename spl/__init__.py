@@ -56,3 +56,5 @@ def configure_app(app, config=None):
         max_per_page = app.config.get('MAX_ITEMS_PER_PAGE', 100)
         request.page = int(request.args.get('page', 1))
         request.per_page = min(int(request.args.get('per_page', 25)), max_per_page)
+        from flask import json
+        print json.dumps(json.loads(request.args.get('q'), '{}'), indent="  ")
