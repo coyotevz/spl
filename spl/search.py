@@ -80,6 +80,7 @@ class Filter(object):
         Returns a new :class:`Filter` object with arguments parsed from
         `dictionary`.
 
+        where ``dictionary['name']`` is the name of the field of the document on which to apply the operator, ``dictionary['op']`` is the name of the operator to apply, ``dictionary['val']`` is the value on the right to which the operator will be applied, and ``dictionary['other']`` is the name of the other field of the document to which the operator will be applied.
         `dictionary` is a dictionary of the form::
 
             {'name': 'age', 'op': 'lt', 'val': 20}
@@ -120,6 +121,46 @@ class SearchParameters(object):
 
     def __repr__(self):
         return ('<SearchParameters spec={}, fields={}, sort={}>').format(self.spec, self.fields, self.sort)
+
+    @staticmethod
+    def from_dictionary(dictionary):
+        """
+        Returns a new :class:`SearchParameters` object with arguments parsed
+        from `dictionary`.
+
+        `dictionary` is a dictionary of the form::
+
+            {
+              'filters': [{'name': 'age', 'op': 'lt', 'val': 20}, ...],
+              'order_by': [{'field': 'age', 'direction': 'desc'], ...],
+              'fields': {'include': ['age', '_id'], 'exclude': ['address']},
+            }
+
+        The provided dictionary may have other key/value pairs, but they are
+        ignored.
+        """
+        fd = Filter.from_dictionary
+        filters = [fd(f) for f in dictionary.get('filters', [])]
+        order_by = [OrderBy(**o) for o in dictionary.get('order_by', [])]
+        fields = [] # TODO: build fields
+        return SearchParameters(filters=filters, fields=fields, order_by=order_by)
+
+    def build(self):
+        return {
+            'spec': self._build_spec(),
+            'fields': [],
+            'sort': [],
+        }
+
+    def _build_spec(self):
+        s = {}
+        for spec in self.spec:
+            f = spec.build()
+            for k, v in f.iteritems():
+                if k in s and isinstance(v, dict):
+                    for vk, vv in v.iteritems():
+                        s[k][vk] = vv
+        return s
 
 
 class QueryBuilder(object):
