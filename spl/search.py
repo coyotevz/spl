@@ -60,7 +60,7 @@ class Filter(object):
     Represents a filter to apply to a query.
 
     A filter can be, for example, a comparison operator applied to a field of a
-    model and a value or a comparision applied to two fields of the same
+    document and a value or a comparision applied to two fields of the same
     document. Fore more information on posible filters, see :ref:`search`.
     """
 
@@ -76,6 +76,25 @@ class Filter(object):
 
     @staticmethod
     def from_dictionary(dictionary):
+        """
+        Returns a new :class:`Filter` object with arguments parsed from
+        `dictionary`.
+
+        `dictionary` is a dictionary of the form::
+
+            {'name': 'age', 'op': 'lt', 'val': 20}
+
+        or::
+
+            {'name': 'age', 'op': 'lt', 'other': 'height'}
+
+        where ``dictionary['name']`` is the name of the field of the document
+        on which to apply the operator, ``dictionary['op']`` is the name of the
+        operator to apply, ``dictionary['val']`` is the value on the right to
+        which the operator will be applied, and ``dictionary['other']`` is the
+        name of the other field of the document to which the operator will be
+        applied.
+        """
         fieldname = dictionary.get('name')
         operator = dictionary.get('op')
         argument = dictionary.get('val')
