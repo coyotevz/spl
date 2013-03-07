@@ -10,6 +10,34 @@
 
 from pymongo import ASCENDING, DESCENDING
 
+def _mk_std_selector(s):
+    def sel(field, arg):
+        return {field: {'$'+s: arg}}
+    sel.__name__ = '_' + s
+    return sel
+
+_selectors = ['ne', 'gt', 'gte', 'lt', 'lte', 'in', 'nin']
+
+OPERATORS = {
+    'eq': lambda f, a: {f: a},
+}
+
+OPERATORS.update([(s, _mk_std_selector(s)) for s in _selectors])
+
+_alias = {
+    '==': 'eq',
+    'equals': 'eq',
+    'equal_to': 'eq',
+    '!=': 'ne',
+    'neq': 'ne',
+    'not_equal_to': 'ne',
+    'does_not_equal': 'ne',
+    '>': 'gt',
+    '<': 'lt',
+    '>=': 'gte',
+    '<=': 'lte',
+    'not_in': 'nin',
+}
 
 class OrderBy(object):
     """Represent a "sort" in Mongo query expression."""
@@ -52,7 +80,17 @@ class Filter(object):
         operator = dictionary.get('op')
         argument = dictionary.get('val')
         otherfield = dictionary.get('field')
-        return Filter(fieldname, opertor, argument, otherfield)
+        return Filter(fieldname, operator, argument, otherfield)
+
+    def build(self):
+        if self.operator in OPERATORS:
+            op = OPERATORS[self.operator]
+        elif self.operator in _alias:
+            op = OPERATORS[_alias[self.operator]]
+        else:
+            raise KeyError('Operator "{}" does not exists'.format(self.operator))
+
+        return op(self.fieldname, self.argument or self.otherfield)
 
 class SearchParameters(object):
 
@@ -63,3 +101,15 @@ class SearchParameters(object):
 
     def __repr__(self):
         return ('<SearchParameters spec={}, fields={}, sort={}>').format(self.spec, self.fields, self.sort)
+
+
+class QueryBuilder(object):
+    """
+    Provides a static function for building PyMongo query arguments based on a
+    :class:`SearchParameters` instance.
+
+    Use the static :meth:`create_query` method to create a PyMongo query
+    arguments on a given document.
+    """
+    # TODO: research _create_operation(), _create_filters(), create_query()
+    pass
