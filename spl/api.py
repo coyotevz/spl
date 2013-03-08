@@ -5,6 +5,8 @@ from flask.views import MethodView
 from spl.models import db
 from spl.utils import json_response, Pagination
 
+from spl.rest import API
+
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -47,33 +49,38 @@ class SupplierAPI(MethodView):
 register_api(SupplierAPI, 'supplier_api', '/suppliers/', pk='supplier_id', pk_type='ObjectId')
 
 
-class ContactAPI(MethodView):
-    """
-    Contacts API definition
-    ~~~~~~~~~~~~~~~~~~~~~~~
+#class ContactAPI(MethodView):
+#    """
+#    Contacts API definition
+#    ~~~~~~~~~~~~~~~~~~~~~~~
+#
+#    /contacts/                  GET         - Gives a list of all contacts (paginated)
+#    /contacts/                  POST        - Create a new contact
+#    /contacts/<contact_id>      GET         - Returns a specified contact
+#    /contacts/<contact_id>      PUT         - Updates a specified contact
+#    /contacts/<contact_id>      DELETE      - Delete a specified contact
+#    """
+#    def get(self, contact_id):
+#        if contact_id is None:
+#            p = Pagination(db.Contact.find().sort('name'), page=request.page,
+#                           per_page=request.per_page)
+#            data = {
+#                'objects': p.items,
+#                'page': p.page,
+#                'num_results': p.total,
+#                'num_pages': p.pages,
+#            }
+#        else:
+#            data = db.Contact.get_or_404(contact_id)
+#        import time; time.sleep(1)
+#        return json_response(data)
 
-    /contacts/                  GET         - Gives a list of all contacts (paginated)
-    /contacts/                  POST        - Create a new contact
-    /contacts/<contact_id>      GET         - Returns a specified contact
-    /contacts/<contact_id>      PUT         - Updates a specified contact
-    /contacts/<contact_id>      DELETE      - Delete a specified contact
-    """
-    def get(self, contact_id):
-        if contact_id is None:
-            p = Pagination(db.Contact.find().sort('name'), page=request.page,
-                           per_page=request.per_page)
-            data = {
-                'objects': p.items,
-                'page': p.page,
-                'num_results': p.total,
-                'num_pages': p.pages,
-            }
-        else:
-            data = db.Contact.get_or_404(contact_id)
-        import time; time.sleep(1)
-        return json_response(data)
+class ContactAPI(API):
 
-register_api(ContactAPI, 'contact_api', '/contacts/', pk='contact_id', pk_type='ObjectId')
+    collection = lambda x: db.Contact
+    authentication_required_for = []
+
+register_api(ContactAPI, 'contact_api', '/contacts/', pk='instid', pk_type='ObjectId')
 
 
 def configure_api(app):
