@@ -59,4 +59,4 @@ def configure_app(app, config=None):
 
         if request.path.startswith('/api'):
             from flask import json
-            print json.dumps(json.loads(request.args.get('q', '{}')), indent="  ")
+            print json.dumps(json.loads(request.args.get('q', '{}')), indent=2)
