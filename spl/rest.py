@@ -166,3 +166,25 @@ class API(MethodView):
         whether an object was deleted.
         """
         pass
+
+    def post(self):
+        """Creates a new instance of a given model based on request data.
+
+        This function parses the string contained in :attr:`flask.request.data`
+        as a JSON object and then validates it with a validator specified in
+        the constructor of this class.
+        """
+        pass
+
+    def put(self, instid):
+        """Updates the instance specified by ``instid`` of the named model, or updates multiple instance if ``instid`` is ``None``.
+
+        The :attr:`flask.request.data` attribute will be parse a s JSON object
+        containing the mapping from field name to value to which to update the
+        specified instance or instances.
+        """
+        pass
+
+    def patch(self, instid):
+        """Alias for :meth:`put`."""
+        return self.put(instid)
