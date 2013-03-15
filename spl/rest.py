@@ -1,34 +1,44 @@
 # -*- coding: utf-8 -*-
 
 """
-	spl.rest
-	~~~~~~~~
+    spl.rest
+    ~~~~~~~~
 
-	Provides the  folowing view classes, subclasses of :class:`spl.rest.API`
-	  Provides the endpoints for each of the basic HTTP methods. This is the 
-	  main class used by the :meth:`APIManager.create_api` method to create
-	  endpoints.
+    Provides the  folowing view classes, subclasses of :class:`spl.rest.API`
+
+    Provides the endpoints for each of the basic HTTP methods. This is the
+    main class used by the :meth:`APIManager.create_api` method to create
+    endpoints.
 """
 
+from math import ceil
 from bson.objectid import ObjectId
 
-from flask import abort, current_app, json, jsonify, request
+from flask import abort, current_app, request, json
 from flask.views import MethodView
 
+from spl.utils import json_response
+
+
+def search(collection, params):
+    return collection.find(**params)
+
+
 class AuthenticationException(Exception):
-	"""Raised when authentication failed for some reason.
-	"""
-	def __init__(self, message='', status_code=401, *args, **kwargs):
-		super(AuthenticationException, self).__init__(*args, **kwargs)
-		self.message = message
-		self.status_code = status_code
+    """Raised when authentication failed for some reason.
+    """
+    def __init__(self, message='', status_code=401, *args, **kwargs):
+        super(AuthenticationException, self).__init__(*args, **kwargs)
+        self.message = message
+        self.status_code = status_code
+
 
 def jsonify_status_code(status_code, *args, **kwargs):
-	"""Returns a jsonified response with the specified HTTP status code.
-	"""
-	response = jsonify(*args, **kwargs)
-	response.status_code = status_code
-	return response
+    """Returns a jsonified response with the specified HTTP status code.
+    """
+    response = json_response(*args, **kwargs)
+    response.status_code = status_code
+    return response
 
 
 class API(MethodView):
@@ -36,7 +46,6 @@ class API(MethodView):
     def __init__(self, *args, **kwargs):
         if callable(self.collection):
             self.collection = self.collection()
-
 
     def _check_authentication(self):
         """Raises an exception if the current user is not authorized to make a
@@ -79,13 +88,12 @@ class API(MethodView):
         items = list(cursor.skip((page - 1) * per_page).limit(per_page))
         if not items and page != 1:
             abort(404)
-        return {
+        return json_response({
             'page': page,
             'num_results': num_results,
             'num_pages': int(ceil(num_results / float(per_page))),
             'objects': items,
-        }
-
+        })
 
     def _search(self):
         """Defines a generic search function for the database document.
@@ -109,7 +117,8 @@ class API(MethodView):
 
         try:
             result = search(self.collection, data)
-        except:
+        except Exception as e:
+            return jsonify_status_code(400, message=e.message)
             return jsonify_status_code(400,
                                        message='Unable to construct query')
 
