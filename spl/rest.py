@@ -18,9 +18,12 @@ from flask import abort, current_app, request, json
 from flask.views import MethodView
 
 from spl.utils import json_response
+from spl.search import SearchParameters
 
 
 def search(collection, params):
+    nparams = SearchParameters.from_dictionary(params)
+    print nparams.build()
     return collection.find(**params)
 
 
@@ -177,7 +180,8 @@ class API(MethodView):
         pass
 
     def put(self, instid):
-        """Updates the instance specified by ``instid`` of the named model, or updates multiple instance if ``instid`` is ``None``.
+        """Updates the instance specified by ``instid`` of the named model, or
+        updates multiple instance if ``instid`` is ``None``.
 
         The :attr:`flask.request.data` attribute will be parse a s JSON object
         containing the mapping from field name to value to which to update the
