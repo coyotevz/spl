@@ -22,9 +22,10 @@ from spl.search import SearchParameters
 
 
 def search(collection, params):
+    import pprint
     nparams = SearchParameters.from_dictionary(params)
-    print nparams.build()
-    return collection.find(**params)
+    pprint.pprint(nparams.build())
+    return collection.find(**nparams.build())
 
 
 class AuthenticationException(Exception):
@@ -103,7 +104,7 @@ class API(MethodView):
 
         If the query string is empty, or if the psecified query is invalid for
         some reason (for example, searching for all person instances with), the
-        response will be the JSON strnig ``{'objects': []}``.
+        response will be the JSON string ``{'objects': []}``.
 
         To search for entities meeting some criteria, the client makes a
         request to :http:get:`/api/<collectionname>` with a query string

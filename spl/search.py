@@ -10,9 +10,14 @@
 
 from pymongo import ASCENDING, DESCENDING
 
+
+INCLUDE = 1
+EXCLUDE = 0
+
+
 def _mk_std_selector(s):
     def sel(field, arg):
-        return {field: {'$'+s: arg}}
+        return {field: {'$' + s: arg}}
     sel.__name__ = '_' + s
     return sel
 
@@ -23,6 +28,15 @@ OPERATORS = {
 }
 
 OPERATORS.update([(s, _mk_std_selector(s)) for s in _selectors])
+
+OPERATORS.update({
+    'like': lambda f, a: {f: {'$regex': a}},
+    'ilike': lambda f, a: {f: {'$regex': a, '$options': 'i'}},
+    'endswith': lambda f, a: {f: {'$regex': a + '$'}},
+    'startswith': lambda f, a: {f: {'$regex': '^' + a}},
+    'contains': lambda f, a: {f: {'$regex': a}},
+    'icontains': lambda f, a: {f: {'$regex': a, '$options': 'i'}},
+})
 
 _alias = {
     '==': 'eq',
@@ -39,6 +53,7 @@ _alias = {
     'not_in': 'nin',
 }
 
+
 class OrderBy(object):
     """Represent a "sort" in Mongo query expression."""
 
@@ -53,6 +68,9 @@ class OrderBy(object):
 
     def __repr__(self):
         return '<OrderBy {}, {}>'.format(self.field, self.direction)
+
+    def build(self):
+        return (self.field, self._directions_map[self.direction])
 
 
 class Filter(object):
@@ -80,7 +98,12 @@ class Filter(object):
         Returns a new :class:`Filter` object with arguments parsed from
         `dictionary`.
 
-        where ``dictionary['name']`` is the name of the field of the document on which to apply the operator, ``dictionary['op']`` is the name of the operator to apply, ``dictionary['val']`` is the value on the right to which the operator will be applied, and ``dictionary['other']`` is the name of the other field of the document to which the operator will be applied.
+        where ``dictionary['name']`` is the name of the field of the document
+        on which to apply the operator, ``dictionary['op']`` is the name of the
+        operator to apply, ``dictionary['val']`` is the value on the right to
+        which the operator will be applied, and ``dictionary['other']`` is the
+        name of the other field of the document to which the operator will be
+        applied.
         `dictionary` is a dictionary of the form::
 
             {'name': 'age', 'op': 'lt', 'val': 20}
@@ -112,6 +135,34 @@ class Filter(object):
 
         return op(self.fieldname, self.argument or self.otherfield)
 
+
+class Fields(object):
+
+    def __init__(self, data):
+        if isinstance(data, dict):
+            inc = data.get('include', [])
+            exc = data.get('exclude', [])
+        elif isinstance(data, list):
+            exc = [s[1:] for s in data if s.startswith('-')]
+            inc = [s for s in data if s[1:] not in exc]
+        else:
+            inc = exc = []
+        self.include = inc
+        self.exclude = exc
+
+    def __repr__(self):
+        return '<Fields include={}, exclude={}>'.format(self.include, self.exclude)
+
+    def __nonzero__(self):
+        return bool(self.include) or bool(self.exclude)
+
+    def build(self):
+        return dict(
+            [(f, INCLUDE) for f in self.include] or
+            [(f, EXCLUDE) for f in self.exclude]
+        )
+
+
 class SearchParameters(object):
 
     def __init__(self, filters=None, fields=None, order_by=None):
@@ -142,15 +193,18 @@ class SearchParameters(object):
         fd = Filter.from_dictionary
         filters = [fd(f) for f in dictionary.get('filters', [])]
         order_by = [OrderBy(**o) for o in dictionary.get('order_by', [])]
-        fields = [] # TODO: build fields
+        fields = Fields(dictionary.get('fields', []))
         return SearchParameters(filters=filters, fields=fields, order_by=order_by)
 
     def build(self):
-        return {
+        retval = {
             'spec': self._build_spec(),
-            'fields': [],
-            'sort': [],
         }
+        if self.sort:
+            retval['sort'] = [s.build() for s in self.sort]
+        if self.fields:
+            retval['fields'] = self.fields.build()
+        return retval
 
     def _build_spec(self):
         s = {}
@@ -158,8 +212,9 @@ class SearchParameters(object):
             f = spec.build()
             for k, v in f.iteritems():
                 if k in s and isinstance(v, dict):
-                    for vk, vv in v.iteritems():
-                        s[k][vk] = vv
+                    s[k].update(v)
+                else:
+                    s[k] = v
         return s
 
 
