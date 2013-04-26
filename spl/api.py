@@ -5,7 +5,7 @@ from flask.views import MethodView
 from spl.models import db
 from spl.utils import json_response, Pagination
 
-from spl.rest import API
+from spl.rest import API, before_get_single, after_get_single, before_search
 
 
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -42,7 +42,6 @@ class SupplierAPI(MethodView):
             }
         else:
             data = db.Supplier.get_or_404(supplier_id)
-        import time; time.sleep(1)
         return json_response(data)
 
 
@@ -72,7 +71,6 @@ register_api(SupplierAPI, 'supplier_api', '/suppliers/', pk='supplier_id', pk_ty
 #            }
 #        else:
 #            data = db.Contact.get_or_404(contact_id)
-#        import time; time.sleep(1)
 #        return json_response(data)
 
 class ContactAPI(API):
@@ -81,6 +79,18 @@ class ContactAPI(API):
     authentication_required_for = []
 
 register_api(ContactAPI, 'contact_api', '/contacts/', pk='instid', pk_type='ObjectId')
+
+@before_get_single.connect_via(ContactAPI)
+def on_before_get_single(sender, **kwargs):
+    print "on_before_get_single():"
+    print "    sender:", sender
+    print "    kwargs:", kwargs
+
+@after_get_single.connect_via(ContactAPI)
+def on_after_get_single(sender, **kwargs):
+    print "on_after_get_single():"
+    print "    sender:", sender
+    print "    kwargs:", kwargs
 
 
 def configure_api(app):

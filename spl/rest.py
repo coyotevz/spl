@@ -11,19 +11,35 @@
     endpoints.
 """
 
+from collections import defaultdict
 from math import ceil
 from bson.objectid import ObjectId
 
 from flask import abort, current_app, request, json
 from flask.views import MethodView
 
+from blinker import signal
+
 from spl.utils import json_response
 from spl.search import SearchParameters
 
+# Signals
+before_search =      signal('before-search')
+after_search =       signal('after-search')
+before_get_single =  signal('before-get-single')
+after_get_single =   signal('after-get-single')
+before_delete =      signal('before-delete')
+after_delete =       signal('after-delete')
+before_post =        signal('before-post')
+after_post =         signal('after-post')
+before_put =         signal('before-put')
+after_put =          signal('after-put')
 
 def search(collection, params):
     import pprint
+    pprint.pprint(params)
     nparams = SearchParameters.from_dictionary(params)
+    pprint.pprint(nparams)
     pprint.pprint(nparams.build())
     return collection.find(**nparams.build())
 
@@ -99,7 +115,7 @@ class API(MethodView):
             'objects': items,
         })
 
-    def _search(self):
+    def get_search(self):
         """Defines a generic search function for the database document.
 
         If the query string is empty, or if the psecified query is invalid for
@@ -119,6 +135,8 @@ class API(MethodView):
         except (TypeError, ValueError, OverflowError):
             return jsonify_status_code(400, message='Unable to decode data')
 
+        before_search.send(self, data=data)
+
         try:
             result = search(self.collection, data)
         except Exception as e:
@@ -126,16 +144,18 @@ class API(MethodView):
             return jsonify_status_code(400,
                                        message='Unable to construct query')
 
+        after_search.send(self, result=result)
+
         return self._paginated(result)
 
-    def _get_by(self, primary_key):
-        return self.collection.find_one(ObjectId(primary_key))
-
-    def _inst(self, instid):
-        inst = self._get_by(instid)
-        if inst is None:
+    def get_instance(self, instid):
+        print self.__class__
+        before_get_single.send(self.__class__, instance_id=instid)
+        result = self.collection.get_from_id(instid)
+        if result is None:
             abort(404)
-        return inst
+        after_get_single.send(self.__class__, result=result)
+        return json_response(result)
 
     def get(self, instid):
         """Returns a JSON representation of an instance of a document with the
@@ -150,16 +170,15 @@ class API(MethodView):
         document with that indentifying integer. If no such instances exists,
         this method respond with :http:status:`404`.
         """
-        try:
-            self._check_authentication()
-        except AuthenticationException, e:
-            return jsonify_status_code(status_code=e.status_code,
-                                       message=e.message)
+        #try:
+        #    self._check_authentication()
+        #except AuthenticationException, e:
+        #    return jsonify_status_code(status_code=e.status_code,
+        #                               message=e.message)
 
         if instid is None:
-            return self._search()
-
-        return self._inst(instid)
+            return self.get_search()
+        return self.get_instance(instid)
 
     def delete(self, instid):
         """Removes the specified instance from collection with the specified
@@ -169,7 +188,14 @@ class API(MethodView):
         :rfc:`2616`, this method respond with :http:status:`204` regardless of
         whether an object was deleted.
         """
-        pass
+        is_deleted = False
+        before_delete.send(self, instance_id=instid)
+        inst = self.collection.get_from_id(instid)
+        if inst is not None:
+            inst.delete()
+            is_deleted = True
+        after_delete.send(self, is_deleted=is_deleted)
+        return jsonify_status_code(204)
 
     def post(self):
         """Creates a new instance of a given model based on request data.
@@ -178,7 +204,19 @@ class API(MethodView):
         as a JSON object and then validates it with a validator specified in
         the constructor of this class.
         """
-        pass
+        # try to read the parameters for the model from body of the request
+        try:
+            params = json.loads(request.data)
+        except (TypeError, ValueError, OverflowError):
+            return jsonify_status_code(400, message='Unable to decode data')
+
+        before_post.send(self, params=params)
+
+        instance = self.collection(doc=params)
+        instance.save()
+
+        after_post.send(self, result=instance)
+        return jsonify_status_code(201, instance)
 
     def put(self, instid):
         """Updates the instance specified by ``instid`` of the named model, or
@@ -188,6 +226,8 @@ class API(MethodView):
         containing the mapping from field name to value to which to update the
         specified instance or instances.
         """
+        before_put.send(self, instance_id=instid)
+        after_put.send(self)
         pass
 
     def patch(self, instid):

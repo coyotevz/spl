@@ -53,6 +53,11 @@ _alias = {
     'not_in': 'nin',
 }
 
+def to_list(l):
+    if not l:
+        return list()
+    return list([l])
+
 
 class OrderBy(object):
     """Represent a "sort" in Mongo query expression."""
@@ -191,9 +196,10 @@ class SearchParameters(object):
         ignored.
         """
         fd = Filter.from_dictionary
-        filters = [fd(f) for f in dictionary.get('filters', [])]
-        order_by = [OrderBy(**o) for o in dictionary.get('order_by', [])]
-        fields = Fields(dictionary.get('fields', []))
+        print to_list(dictionary.get('filters'))
+        filters = [fd(f) for f in to_list(dictionary.get('filters'))]
+        order_by = [OrderBy(**o) for o in to_list(dictionary.get('order_by'))]
+        fields = to_list(Fields(dictionary.get('fields')))
         return SearchParameters(filters=filters, fields=fields, order_by=order_by)
 
     def build(self):
