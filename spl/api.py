@@ -1,97 +1,33 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, request
-from flask.views import MethodView
+from flask import request
 from spl.models import db
 from spl.utils import json_response, Pagination
 
-from spl.rest import API, before_get_single, after_get_single, before_search
+from spl.rest import ResourceView, ManagerAPI
 
 
-api = Blueprint('api', __name__, url_prefix='/api')
+rest = ManagerAPI('api', __name__, url_prefix='/api')
 
 
-def register_api(view, endpoint, url, pk='id', pk_type='int'):
-    view_func = view.as_view(endpoint)
-    api.add_url_rule(url, defaults={pk: None}, view_func=view_func,
-                     methods=['GET', 'POST'])
-    api.add_url_rule('%s<%s:%s>' % (url, pk_type, pk), view_func=view_func,
-                     methods=['GET', 'PUT', 'DELETE'])
+class SupplierResource(ResourceView):
+
+    endpoint = 'supplier_api'
+    url = 'suppilers'
+    collection = lambda x: db.Supplier
+
+rest.register_resource(SupplierResource)
 
 
-class SupplierAPI(MethodView):
-    """
-    Suppliers API definition
-    ~~~~~~~~~~~~~~~~~~~~~~~~
+class ContactResource(ResourceView):
 
-    /suppliers/                 GET         - Gives a list of all suppliers (paginated)
-    /suppliers/                 POST        - Create a new supplier
-    /suppliers/<supplier_id>    GET         - Returns a specified supplier
-    /suppliers/<supplier_id>    PUT         - Updates a specified supplier
-    /suppliers/<supplier_id>    DELETE      - Delete a specified supplier
-    """
-    def get(self, supplier_id):
-        if supplier_id is None:
-            p = Pagination(db.Supplier.find().sort('name'), page=request.page,
-                           per_page=request.per_page)
-            data = {
-                'objects': p.items,
-                'page': p.page,
-                'num_results': p.total,
-                'num_pages': p.pages,
-            }
-        else:
-            data = db.Supplier.get_or_404(supplier_id)
-        return json_response(data)
-
-
-register_api(SupplierAPI, 'supplier_api', '/suppliers/', pk='supplier_id', pk_type='ObjectId')
-
-
-#class ContactAPI(MethodView):
-#    """
-#    Contacts API definition
-#    ~~~~~~~~~~~~~~~~~~~~~~~
-#
-#    /contacts/                  GET         - Gives a list of all contacts (paginated)
-#    /contacts/                  POST        - Create a new contact
-#    /contacts/<contact_id>      GET         - Returns a specified contact
-#    /contacts/<contact_id>      PUT         - Updates a specified contact
-#    /contacts/<contact_id>      DELETE      - Delete a specified contact
-#    """
-#    def get(self, contact_id):
-#        if contact_id is None:
-#            p = Pagination(db.Contact.find().sort('name'), page=request.page,
-#                           per_page=request.per_page)
-#            data = {
-#                'objects': p.items,
-#                'page': p.page,
-#                'num_results': p.total,
-#                'num_pages': p.pages,
-#            }
-#        else:
-#            data = db.Contact.get_or_404(contact_id)
-#        return json_response(data)
-
-class ContactAPI(API):
+    endpoint = 'contact_api'
+    url = 'contacts'
 
     collection = lambda x: db.Contact
-    authentication_required_for = []
 
-register_api(ContactAPI, 'contact_api', '/contacts/', pk='instid', pk_type='ObjectId')
-
-@before_get_single.connect_via(ContactAPI)
-def on_before_get_single(sender, **kwargs):
-    print "on_before_get_single():"
-    print "    sender:", sender
-    print "    kwargs:", kwargs
-
-@after_get_single.connect_via(ContactAPI)
-def on_after_get_single(sender, **kwargs):
-    print "on_after_get_single():"
-    print "    sender:", sender
-    print "    kwargs:", kwargs
+rest.register_resource(ContactResource)
 
 
 def configure_api(app):
-    app.register_blueprint(api)
+    rest.init_app(app)
