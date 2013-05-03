@@ -13,7 +13,7 @@ rest = ManagerAPI('api', __name__, url_prefix='/api')
 class SupplierResource(ResourceView):
 
     endpoint = 'supplier_api'
-    url = 'suppilers'
+    url = 'suppliers'
     collection = lambda x: db.Supplier
 
 rest.register_resource(SupplierResource)
