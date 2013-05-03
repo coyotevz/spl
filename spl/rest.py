@@ -229,7 +229,12 @@ def _get_endpoint(resource, params):
     return '%s' % _get_attr('endpoint', resource, params)
 
 def _get_url(resource, params):
-    return '/%s/' % _get_attr('url', resource, params)
+    url = _get_attr('url', resource, params)
+    if not url.startswith('/'):
+        url = '/' + url
+    if not url.endswith('/'):
+        url = url + '/'
+    return url
 
 def _get_attr(attr, resource, params):
     if attr in params:
