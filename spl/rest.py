@@ -69,7 +69,7 @@ class ResourceView(MethodView):
         """
         if instid is None:
             return self._get_search()
-        return self._get_instance(instid)
+        return self._get_single(instid)
 
     def delete(self, instid):
         """Removes the specified instance from collection with the specified
@@ -120,7 +120,7 @@ class ResourceView(MethodView):
 
     # Private API
 
-    def _get_instance(self, instid):
+    def _get_single(self, instid):
         result = self.collection.get_from_id(instid)
         if result is None:
             abort(404)
