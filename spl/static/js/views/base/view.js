@@ -1,8 +1,8 @@
 define([
   'underscore',
   'chaplin',
-  'templates/config'
-], function(_, Chaplin) {
+  'templates/env'
+], function(_, Chaplin, env) {
   "use strict";
 
   var View = Chaplin.View.extend({
@@ -11,21 +11,20 @@ define([
       /* Template compilation
        * ~~~~~~~~~~~~~~~~~~~~
        *
-       * We use underscore templates to render views.
-       * The template is loaded with require.js and stored as string on
-       * the view prototype. On rendering, it is compiled on the client-side.
+       * We use nunjucks templates to render views.
+       * The templates is loaded with nunjucks.HttpLoader. On rendering, it is
+       * compiled on the client-side.
        * The compiled template function replaces the string on the view
        * prototype.
        *
        * In the end we want to precompile the templates to JavaScript functions
        * on the server-side and just load the JavaScript code.
        */
-
       var template = this.template,
           templateFunc = null;
 
       if (typeof template === 'string') {
-        templateFunc = _.template(template);
+        templateFunc = env.getTemplate(template).render;
         this.constructor.prototype.template = templateFunc;
       } else {
         templateFunc = template;

@@ -1,12 +1,11 @@
 define([
   'views/base/view',
-  'text!templates/navigation.html',
   'ui/dropdown'
-], function(View, template) {
+], function(View) {
   "use strict";
 
   var NavigationView = View.extend({
-    template: template,
+    template: 'navigation.html',
     className: 'title dropdown',
     container: 'aside header',
     autoRender: false,

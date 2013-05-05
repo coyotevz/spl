@@ -1,7 +1,12 @@
-<span class="dropdown-toggle" data-toggle="dropdown">[%= current_title %] <i class="icon-caret-down"></i></span>
+<span class="dropdown-toggle" data-toggle="dropdown">{{ current_title }} <i class="icon-caret-down"></i></span>
 <ul class="dropdown-menu" role="menu">
+  {% for item in items %}
+  <li {% if nav.name == current) %}class="current"{% endif %}><a tabindex="-1" {% if nav.href %}href="{{ nav.href }}"{% else %}disabled{% endif %}>{{ nav.title }}<a/></li>
+  {% endfor %}
+  {#
   [% for (item in items) {
      nav = items[item]; %]
      <li [% if (nav.name == current) print('class="current"') %]><a tabindex="-1" [% nav.href ? print('href="' + nav.href + '"') : print("disabled") %]>[%= nav.title %]</a></li>
   [% } %]
+  #}
 </ul>
