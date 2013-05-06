@@ -1,12 +1,11 @@
 define([
   'views/base/collection_view',
   'views/supplier_row_view',
-  'text!templates/suppliers.html'
-], function(CollectionView, SupplierRowView, template) {
+], function(CollectionView, SupplierRowView) {
   "use strict";
 
   var SuppliersView = CollectionView.extend({
-    template: template,
+    template: 'suppliers.html',
     tagName: 'table',
     id: 'suppliers-list',
     className: 'list',

@@ -1,6 +1,16 @@
-<span class="dropdown-toggle" data-toggle="dropdown">{{ current_title }} <i class="icon-caret-down"></i></span>
-<ul class="dropdown-menu" role="menu">
-  {% for item in items -%}
-  <li{% if item.name == current %} class="current"{% endif %}><a tabindex="-1" {% if item.href %}href="{{ item.href }}"{% else %}disabled{% endif %}>{{ item.title }}</a></li>
-  {%- endfor %}
-</ul>
+<header>
+  <div class="title dropdown">
+    <span class="dropdown-toggle" data-toggle="dropdown">{{ current_title }} <i class="icon-caret-down"></i></span>
+    <ul class="dropdown-menu" role="menu">
+      {% for item in items -%}
+      <li{% if item.name == current %} class="current"{% endif %}><a tabindex="-1" {% if item.href %}href="{{ item.href }}"{% else %}disabled{% endif %}>{{ item.title }}</a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</header>
+<div class="content">
+  <div class="action">
+    <button class="btn btn-danger">{{ current_action }}</button>
+  </div>
+  <div class="sidenav"></div>
+</div>

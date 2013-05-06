@@ -2,13 +2,12 @@ define([
   'jquery',
   'chaplin',
   'views/base/view',
-  'text!templates/supplier_row.html'
-], function($, Chaplin, View, template) {
+], function($, Chaplin, View) {
   "use strict";
 
   var SupplierRowView = View.extend({
     
-    template: template,
+    template: 'supplier_row.html',
     tagName: 'tr',
     className: 'supplier-row',
     selected: false,

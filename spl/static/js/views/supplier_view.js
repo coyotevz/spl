@@ -1,14 +1,13 @@
 define([
   'views/base/view',
-  'text!templates/supplier_view.html'
-], function(View, template) {
+], function(View) {
   "use strict";
 
   var SupplierView = View.extend({
     id: 'supplier',
     container: '#content',
     autoRender: false,
-    template: template,
+    template: 'supplier_view.html',
 
     listen: {
       'change model': 'render',
