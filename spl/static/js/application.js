@@ -28,6 +28,9 @@ define([
       /* You might pass Router/History options as the second parameter. */
       // this.initRouter(routers, { pushState: false, root: '/subdir/' });
 
+      // Actually start routing.
+      this.startRouting();
+
       /* Freeze the application instance to prevent further changes */
       if (Object.freeze) Object.freeze(this);
     },
