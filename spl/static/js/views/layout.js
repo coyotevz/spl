@@ -1,8 +1,9 @@
 define([
   'jquery',
   'underscore',
-  'chaplin'
-], function($, _, Chaplin) {
+  'chaplin',
+  'nunjucks'
+], function($, _, Chaplin, nunjucks) {
   "use strict";
 
   var Layout = Chaplin.Layout.extend({
@@ -11,7 +12,7 @@ define([
 
     initialize: function(options) {
       options = _.extend(options, {
-         titleTemplate: _.template("[%= subtitle %] – [%= title %]"),
+         titleTemplate: nunjucks.Template("{{ subtitle }} – {{ title }}"),
       });
       Layout.__super__.initialize.apply(this, arguments);
       this.subscribeEvent('startupController', this.removeFallbackContent);
