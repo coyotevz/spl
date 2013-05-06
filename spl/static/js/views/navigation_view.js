@@ -6,8 +6,7 @@ define([
 
   var NavigationView = View.extend({
     template: 'navigation.html',
-    className: 'title dropdown',
-    container: 'aside',
+    el: 'div#page aside', // container element
     autoRender: false,
 
     initialize: function() {
