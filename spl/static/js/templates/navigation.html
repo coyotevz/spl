@@ -10,7 +10,7 @@
 </header>
 <div class="content">
   <div class="action">
-    <button class="btn btn-danger">{{ current_action }}</button>
+    <button class="btn btn-danger">{{ current_action|default('Undefined action') }}</button>
   </div>
   <div class="sidenav"></div>
 </div>

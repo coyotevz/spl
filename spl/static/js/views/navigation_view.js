@@ -19,7 +19,10 @@ define([
       var data = this.model.getAttributes();
       data.current_title = 'NaN';
       _.each(data.items, function(nav) {
-        if (data.current == nav.name) data.current_title = nav.title;
+        if (data.current == nav.name) {
+          data.current_title = nav.title;
+          data.current_action = nav.action;
+        }
       });
       return data;
     }

@@ -10,20 +10,24 @@ define([
         {
           name: 'invoices',
           title: 'Facturas',
+          action: 'Nueva Factura',
         },
         {
           name: 'orders',
           title: 'Pedidos',
+          action: 'Nuevo Pedido',
         },
         {
           name: 'suppliers',
           href: '#/suppliers',
-          title: 'Proveedores'
+          title: 'Proveedores',
+          action: 'Nuevo Proveedor',
         },
         {
           name: 'contacts',
           href: '#/contacts',
-          title: 'Contactos'
+          title: 'Contactos',
+          action: 'Nuevo Contacto',
         }
       ]
     }
