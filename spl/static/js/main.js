@@ -13,7 +13,6 @@ require.config({
     'underscore': 'vendor/underscore-1.4.4',
     'backbone':   'vendor/backbone-0.9.10',
     'chaplin':    'vendor/chaplin-0.7.0',
-    'text':       'vendor/text-2.0.5',
     'nunjucks':   'vendor/nunjucks-dev',
   },
 

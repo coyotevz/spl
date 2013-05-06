@@ -2,13 +2,12 @@ define([
   'jquery',
   'chaplin',
   'views/base/view',
-  'text!templates/contact_row.html'
-], function($, Chaplin, View, template) {
+], function($, Chaplin, View) {
   "use strict";
 
   var ContactRowView = View.extend({
     
-    template: template,
+    template: 'contact_row.html',
     tagName: 'tr',
     className: 'contact-row',
     selected: false,
