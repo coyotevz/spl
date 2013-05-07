@@ -4,13 +4,13 @@ define([
 ], function(View) {
   "use strict";
 
-  var NavigationView = View.extend({
-    template: 'navigation.html',
+  var SidebarView = View.extend({
+    template: 'sidebar.html',
     el: 'div#page aside', // container element
     autoRender: false,
 
     initialize: function() {
-      NavigationView.__super__.initialize.apply(this, arguments);
+      SidebarView.__super__.initialize.apply(this, arguments);
       this.listenTo(this.model, 'change', this.render);
     },
 
@@ -27,7 +27,7 @@ define([
     }
   });
 
-  return NavigationView;
+  return SidebarView;
 });
 
 // vim:sw=2

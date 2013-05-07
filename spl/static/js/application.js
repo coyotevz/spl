@@ -1,10 +1,10 @@
 define([
   'chaplin',
   'views/layout',
-  'controllers/navigation_controller',
+  'controllers/sidebar_controller',
   'routes',
   'ui/main'
-], function(Chaplin, Layout, NavigationController, routes) {
+], function(Chaplin, Layout, SidebarController, routes) {
   'use strict';
 
   var Application = Chaplin.Application.extend({
@@ -45,9 +45,9 @@ define([
        * You don't need to instantiate all controllers here, only special
        * controllers which do not to respond to routes. They may govern models
        * and views which are needed the whole time, for example header, footer
-       * or navigation views.
+       * or sidebar views.
        */
-      new NavigationController();
+      new SidebarController();
     },
 
     /* Create additional mediator properties */

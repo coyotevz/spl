@@ -15,7 +15,7 @@ define([
 
     initialize: function() {
       SuppliersController.__super__.initialize.apply(this, arguments);
-      this.publishEvent('navigation:change', 'suppliers');
+      this.publishEvent('sidebar:change', 'suppliers');
     },
 
     index: function(params) {

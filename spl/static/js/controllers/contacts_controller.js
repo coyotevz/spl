@@ -13,7 +13,7 @@ define([
 
     initialize: function() {
       ContactsController.__super__.initialize.apply(this, arguments);
-      this.publishEvent('navigation:change', 'contacts');
+      this.publishEvent('sidebar:change', 'contacts');
     },
 
     historyURL: function(params) {

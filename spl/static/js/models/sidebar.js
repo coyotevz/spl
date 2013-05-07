@@ -3,7 +3,7 @@ define([
 ], function(Model) {
   "use strict";
 
-  var Navigation = Model.extend({
+  var Sidebar = Model.extend({
     defaults: {
       current: '',
       items: [
@@ -33,6 +33,6 @@ define([
     }
   });
 
-  return Navigation;
+  return Sidebar;
 });
 // vim:sw=2
