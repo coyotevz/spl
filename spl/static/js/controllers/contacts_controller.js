@@ -1,27 +1,20 @@
 define([
-  'chaplin',
+  //'chaplin',
+  'controllers/base_controller',
   'models/contact',
   'views/contact_view',
   'models/contacts',
   'views/contacts_view'
-], function(Chaplin, Contact, ContactView, Contacts, ContactsView) {
+], function(BaseController, Contact, ContactView, Contacts, ContactsView) {
   "use strict";
 
-  var ContactsController = Chaplin.Controller.extend({
+  var ContactsController = BaseController.extend({
 
     title: 'Contacts',
 
     initialize: function() {
       ContactsController.__super__.initialize.apply(this, arguments);
       this.publishEvent('sidebar:change', 'contacts');
-    },
-
-    historyURL: function(params) {
-      if (params.id) {
-        return "contacts/" + params.id;
-      } else {
-        return '';
-      }
     },
 
     index: function(params) {

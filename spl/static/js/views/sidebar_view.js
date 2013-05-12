@@ -11,6 +11,11 @@ define([
 
     initialize: function() {
       SidebarView.__super__.initialize.apply(this, arguments);
+      this.subscribeEvent('sidebar:change', function(current) {
+        console.log('current:', current);
+        console.log('model:', this.model);
+        this.model.set({'current': current});
+      });
       this.listenTo(this.model, 'change', this.render);
     },
 

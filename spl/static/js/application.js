@@ -2,9 +2,10 @@ define([
   'chaplin',
   'views/layout',
   'controllers/sidebar_controller',
+  'controllers/toolbar_controller',
   'routes',
   'ui/main'
-], function(Chaplin, Layout, SidebarController, routes) {
+], function(Chaplin, Layout, SidebarController, ToolbarController, routes) {
   'use strict';
 
   var Application = Chaplin.Application.extend({
@@ -18,6 +19,7 @@ define([
       /* Initialize core components */
       this.initDispatcher();
       this.initLayout();
+      this.initComposer();
       this.initMediator();
 
       /* Application-specific scaffold */
@@ -47,7 +49,8 @@ define([
        * and views which are needed the whole time, for example header, footer
        * or sidebar views.
        */
-      new SidebarController();
+      //new SidebarController();
+      //new ToolbarController();
     },
 
     /* Create additional mediator properties */

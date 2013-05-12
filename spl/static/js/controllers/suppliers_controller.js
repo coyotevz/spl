@@ -1,15 +1,18 @@
 define([
-  'chaplin',
+  //'chaplin',
+  'controllers/base_controller',
   'models/supplier', 'views/supplier_view',
   'models/suppliers', 'views/suppliers_view',
   'views/supplier_edit_view'
-], function(Chaplin,
+], function(//Chaplin,
+            BaseController,
             Supplier, SupplierView,
             Suppliers, SuppliersView,
             SupplierEditView) {
   "use strict";
 
-  var SuppliersController = Chaplin.Controller.extend({
+  //var SuppliersController = Chaplin.Controller.extend({
+  var SuppliersController = BaseController.extend({
 
     title: 'Suppliers',
 
@@ -27,7 +30,7 @@ define([
 
     show: function(params) {
       this.supplier = new Supplier({ _id: params.id }, { loadDetails: true });
-      this.view = new SupplierView({ model: this.supplier });
+      this.view = new SupplierView({ model: this.supplier, region: 'body' });
     },
 
     'new': function(params) {
