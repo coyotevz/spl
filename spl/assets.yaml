@@ -8,23 +8,23 @@ style_bundle:
 #    output: assets/modernizr.js
 #    contents:
 #        - js/vendor/modernizr.js
-js_bundle:
-    output: assets/all.js
-    contents:
-        - js.old/vendor/require.js
-        - js.old/vendor/jquery-1.9.1.js
-        - js.old/vendor/jquery.dotimeout-1.0.js
-        - js.old/vendor/json2.js
-        - js.old/vendor/underscore-1.4.4.js
-        - js.old/vendor/backbone-0.9.10.js
-        - js.old/backbone.stickit.js
-        - js.old/spl.resize.design.js
-        - js.old/spl.hover.js
-        - js.old/spl.checkboxes.js
-        - js.old/spl.scroll.js
-        - js.old/spl.tooltip.js
-        - js.old/spl.dropdown.js
-        - js.old/spl.autogrow.js
-        - js.old/spl.paginated.js
-        - js.old/spl.models.js
-          #- js.old/spl.application.js
+#js_bundle:
+#    output: assets/all.js
+#    contents:
+#        - js/vendor/require.js
+#        - js/jquery-1.9.0.js
+#        - js/jquery.dotimeout.js
+#        - js/json2.js
+#        - js/underscore.js
+#        - js/backbone.js
+#        - js/backbone.stickit.js
+#        - js/spl.resize.design.js
+#        - js/spl.hover.js
+#        - js/spl.checkboxes.js
+#        - js/spl.scroll.js
+#        - js/spl.tooltip.js
+#        - js/spl.dropdown.js
+#        - js/spl.autogrow.js
+#        - js/spl.paginated.js
+#        - js/spl.models.js
+#        - js/spl.application.js

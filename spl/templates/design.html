@@ -17,6 +17,9 @@
     <script type="text/javascript">
       var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
+    {%- assets "modernizr_bundle" %}
+    <script src="{{ ASSET_URL }}"></script>
+    {%- endassets %}
   </head>
 
   <body>
