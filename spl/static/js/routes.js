@@ -10,7 +10,7 @@ define(function() {
 
     /* suppliers controller */
     match('suppliers',            'suppliers#index', {name: 'suppliers'});
-//    match('suppliers/new',        'suppliers#new');
+    match('suppliers/new',        'suppliers#new', {name: 'new_supplier'});
     match('suppliers/:id',        'suppliers#show', {name: 'supplier'});
 //    match('suppliers/:id/edit',   'suppliers#edit');
 //    match('suppliers/:id/delete', 'suppliers#delete');

@@ -1,10 +1,11 @@
 define([
   'chaplin',
   'views/layout',
-  'controllers/navigation_controller',
+  'controllers/sidebar_controller',
+  'controllers/toolbar_controller',
   'routes',
   'ui/main'
-], function(Chaplin, Layout, NavigationController, routes) {
+], function(Chaplin, Layout, SidebarController, ToolbarController, routes) {
   'use strict';
 
   var Application = Chaplin.Application.extend({
@@ -18,6 +19,7 @@ define([
       /* Initialize core components */
       this.initDispatcher();
       this.initLayout();
+      this.initComposer();
       this.initMediator();
 
       /* Application-specific scaffold */
@@ -27,6 +29,9 @@ define([
       this.initRouter(routes, { pushState: false, root: '/spl/' });
       /* You might pass Router/History options as the second parameter. */
       // this.initRouter(routers, { pushState: false, root: '/subdir/' });
+
+      // Actually start routing.
+      this.startRouting();
 
       /* Freeze the application instance to prevent further changes */
       if (Object.freeze) Object.freeze(this);
@@ -42,9 +47,10 @@ define([
        * You don't need to instantiate all controllers here, only special
        * controllers which do not to respond to routes. They may govern models
        * and views which are needed the whole time, for example header, footer
-       * or navigation views.
+       * or sidebar views.
        */
-      new NavigationController();
+      //new SidebarController();
+      //new ToolbarController();
     },
 
     /* Create additional mediator properties */

@@ -7,7 +7,7 @@ define([
 
     initialize: function() {
       HomeController.__super__.initialize.apply(this, arguments);
-      this.publishEvent('navigation:change', 'home');
+      this.publishEvent('sidebar:change', 'home');
     },
 
     index: function(params) {

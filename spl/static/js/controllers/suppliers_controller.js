@@ -1,27 +1,24 @@
 define([
-  'chaplin',
-  'models/supplier',
-  'views/supplier_view',
-  'models/suppliers',
-  'views/suppliers_view'
-], function(Chaplin, Supplier, SupplierView, Suppliers, SuppliersView) {
+  //'chaplin',
+  'controllers/base_controller',
+  'models/supplier', 'views/supplier_view',
+  'models/suppliers', 'views/suppliers_view',
+  'views/supplier_edit_view'
+], function(//Chaplin,
+            BaseController,
+            Supplier, SupplierView,
+            Suppliers, SuppliersView,
+            SupplierEditView) {
   "use strict";
 
-  var SuppliersController = Chaplin.Controller.extend({
+  //var SuppliersController = Chaplin.Controller.extend({
+  var SuppliersController = BaseController.extend({
 
     title: 'Suppliers',
 
     initialize: function() {
       SuppliersController.__super__.initialize.apply(this, arguments);
-      this.publishEvent('navigation:change', 'suppliers');
-    },
-
-    historyURL: function(params) {
-      if (params.id) {
-        return "suppliers/" + params.id;
-      } else {
-        return '';
-      }
+      this.publishEvent('sidebar:change', 'suppliers');
     },
 
     index: function(params) {
@@ -33,8 +30,18 @@ define([
 
     show: function(params) {
       this.supplier = new Supplier({ _id: params.id }, { loadDetails: true });
-      this.view = new SupplierView({ model: this.supplier });
-    }
+      this.view = new SupplierView({ model: this.supplier, region: 'body' });
+    },
+
+    'new': function(params) {
+      console.log("#new");
+      this.view = new SupplierEditView();
+    },
+
+    edit: function(params) {
+      console.log("#edit");
+      this.view = new SupplierEditView();
+    },
   });
 
   return SuppliersController;
