@@ -52,7 +52,7 @@ def configure_app(app, config=None):
         return render_template('design.html', db=db)
 
     @app.route('/design2/')
-    def dev_design():
+    def dev_design2():
         from flask import render_template
         from spl.models import db
         return render_template('design2.html', db=db)
