@@ -2,7 +2,7 @@
 
 import re
 from datetime import datetime
-from flask.ext.mongokit import MongoKit, Document
+from flask_mongokit import MongoKit, Document
 from mongokit import IS
 
 db = MongoKit()

@@ -9,14 +9,14 @@
 """
 
 from flask import current_app
-from flask.ext.script import Manager, Shell, prompt_bool
-from flask.ext.assets import ManageAssets
+from flask_script import Manager, Shell, prompt_bool
+from flask_assets import ManageAssets
 
 from spl import create_app
 from spl.models import db
 
 manager = Manager(create_app)
-#manager.add_command("assets", ManageAssets())
+manager.add_command("assets", ManageAssets())
 
 manager.add_option('-c', '--config', dest='config', required=False)
 
